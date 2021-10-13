@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,270 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Karma:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5% !important;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Karma", serif !important;
+  background-color: #fbfbfb;
+  font-size: 1rem;
+}
+
+/* ::-webkit-scrollbar {
+  display: none;
+} */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.pointer-none {
+  pointer-events: none;
+}
+
+.form-control {
+  font-size: 1.6rem !important;
+}
+
+.h-unset {
+  height: unset !important;
+}
+
+.caret-off::before,
+.caret-off::after {
+  display: none !important;
+}
+
+.border-none {
+  border: none !important;
+}
+
+.no-box-shadow {
+  box-shadow: none !important;
+}
+
+/********************
+
+    reuseable
+                
+*********************/
+
+.w-5 {
+  width: 5%;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+.w-15 {
+  width: 15% !important;
+}
+
+.w-16 {
+  width: 16%;
+}
+
+.w-19 {
+  width: 19%;
+}
+
+.w-20 {
+  width: 20% !important;
+}
+
+.w-23 {
+  width: 23%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-28 {
+  width: 28%;
+}
+
+.w-30 {
+  width: 30% !important;
+}
+
+.w-33 {
+  width: 33.3%;
+}
+
+.w-35 {
+  width: 35% !important;
+}
+
+.w-37 {
+  width: 37%;
+}
+
+.w-40 {
+  width: 40% !important;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+.w-48 {
+  width: 48%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-62 {
+  width: 62%;
+}
+
+.w-65 {
+  width: 65%;
+}
+
+.w-68 {
+  width: 68%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-78 {
+  width: 78%;
+}
+
+.w-79 {
+  width: 79%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-85 {
+  width: 85%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.w-95 {
+  width: 95%;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.vw-100 {
+  width: 100vw;
+}
+
+.fw-300 {
+  font-weight: 300;
+}
+
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+.lh-1 {
+  line-height: 0.5rem;
+}
+
+.lh-2 {
+  line-height: 1rem;
+}
+
+.lh-3 {
+  line-height: 1.5rem;
+}
+
+.lh-4 {
+  line-height: 2rem;
+}
+
+.br-1 {
+  border-radius: 0.3rem !important;
+}
+
+.br-2 {
+  border-radius: 0.5rem !important;
+}
+
+.br-3 {
+  border-radius: 0.8rem;
+}
+
+.br-4 {
+  border-radius: 1.2rem !important;
+}
+
+a,
+a:hover,
+a:focus {
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: all 0.3s;
+}
+
+.white {
+  color: white;
+}
+
+.bg-white {
+  background: white;
+}
+
+.bg-grey {
+  background: grey;
+}
+
+.position-relative {
+  position: relative !important;
+}
+
+.h-unset {
+  height: unset !important;
+}
+
+.overflow-y-unset {
+  overflow-y: unset !important;
+}
+
+.min-w-unset {
+  min-width: unset !important ;
+}
+
+.max-w-unset {
+  max-width: unset !important ;
 }

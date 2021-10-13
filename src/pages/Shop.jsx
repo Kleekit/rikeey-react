@@ -1,7 +1,16 @@
 import React from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
+import { makeStyles } from "@material-ui/styles";
+// import clsx from "clsx";
+
+// const useStyles = makeStyles({
+//   root: {
+//
+//   },
+// });
 
 function Shop() {
+  // const classes = useStyles();
   const customConfig = {
     customStyle: "pt-4 d-flex",
   };

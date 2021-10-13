@@ -1,7 +1,35 @@
-import React from "react";
+import React, { Component, useState, useEffect } from "react";
+import CustomCarousel from "../components/LandingPage/CustomCarousel";
 import CustomContainer from "../components/Navigation/CustomContainer";
+// import { makeStyles } from "@material-ui/styles";
+
+// const useStyles = makeStyles({
+//   root: {
+
+//   },
+// })
 
 function LandingPage() {
+  // const classes = useStyles();
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const changeImage = () => {
+    setInterval(() => {
+      if (imageIndex > 5) {
+        setImageIndex(0);
+      } else {
+        console.log(imageIndex);
+        let newValue = imageIndex + 1;
+        setImageIndex(newValue);
+      }
+    }, 1500);
+  };
+  useEffect(() => {
+    changeImage();
+    // return () => {
+    //   cleanup;
+    // };
+  }, []);
   return (
     <CustomContainer>
       <div className="hero-container ">
@@ -32,34 +60,30 @@ function LandingPage() {
           <div className="col-md-4 men-top px-0">
             <img
               src="./images/men-top.png"
-              className="catalog-img img-fluid men-top-img"
-              alt=""
+              className="h-100 catalog-img img-fluid men-top-img"
             />
             <div className="catalog-text-bg">Men Top</div>
           </div>
           <div className="col-md-4 px-0 women-catalog">
-            <div className="d-flex  mx-0 women-short">
+            <div className="d-flex mx-0 women-short">
               <img
                 src="./images/women-short.png"
-                className="catalog-img px-0 img-fluid women-short-img"
-                alt=""
+                className="h-100 catalog-img px-0 img-fluid women-short-img"
               />
               <div className="catalog-text-bg">Women Short</div>
             </div>
-            <div className="d-flex  mx-0 women-set">
+            <div className="d-flex mx-0 women-set">
               <img
                 src="./images/women-set.png"
-                className="catalog-img px-0 img-fluid women-set-img"
-                alt=""
+                className="h-100 catalog-img px-0 img-fluid women-set-img"
               />
               <div className="catalog-text-bg">Women Set</div>
             </div>
           </div>
-          <div className="col-md-4  men-bottom px-0">
+          <div className="col-md-4 men-bottom px-0">
             <img
               src="./images/men-button.png"
-              className="catalog-img men-bottom-img"
-              alt=""
+              className="h-100 catalog-img men-bottom-img"
             />
             <div className="catalog-text-bg">Men Bottom</div>
           </div>
@@ -86,6 +110,7 @@ function LandingPage() {
                     </div> -->
                      */}
         </div>
+        <CustomCarousel imageIndex={imageIndex} />
 
         {/* <!-- <section className="center slider">
                     <div>

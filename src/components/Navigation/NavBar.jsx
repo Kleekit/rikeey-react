@@ -1,63 +1,84 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import RikeeyLogo from "../Reuseable/RikeeyLogo";
+import { Grid, Hidden } from "@mui/material";
+import { makeStyles } from "@material-ui/styles";
+import SearchIcon from "@mui/icons-material/SearchOutlined";
+import SideBar from "../Sidebar/SideBar";
+import clsx from "clsx";
+
+const useStyles = makeStyles({
+  root: {
+    "& .navigation": {
+      height: "8rem",
+      padding: "0 7.5rem",
+      background: "#F6F6F6",
+    },
+    "& .logo-container": {
+      width: "4rem",
+    },
+    "& .logo-img": {
+      height: "100%",
+    },
+    "& .menuContainer": {
+      fontSize: "1.8rem",
+      fontWeight: 700,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    "& .search-nav": {
+      borderBottom: "0.03rem solid black",
+    },
+  },
+});
 
 function NavBar() {
+  const classes = useStyles();
   return (
-    <div>
-      <nav className=" bg-nav d-flex mx-0 justify-content-around p-3 fixed-top">
-        <div className="col-2 nav-logo-container pt-2">
-          <a href="../#" className=" fw-700">
-            Clothing-Line
-          </a>
-        </div>
-        <div className="col-7 fw-700 d-flex align-items-center ">
-          <div className=" d-flex w-100 justify-content-around text-center">
-            <a href="#" className="col-2">
-              New
-            </a>
-            <a className="col-2" href="../shop">
-              Shop
-            </a>
-            <a href="#" className="col-2">
-              About
-            </a>
-            <a href="#" className="col-2">
-              Account
-            </a>
-            <a className="col-2" href="../cart">
-              Cart
-            </a>
-          </div>
-        </div>
-        <div className="col-2 ">
-          <div className="input-group search-nav">
-            <label className="search-nav-label me-2" for="">
-              {" "}
-              <svg
-                xmlns="https://www.w3.org/2000/svg"
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather my-auto feather-search "
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>{" "}
-            </label>
-            <input
-              type="text"
-              className="form-control btn-sm white small no-box-shadow bg-transparent border-none"
-              placeholder="Search"
-            />
-          </div>
-        </div>
-      </nav>
+    <div className={classes.root}>
+      <Hidden smDown>
+        <Grid
+          container
+          justifyContent="space-between"
+          alignItems="center"
+          className={clsx("bg-nav navigation fixed-top")}
+        >
+          <Grid items md={2}>
+            <Link className="logo-container d-block" to="/">
+              <RikeeyLogo />
+            </Link>
+          </Grid>
+          <Grid className="menuContainer" items md={5}>
+            <Link to="/">New</Link>
+            <Link to="/shop">Shop</Link>
+            <Link to="/">About</Link>
+            <Link to="/">Account</Link>
+            <Link to="/cart">Cart</Link>
+          </Grid>
+          <Grid items md={2}>
+            <div className="input-group search-nav">
+              <label className="search-nav-label my-auto me-2">
+                <SearchIcon fontSize="large" />
+              </label>
+              <input
+                type="text"
+                className="form-control btn-sm white small no-box-shadow bg-transparent border-none"
+                placeholder="Search"
+              />
+            </div>
+          </Grid>
+        </Grid>
+      </Hidden>
+      <SideBar />
+    </div>
+  );
+}
 
-      <nav className="sm-nav fixed-top">
+export default NavBar;
+
+{
+  /* <nav className="sm-nav fixed-top">
         <div id="sideBar">
           <div className=" mt-3 sidebar-nav mx-2 d-flex px-2">
             <span className="close-btn" onclick="closeSidebar()">
@@ -247,9 +268,5 @@ function NavBar() {
             </a>
           </div>
         </div>
-      </nav>
-    </div>
-  );
+      </nav> */
 }
-
-export default NavBar;

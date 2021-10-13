@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Karma:wght@300;400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Karma:wght@300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -278,32 +278,30 @@ a:focus {
     background: rgba(255,255,255,0.7);
     padding-left: 1.35rem !important;
 
-}
+} */
 
 /**********************************************
         admin general css 
 ***********************************************/
 .w-31 {
-    width: 31%;
+  width: 31%;
 }
 
-
-
 .bg-blue {
-    background: rgba(74,134,191,1);
+  background: rgba(74, 134, 191, 1);
 }
 
 .bg-darkpink {
-    background: rgba(213,64,97,1);
+  background: rgba(213, 64, 97, 1);
 }
 
 .bg-lightbrown {
-    background: rgba(165,137,146,1);
+  background: rgba(165, 137, 146, 1);
 }
 
 .dashboard-card1 {
-    height : 10rem ;
-    width: 31.5%;
+  height: 10rem;
+  width: 31.5%;
 }
 
 /**********************************************
@@ -311,129 +309,103 @@ a:focus {
 ***********************************************/
 
 .admin-sidenav {
-    height: 100vmin;
-    position: relative;
+  height: 100vmin;
+  position: relative;
 }
 
-.sidenav-content{
-    position: absolute;
-    top: 40%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-
+.sidenav-content {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  transform: translate(-50%, -50%);
 }
 
-.sidenav-content a{
-    display: flex;
-    align-items: center;
-    border-radius: 0.8rem ;
-    font-size: 1.15rem;
-    height: 2.5rem ;
-    font-weight: 700;
-    margin-bottom: 1.2rem;
-    padding-left: 2.2rem;
-    color: #fff;
+.sidenav-content a {
+  display: flex;
+  align-items: center;
+  border-radius: 0.8rem;
+  font-size: 1.15rem;
+  height: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  padding-left: 2.2rem;
+  color: #fff;
 }
 
 .sidenav-content a:hover,
 .sidenav-content a:active {
-    background: #fff ;
-    color: rgba(114,27,27,1) ;
-    transition: 0.2s;
+  background: #fff;
+  color: rgba(114, 27, 27, 1);
+  transition: 0.2s;
 }
 
 .main-content {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .main-content .row {
-    margin-bottom: 2.3rem;
+  margin-bottom: 2.3rem;
 }
 
 .main-content .row:last-of-type {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
-
 
 /**********************************************
         admin dashboard 
 ***********************************************/
 
 .dashboard-card1 {
-    height : 10rem ;
-    width: 31.5%;
-    display: flex ;
+  height: 10rem;
+  width: 31.5%;
+  display: flex;
 }
 
-
-.dashboard-card1 .w-50:last-of-type {    
-    align-self: center;
+.dashboard-card1 .w-50:last-of-type {
+  align-self: center;
 }
 
 .card1-text {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .card1-no {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 .dashboard-card2 {
-    height : 23rem ;
-    box-shadow: 0rem 0rem 2.3rem rgb(83, 81, 81, 0.55);
-    width: 65.75%;
+  height: 23rem;
+  box-shadow: 0rem 0rem 2.3rem rgb(83, 81, 81, 0.55);
+  width: 65.75%;
 }
 
 .dashboard-card3 {
-    height : 19rem ;
-    width: 31.5%;
-    border: 0.20rem solid rgba(68,30,30,1);
+  height: 19rem;
+  width: 31.5%;
+  border: 0.2rem solid rgba(68, 30, 30, 1);
 }
 
 .summary-border {
-    border-bottom: 0.1rem solid #333;
+  border-bottom: 0.1rem solid #333;
 }
-
 
 /**********************************************
         MEDIA QUERY FOR SMALL SCREENS
 ***********************************************/
 
-
-@media (min-width: 320px ) {
-
-   
-
-
-    
-    
+@media (min-width: 320px) {
 }
-
 
 /**********************************************
         MEDIA QUERY FOR MEDIUM SCREENS
 ***********************************************/
 
-
-@media (min-width: px ) {
-
-  
-
+@media (min-width: px) {
 }
-
-
-
 
 /**********************************************
         MEDIA QUERY FOR LARGE SCREENS
 ***********************************************/
 
-
-
-@media (min-width: 768px ) {
-
-    
-
-
-
+@media (min-width: 768px) {
 }
