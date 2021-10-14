@@ -1,18 +1,27 @@
 import React from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
+import { makeStyles } from "@material-ui/styles";
+import { Checkbox, FormControlLabel } from "@mui/material";
+
+const useStyles = makeStyles({
+  root: {
+    marginTop: "10rem",
+  },
+});
 
 function Checkout() {
+  const classes = useStyles();
   const customConfig = {
-    customStyle: "pt-4 px-4 row ",
+    customStyle: `${classes.root} pt-4 px-4 row `,
   };
 
   return (
     <CustomContainer {...customConfig}>
       <div className="col-md-6 mt-6 mb-15 mx-auto">
         <div className="contact-info mb-5  br-3 px-3 py-4">
-          <h5 className="fw-600 px-2 mb-4">Contact Information</h5>
+          <h3 className="fw-600 px-2 mb-4">Contact Information</h3>
           <div className="form px-4">
-            <div className="form-group fs-sm">
+            <div className="form-group mb-4 fs-sm">
               <label for="">Email address</label>
               <input
                 type="email"
@@ -22,7 +31,7 @@ function Checkout() {
                 placeholder="johndoe@gmail.com"
               />
             </div>
-            <div className="form-group fs-sm">
+            <div className="form-group mb-4 fs-sm">
               <label for="">Phone Number</label>
               <input
                 type="text"
@@ -34,9 +43,9 @@ function Checkout() {
           </div>
         </div>
         <div className="contact-info br-3 px-3 py-4 mb-4">
-          <h5 className="fw-600 px-2 mb-4">Waybill Information</h5>
+          <h3 className="fw-600 px-2 mb-4">Waybill Information</h3>
           <div className="form px-4">
-            <div className="form-group fs-sm">
+            <div className="form-group mb-4 fs-sm">
               <label for="">First Name</label>
               <input
                 type="text"
@@ -46,7 +55,7 @@ function Checkout() {
                 placeholder="john"
               />
             </div>
-            <div className="form-group fs-sm">
+            <div className="form-group mb-4 mb-4 fs-sm">
               <label for="">Last Name</label>
               <input
                 type="text"
@@ -55,7 +64,7 @@ function Checkout() {
                 placeholder="doe"
               />
             </div>
-            <div className="form-group fs-sm">
+            <div className="form-group mb-4 fs-sm">
               <label for="">Address</label>
               <input
                 type="text"
@@ -65,7 +74,7 @@ function Checkout() {
               />
             </div>
             <div className="country-state-form w-80 d-flex justify-content-between">
-              <div className="form-group w-40 fs-sm">
+              <div className="form-group mb-4 w-40 fs-sm">
                 <label for="">Country</label>
                 <input
                   type="text"
@@ -74,7 +83,7 @@ function Checkout() {
                   placeholder="Nigeria"
                 />
               </div>
-              <div className="form-group w-40 fs-sm">
+              <div className="form-group mb-4 w-40 fs-sm">
                 <label for="">State</label>
                 <input
                   type="text"
@@ -84,7 +93,7 @@ function Checkout() {
                 />
               </div>
             </div>
-            <div className="form-group fs-sm">
+            <div className="form-group mb-4 fs-sm">
               <label for="">City</label>
               <input
                 type="text"
@@ -93,7 +102,7 @@ function Checkout() {
                 placeholder="Warri"
               />
             </div>
-            <div className="form-group form-check">
+            <div className="form-group mb-4 form-check">
               <input
                 type="checkbox"
                 className="form-check-input bg-grey"
@@ -103,6 +112,13 @@ function Checkout() {
                 Save my details
               </label>
             </div>
+            <Checkbox
+              sx={{
+                "&.Mui-checked": {
+                  color: "rgba(115, 15, 17, 1)",
+                },
+              }}
+            />
           </div>
         </div>
         <div className="d-flex justify-content-between">

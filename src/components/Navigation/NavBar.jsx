@@ -30,6 +30,9 @@ const useStyles = makeStyles({
     "& .search-nav": {
       borderBottom: "0.03rem solid black",
     },
+    "& .sideBarNav": {
+      padding: "0 4rem",
+    },
   },
 });
 
@@ -49,11 +52,9 @@ function NavBar() {
               <RikeeyLogo />
             </Link>
           </Grid>
-          <Grid className="menuContainer" items md={5}>
-            <Link to="/">New</Link>
+          <Grid className="menuContainer" items md={4}>
+            <Link to="/">Home</Link>
             <Link to="/shop">Shop</Link>
-            <Link to="/">About</Link>
-            <Link to="/">Account</Link>
             <Link to="/cart">Cart</Link>
           </Grid>
           <Grid items md={2}>
@@ -70,7 +71,12 @@ function NavBar() {
           </Grid>
         </Grid>
       </Hidden>
-      <SideBar />
+      <div className="navigation sideBarNav d-flex justify-content-between align-items-center">
+        <Link className="logo-container d-block" to="/">
+          <RikeeyLogo />
+        </Link>
+        <SideBar />
+      </div>
     </div>
   );
 }

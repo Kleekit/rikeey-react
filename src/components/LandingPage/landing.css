@@ -500,8 +500,10 @@ footer,
 .open-filter {
   position: absolute;
   top: 1.5rem;
-  background-color: transparent;
+  background-color: #fff;
   align-items: center;
+  padding: 0.5rem;
+  z-index: 2;
 }
 
 .filterbar-links {
@@ -849,7 +851,7 @@ footer,
 
   .women-short,
   .women-set {
-    height: 48%;
+    height: 48vh;
   }
 
   .men-top,
@@ -1014,7 +1016,7 @@ footer,
 
   .women-short,
   .women-set {
-    height: 50%;
+    height: 50vh;
   }
 
   .men-top,

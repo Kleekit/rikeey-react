@@ -16,11 +16,12 @@ import CloseIcon from "@mui/icons-material/CloseRounded";
 import Notifications from "@mui/icons-material/NotificationsNoneRounded";
 import CollapseIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import ExpandIcon from "@mui/icons-material/KeyboardArrowRightRounded";
+import clsx from "clsx";
 // import Divider from "@mui/material/Divider";
 
 const useStyles = makeStyles({
   largeIcon: {
-    fontSize: "3.5rem",
+    fontSize: "3.5rem !important",
   },
   drawer: {
     // "& > .MuiBackdrop-root": {
@@ -30,8 +31,8 @@ const useStyles = makeStyles({
       left: 0,
       // top: "10rem !important",
       boxShadow: "0 0.1rem 0.4rem rgb(0 0 0 .1)",
-      background: "rgba(139, 181, 178, 1)",
-      color: "#fff",
+      background: "rgba(255, 255, 255, 1)",
+      color: "#000",
       padding: 0,
       // height: "calc(100% - 10rem)",
       height: "100%",
@@ -42,22 +43,22 @@ const useStyles = makeStyles({
         position: "relative",
         "& .navIcon": {
           fontSize: "2.5rem",
-          color: "#fff",
+          color: "#000",
         },
         "& .menuIcon": {
           fontSize: "3rem",
-          color: "#fff",
+          color: "#000",
         },
         "& .mCIcon": {
           fontSize: "2.5rem",
-          color: "#fff",
+          color: "#000",
           marginRight: "3rem",
         },
         // "& .navigationContainer": {},
         "& .menuContainer": {
           fontSize: "1.7rem",
-          marginTop: "2.8rem",
-          marginRight: "-2.8rem",
+          marginTop: "3.5rem",
+          marginRight: "-3rem",
           paddingBottom: "3.5rem",
         },
         "& .menuItem": {
@@ -89,7 +90,7 @@ const useStyles = makeStyles({
           display: "block",
         },
         "& .link:focus-within": {
-          backgroundColor: "rgba(124, 163, 160, 1) !important",
+          backgroundColor: "rgba(240, 240, 240, 1) !important",
         },
         "& .sidebarBottom": {
           marginTop: "8rem",
@@ -101,10 +102,10 @@ const useStyles = makeStyles({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          border: "0.01rem solid #fff",
+          border: "0.01rem solid #000",
           borderRadius: "8rem",
           "& .searchInput": { fontSize: "1.7rem", color: "inherit" },
-          "& .searchIcon": { width: "2.6rem", height: "2.6rem", color: "#fff" },
+          "& .searchIcon": { width: "2.6rem", height: "2.6rem", color: "#000" },
         },
         "& .mTopMenu": {
           marginTop: "3.5rem",
@@ -119,27 +120,27 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SideBar({ sidebarType }) {
+export default function SideBar() {
   const classes = useStyles();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const [openLearn, setOpenLearn] = React.useState(true);
+  const [openWomen, setOpenWomen] = React.useState(true);
 
-  const handleLearnClick = () => {
-    setOpenLearn(!openLearn);
+  const handleWomenClick = () => {
+    setOpenWomen(!openWomen);
   };
 
-  const [openProfile, setOpenProfile] = React.useState(true);
+  const [openMen, setOpenMen] = React.useState(true);
 
-  const handleProfileClick = () => {
-    setOpenProfile(!openProfile);
+  const handleMenClick = () => {
+    setOpenMen(!openMen);
   };
 
   return (
     <Hidden smUp>
       <MenuRoundedIcon
-        className={classes.largeIcon}
+        className={clsx(classes.largeIcon, "cursor-pointer")}
         onClick={() => setIsDrawerOpen(!isDrawerOpen)}
       />
       <Drawer
@@ -155,7 +156,7 @@ export default function SideBar({ sidebarType }) {
               zIndex: 100,
               height: "fit-content",
               position: "sticky",
-              background: "rgba(139, 181, 178, 1)",
+              background: "rgba(255, 255, 255, 1)",
               paddingTop: "3rem",
               paddingBottom: "2rem",
             }}
@@ -163,7 +164,7 @@ export default function SideBar({ sidebarType }) {
             <div className="navigationContainer d-flex justify-content-between align-items-center">
               <Notifications className="navIcon" />
               <CloseIcon
-                className="navIcon"
+                className="navIcon cursor-pointer"
                 onClick={() => setIsDrawerOpen(!isDrawerOpen)}
               />
             </div>
@@ -171,91 +172,84 @@ export default function SideBar({ sidebarType }) {
           </ListItem>
           <ListItem>
             <div className=" searchBar" component="form">
-              <InputBase
-                className="searchInput w-100"
-                placeholder="Search for Courses or Category"
-              />
+              <InputBase className="searchInput w-100" placeholder="Search" />
               <Button className="customButton">
                 <SearchIcon className="searchIcon" />
               </Button>
             </div>
             <div className="menuContainer">
               <div className="menuItem">
+                <Link className="menuItemHeader link" to="/">
+                  Home
+                </Link>
+              </div>
+              <div className="menuItem">
+                <Link className="menuItemHeader link" to="/shop">
+                  Shop
+                </Link>
+              </div>
+              <div className="menuItem">
                 <div
                   className="menuItemHeader link"
                   tabIndex="1"
                   type="button"
-                  onClick={handleLearnClick}
+                  onClick={handleWomenClick}
                 >
-                  <span>Learn</span>
-                  {openLearn ? (
+                  <span>Women Active Wear</span>
+                  {openWomen ? (
                     <ExpandIcon className="menuIcon" />
                   ) : (
                     <CollapseIcon className="menuIcon" />
                   )}
                 </div>
-                <Collapse in={!openLearn} timeout="auto" unmountOnExit>
+                <Collapse in={!openWomen} timeout="auto" unmountOnExit>
                   <div className="menuItemContent ">
-                    <Link className="contentList link" to="/404">
-                      Blog
+                    <Link className="contentList link" to="/shop">
+                      Fullset
                     </Link>
-                    <Link
-                      className="contentList link"
-                      to="/masterclass/dashboard"
-                    >
-                      Masterclass
+                    <Link className="contentList link" to="/shop">
+                      Tops & Bra tops
                     </Link>
-                    <Link
-                      className="contentList mb-0 link"
-                      to="/masterclass/becometutor"
-                    >
-                      Become a Tutor
+                    <Link className="contentList mb-0 link" to="/shop">
+                      Buttoms
+                    </Link>
+                  </div>
+                </Collapse>
+              </div>
+              <div className="menuItem ">
+                <div
+                  className="menuItemHeader link"
+                  tabIndex="1"
+                  type="button"
+                  onClick={handleMenClick}
+                >
+                  <span>Men Active Wear</span>
+                  {openMen ? (
+                    <ExpandIcon className="menuIcon" />
+                  ) : (
+                    <CollapseIcon className="menuIcon" />
+                  )}
+                </div>
+                <Collapse in={!openMen} timeout="auto" unmountOnExit>
+                  <div className="menuItemContent ">
+                    <Link className="contentList link" to="/shop">
+                      Tops
+                    </Link>
+                    <Link className="contentList mb-0 link" to="/shop">
+                      Buttoms
                     </Link>
                   </div>
                 </Collapse>
               </div>
               <div className="menuItem">
-                <Link className="menuItemHeader link" to="/">
-                  Market
-                </Link>
-              </div>
-              <div className="menuItem">
-                <Link className="menuItemHeader link" to="/giftCard">
-                  Gift Card
-                </Link>
-              </div>
-              <div className="menuItem">
-                <Link className="menuItemHeader link" to="/404">
-                  Affiliate
+                <Link className="menuItemHeader link" to="/shop">
+                  Waist Trainer
                 </Link>
               </div>
               <div className="menuItem mb-0">
-                <div
-                  className="menuItemHeader link"
-                  tabIndex="1"
-                  type="button"
-                  onClick={handleProfileClick}
-                >
-                  <span>Profile</span>
-                  {openProfile ? (
-                    <ExpandIcon className="menuIcon" />
-                  ) : (
-                    <CollapseIcon className="menuIcon" />
-                  )}
-                </div>
-                <Collapse in={!openProfile} timeout="auto" unmountOnExit>
-                  <div className="menuItemContent ">
-                    <Link className="contentList link" to="/404">
-                      My Profile
-                    </Link>
-                    <Link className="contentList link" to="/404">
-                      Ticket
-                    </Link>
-                    <Link className="contentList mb-0 link" to="/404">
-                      Settings
-                    </Link>
-                  </div>
-                </Collapse>
+                <Link className="menuItemHeader link" to="/shop">
+                  Fitness Equipment
+                </Link>
               </div>
             </div>
           </ListItem>
@@ -264,528 +258,3 @@ export default function SideBar({ sidebarType }) {
     </Hidden>
   );
 }
-
-// function AuthSideBar() {
-//   const [openLearn, setOpenLearn] = React.useState(true);
-
-//   const handleLearnClick = () => {
-//     setOpenLearn(!openLearn);
-//   };
-
-//   const [openProfile, setOpenProfile] = React.useState(true);
-
-//   const handleProfileClick = () => {
-//     setOpenProfile(!openProfile);
-//   };
-
-//   return (
-//     <List>
-//       <ListItem>
-//         <div className="menuContainer">
-//           <div className="menuItem">
-//             <div
-//               className="menuItemHeader link"
-//               tabIndex="1"
-//               type="button"
-//               onClick={handleLearnClick}
-//             >
-//               <span>Learn</span>
-//               {openLearn ? (
-//                 <ExpandIcon className="menuIcon" />
-//               ) : (
-//                 <CollapseIcon className="menuIcon" />
-//               )}
-//             </div>
-//             <Collapse in={!openLearn} timeout="auto" unmountOnExit>
-//               <div className="menuItemContent ">
-//                 <Link className="contentList link" to="/404">
-//                   Blog
-//                 </Link>
-//                 <Link className="contentList link" to="/masterclass/dashboard">
-//                   Masterclass
-//                 </Link>
-//                 <Link
-//                   className="contentList mb-0 link"
-//                   to="/masterclass/becometutor"
-//                 >
-//                   Become a Tutor
-//                 </Link>
-//               </div>
-//             </Collapse>
-//           </div>
-//           <div className="menuItem">
-//             <Link className="menuItemHeader link" to="/">
-//               Market
-//             </Link>
-//           </div>
-//           <div className="menuItem">
-//             <Link className="menuItemHeader link" to="/giftCard">
-//               Gift Card
-//             </Link>
-//           </div>
-//           <div className="menuItem">
-//             <Link className="menuItemHeader link" to="/404">
-//               Affiliate
-//             </Link>
-//           </div>
-//           <div className="menuItem mb-0">
-//             <div
-//               className="menuItemHeader link"
-//               tabIndex="1"
-//               type="button"
-//               onClick={handleProfileClick}
-//             >
-//               <span>Profile</span>
-//               {openProfile ? (
-//                 <ExpandIcon className="menuIcon" />
-//               ) : (
-//                 <CollapseIcon className="menuIcon" />
-//               )}
-//             </div>
-//             <Collapse in={!openProfile} timeout="auto" unmountOnExit>
-//               <div className="menuItemContent ">
-//                 <Link className="contentList link" to="/404">
-//                   My Profile
-//                 </Link>
-//                 <Link className="contentList link" to="/404">
-//                   Ticket
-//                 </Link>
-//                 <Link className="contentList mb-0 link" to="/404">
-//                   Settings
-//                 </Link>
-//               </div>
-//             </Collapse>
-//           </div>
-//         </div>
-//       </ListItem>
-//       <ListItem
-//         style={{
-//           zIndex: 100,
-//           height: "fit-content",
-//           position: "sticky",
-//           bottom: 0,
-//           background: "rgba(139, 181, 178, 1)",
-//           paddingTop: "1.5rem",
-//           paddingBottom: "3.5rem",
-//           display: "flex",
-//           justifyContent: "space-between",
-//           alignItems: "center",
-//         }}
-//       >
-//         <div className="menuItem my-0">
-//           <Link className="menuItemHeader link" to="/">
-//             Sign In
-//           </Link>
-//         </div>
-//         <div className="menuItem my-0">
-//           <Link className="menuItemHeader link" to="/">
-//             Sign Out
-//           </Link>
-//         </div>
-//       </ListItem>
-//     </List>
-//   );
-// }
-
-// function MainSideBar() {
-//   const [openLearn, setOpenLearn] = React.useState(true);
-
-//   const handleLearnClick = () => {
-//     setOpenLearn(!openLearn);
-//   };
-
-//   const [openDashboard, setOpenDashboard] = React.useState(true);
-
-//   const handleDashboardClick = () => {
-//     setOpenDashboard(!openDashboard);
-//   };
-
-//   const [openMasterclass, setOpenMasterclass] = React.useState(true);
-
-//   const handleMasterclassClick = () => {
-//     setOpenMasterclass(!openMasterclass);
-//   };
-
-//   const [openProfile, setOpenProfile] = React.useState(true);
-
-//   const handleProfileClick = () => {
-//     setOpenProfile(!openProfile);
-//   };
-
-//   return (
-//     <ListItem>
-//       <div className="menuContainer">
-//         <div className="menuItem">
-//           <div
-//             className="menuItemHeader link"
-//             tabIndex="1"
-//             type="button"
-//             onClick={handleLearnClick}
-//           >
-//             <span>Learn</span>
-//             {openLearn ? (
-//               <ExpandIcon className="menuIcon" />
-//             ) : (
-//               <CollapseIcon className="menuIcon" />
-//             )}
-//           </div>
-//           <Collapse in={!openLearn} timeout="auto" unmountOnExit>
-//             <div className="menuItemContent ">
-//               <Link className="contentList link" to="/404">
-//                 Blog
-//               </Link>
-//               <Link className="contentList link" to="/masterclass/dashboard">
-//                 Masterclass
-//               </Link>
-//               <Link
-//                 className="contentList mb-0 link"
-//                 to="/masterclass/becometutor"
-//               >
-//                 Become a Tutor
-//               </Link>
-//             </div>
-//           </Collapse>
-//         </div>
-//         <div className="menuItem">
-//           <Link className="menuItemHeader link" to="/">
-//             Market
-//           </Link>
-//         </div>
-//         <div className="menuItem">
-//           <div
-//             className="menuItemHeader link"
-//             tabIndex="1"
-//             type="button"
-//             onClick={handleDashboardClick}
-//           >
-//             <span>Dashboard</span>
-//             {openDashboard ? (
-//               <ExpandIcon className="menuIcon" />
-//             ) : (
-//               <CollapseIcon className="menuIcon" />
-//             )}
-//           </div>
-//           <Collapse in={!openDashboard} timeout="auto" unmountOnExit>
-//             <div className="menuItemContent ">
-//               <Link className="contentList link" to="/affiliate/dashboard">
-//                 Affiliate Dashboard
-//               </Link>
-//               <Link className="contentList link" to="/market/dashboard">
-//                 Market Dashboard
-//               </Link>
-//               <div
-//                 className="contentList d-flex justify-content-between align-items-center link"
-//                 tabIndex="1"
-//                 type="button"
-//                 onClick={handleMasterclassClick}
-//               >
-//                 <span>Masterclass Dashboard</span>
-//                 {openMasterclass ? (
-//                   <ExpandIcon className="mCIcon" />
-//                 ) : (
-//                   <CollapseIcon className="mCIcon" />
-//                 )}
-//               </div>
-//               <Collapse in={!openMasterclass} timeout="auto" unmountOnExit>
-//                 <div className="menuItemContent ">
-//                   <Link
-//                     className="contentList link"
-//                     to="/masterclass/tutor/profile"
-//                   >
-//                     My Profile
-//                   </Link>
-//                   <Link className="contentList link" to="/masterclass/courses">
-//                     My Courses
-//                   </Link>
-//                   <Link
-//                     className="contentList mb-0 link"
-//                     to="/masterclass/uploads"
-//                   >
-//                     My Uploads
-//                   </Link>
-//                 </div>
-//               </Collapse>
-//             </div>
-//           </Collapse>
-//         </div>
-//         <div className="menuItem">
-//           <Link className="menuItemHeader link" to="/giftCard">
-//             Gift Card
-//           </Link>
-//         </div>
-//         <div className="menuItem">
-//           <Link className="menuItemHeader link" to="/404">
-//             Affiliate
-//           </Link>
-//         </div>
-//         <div className="menuItem mb-0">
-//           <div
-//             className="menuItemHeader link"
-//             tabIndex="1"
-//             type="button"
-//             onClick={handleProfileClick}
-//           >
-//             <span>Profile</span>
-//             {openProfile ? (
-//               <ExpandIcon className="menuIcon" />
-//             ) : (
-//               <CollapseIcon className="menuIcon" />
-//             )}
-//           </div>
-//           <Collapse in={!openProfile} timeout="auto" unmountOnExit>
-//             <div className="menuItemContent ">
-//               <Link className="contentList link" to="/404">
-//                 My Profile
-//               </Link>
-//               <Link className="contentList link" to="/404">
-//                 Ticket
-//               </Link>
-//               <Link className="contentList mb-0 link" to="/404">
-//                 Settings
-//               </Link>
-//             </div>
-//           </Collapse>
-//         </div>
-//         <div className="menuItem sidebarBottom">
-//           <Link className="menuItemHeader link" to="/">
-//             Log-Out
-//           </Link>
-//         </div>
-//       </div>
-//     </ListItem>
-//   );
-// }
-
-// function MasterclassSideBar() {
-//   const [openCategory, setOpenCategory] = React.useState(true);
-
-//   const handleCategoryClick = () => {
-//     setOpenCategory(!openCategory);
-//   };
-
-//   const [openLearn, setOpenLearn] = React.useState(true);
-
-//   const handleLearnClick = () => {
-//     setOpenLearn(!openLearn);
-//   };
-
-//   const [openDashboard, setOpenDashboard] = React.useState(true);
-
-//   const handleDashboardClick = () => {
-//     setOpenDashboard(!openDashboard);
-//   };
-
-//   const [openMasterclass, setOpenMasterclass] = React.useState(true);
-
-//   const handleMasterclassClick = () => {
-//     setOpenMasterclass(!openMasterclass);
-//   };
-
-//   const [openProfile, setOpenProfile] = React.useState(true);
-
-//   const handleProfileClick = () => {
-//     setOpenProfile(!openProfile);
-//   };
-
-//   return (
-//     <List>
-//       <ListItem>
-//         <div className=" searchBar" component="form">
-//           <InputBase
-//             className="searchInput w-100"
-//             placeholder="Search for Courses or Category"
-//           />
-//           <Button className="customButton">
-//             <SearchIcon className="searchIcon" />
-//           </Button>
-//         </div>
-//         <div className="menuContainer mTopMenu">
-//           <div className="menuItem">
-//             <div
-//               className="menuItemHeader link"
-//               tabIndex="1"
-//               type="button"
-//               onClick={handleCategoryClick}
-//             >
-//               <span>Category</span>
-//               {openCategory ? (
-//                 <ExpandIcon className="menuIcon" />
-//               ) : (
-//                 <CollapseIcon className="menuIcon" />
-//               )}
-//             </div>
-//             <Collapse in={!openCategory} timeout="auto" unmountOnExit>
-//               <div className="menuItemContent ">
-//                 <Link className="contentList link" to="/404">
-//                   Category 1
-//                 </Link>
-//                 <Link className="contentList link" to="/404">
-//                   Category 2
-//                 </Link>
-//                 <Link className="contentList mb-0 link" to="/404">
-//                   Category 3
-//                 </Link>
-//               </div>
-//             </Collapse>
-//           </div>
-//           <div className="menuItem">
-//             <div
-//               className="menuItemHeader link"
-//               tabIndex="1"
-//               type="button"
-//               onClick={handleLearnClick}
-//             >
-//               <span>Learn</span>
-//               {openLearn ? (
-//                 <ExpandIcon className="menuIcon" />
-//               ) : (
-//                 <CollapseIcon className="menuIcon" />
-//               )}
-//             </div>
-//             <Collapse in={!openLearn} timeout="auto" unmountOnExit>
-//               <div className="menuItemContent ">
-//                 <Link className="contentList link" to="/404">
-//                   Blog
-//                 </Link>
-//                 <Link className="contentList link" to="/masterclass/dashboard">
-//                   Masterclass
-//                 </Link>
-//                 <Link
-//                   className="contentList mb-0 link"
-//                   to="/masterclass/becometutor"
-//                 >
-//                   Become a Tutor
-//                 </Link>
-//               </div>
-//             </Collapse>
-//           </div>
-//           <div className="menuItem">
-//             <Link className="menuItemHeader link" to="/">
-//               Market
-//             </Link>
-//           </div>
-//           <div className="menuItem">
-//             <div
-//               className="menuItemHeader link"
-//               tabIndex="1"
-//               type="button"
-//               onClick={handleDashboardClick}
-//             >
-//               <span>Dashboard</span>
-//               {openDashboard ? (
-//                 <ExpandIcon className="menuIcon" />
-//               ) : (
-//                 <CollapseIcon className="menuIcon" />
-//               )}
-//             </div>
-//             <Collapse in={!openDashboard} timeout="auto" unmountOnExit>
-//               <div className="menuItemContent ">
-//                 <Link className="contentList link" to="/affiliate/dashboard">
-//                   Affiliate Dashboard
-//                 </Link>
-//                 <Link className="contentList link" to="/market/dashboard">
-//                   Market Dashboard
-//                 </Link>
-//                 <div
-//                   className="contentList d-flex justify-content-between align-items-center link"
-//                   tabIndex="1"
-//                   type="button"
-//                   onClick={handleMasterclassClick}
-//                 >
-//                   <span>Masterclass Dashboard</span>
-//                   {openMasterclass ? (
-//                     <ExpandIcon className="mCIcon" />
-//                   ) : (
-//                     <CollapseIcon className="mCIcon" />
-//                   )}
-//                 </div>
-//                 <Collapse in={!openMasterclass} timeout="auto" unmountOnExit>
-//                   <div className="menuItemContent ">
-//                     <Link
-//                       className="contentList link"
-//                       to="/masterclass/tutor/profile"
-//                     >
-//                       My Profile
-//                     </Link>
-//                     <Link
-//                       className="contentList link"
-//                       to="/masterclass/courses"
-//                     >
-//                       My Courses
-//                     </Link>
-//                     <Link
-//                       className="contentList mb-0 link"
-//                       to="/masterclass/uploads"
-//                     >
-//                       My Uploads
-//                     </Link>
-//                   </div>
-//                 </Collapse>
-//               </div>
-//             </Collapse>
-//           </div>
-//           <div className="menuItem">
-//             <Link className="menuItemHeader link" to="/giftCard">
-//               Gift Card
-//             </Link>
-//           </div>
-//           <div className="menuItem">
-//             <Link className="menuItemHeader link" to="/404">
-//               Affiliate
-//             </Link>
-//           </div>
-//           <div className="menuItem mb-0">
-//             <div
-//               className="menuItemHeader link"
-//               tabIndex="1"
-//               type="button"
-//               onClick={handleProfileClick}
-//             >
-//               <span>Profile</span>
-//               {openProfile ? (
-//                 <ExpandIcon className="menuIcon" />
-//               ) : (
-//                 <CollapseIcon className="menuIcon" />
-//               )}
-//             </div>
-//             <Collapse in={!openProfile} timeout="auto" unmountOnExit>
-//               <div className="menuItemContent ">
-//                 <Link className="contentList link" to="/404">
-//                   My Profile
-//                 </Link>
-//                 <Link className="contentList link" to="/404">
-//                   Ticket
-//                 </Link>
-//                 <Link className="contentList mb-0 link" to="/404">
-//                   Settings
-//                 </Link>
-//               </div>
-//             </Collapse>
-//           </div>
-//           <div className="menuItem sidebarBottom">
-//             <Link className="menuItemHeader link" to="/">
-//               Log-Out
-//             </Link>
-//           </div>
-//         </div>
-//       </ListItem>
-//       {/* <ListItem
-//               style={{
-//                 zIndex: 100,
-//                 height: "fit-content",
-//                 position: "absolute",
-//                 bottom: "3.5rem",
-//                 // background: "rgba(139, 181, 178, 1)",
-//                 // paddingTop: "3rem",
-//                 // paddingBottom: "2rem",
-//               }}
-//             >
-//               <div className="menuItem sidebarBottom">
-//                 <Link className="menuItemHeader link" to="/">
-//                   Log-Out
-//                 </Link>
-//               </div>
-//             </ListItem> */}
-//     </List>
-//   );
-// }
