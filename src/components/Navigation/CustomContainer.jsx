@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     "& .mainContainer": {
       fontSize: "1.5rem",
       paddingBottom: "15rem",
+      background: "rgba(250, 250, 250, 0.3)",
     },
   },
 });

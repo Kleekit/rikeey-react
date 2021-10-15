@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Divider, Grid, Paper, Rating } from "@mui/material";
+import { Button, Divider, Grid, Paper, Rating } from "@mui/material";
 import CustomContainer from "../components/Navigation/CustomContainer";
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalClose,
+  ModalBody,
+  ModalFooter,
+} from "react-modal-bootstrap";
+// import CommentModal from "../components/Shop/CommentModal";
 // import clsx from "clsx";
 
 const useStyles = makeStyles({
@@ -32,11 +43,28 @@ const useStyles = makeStyles({
         ["@media (max-width: 960px)"]: {
           marginTop: "8rem",
         },
+        "& .viewReviewBtn": {
+          color: "rgba(13, 109, 163, 1)",
+          borderBottom: "0.1rem solid rgba(13, 109, 163, 1)",
+          fontSize: "1.35rem",
+        },
+        "& .writeReviewBtn": {
+          color: "rgba(115, 15, 17, 1)",
+          borderBottom: "0.1rem solid rgba(115, 15, 17, 1)",
+          fontSize: "1.35rem",
+        },
+        "& .itemDescription": {
+          fontSize: "1.8rem",
+          textAlign: "justify",
+          lineHeight: "3.5rem",
+          fontWeight: 600,
+        },
         "& .selectHeader": {
           marginBottom: "1.4rem",
         },
         "& .paperColorPicker": {
           padding: "1.2rem 2.8rem",
+          paddingLeft: "1.1rem",
           display: "flex",
           justifyContent: "space-between",
           width: "fit-content",
@@ -60,10 +88,11 @@ const useStyles = makeStyles({
         },
         "& .paperSizePicker": {
           padding: "1.2rem 2.8rem",
+          paddingLeft: "1.1rem",
           display: "flex",
           justifyContent: "space-between",
           width: "fit-content",
-          marginBottom: "3rem",
+          marginBottom: "5rem",
         },
         "& #sizePicker": {
           width: "3.5rem",
@@ -84,8 +113,11 @@ const useStyles = makeStyles({
           background: "rgba(115, 15, 17, 1)",
           color: "#fff",
           width: "fit-content",
-          padding: "1rem 5rem",
+          padding: "1.3rem 5rem",
           borderRadius: "1rem",
+          ["@media (max-width: 960px)"]: {
+            margin: "0 auto",
+          },
         },
       },
     },
@@ -104,7 +136,7 @@ const useStyles = makeStyles({
         padding: "3rem 4.5rem",
         borderRadius: "1rem",
         background: "rgba(251, 251, 251, 1)",
-        border: "0.1rem solid #000",
+        border: "0.1rem solid rgba( 220, 220, 220, .5)",
         "& .customer": {
           marginBottom: "5rem",
           "& .customerImg": {
@@ -116,6 +148,22 @@ const useStyles = makeStyles({
           },
         },
       },
+    },
+    "& .dividerHeader": {
+      width: "25%",
+      ["@media (max-width: 960px)"]: {
+        width: "60%",
+      },
+    },
+    "& .subCoverImg": {
+      flexGrow: 0,
+      maxWidth: "30%",
+      flexBasis: "30%",
+    },
+    "& .containerCatalogItem": {
+      flexGrow: 0,
+      maxWidth: "22%",
+      flexBasis: "22%",
     },
   },
 });
@@ -160,36 +208,66 @@ function Details() {
           </div>
         </Grid>
         <Grid items xs={12} md={5} className="shopItemDetails">
-          <div className="itemName">Contour Seamless Leggings</div>
-          <div className="itemPrice"># 7,000.00 / $ 17</div>
-          <div className="itemStarReview d-flex align-items-center">
+          <h1 className="itemName mb-4">Contour Seamless Leggings</h1>
+          <h3 className="itemPrice fw-600 mb-4"># 7,000.00 / $ 17</h3>
+          <div className="itemStarReview mb-2 d-flex align-items-center">
             <Rating
               name="customers-rating"
               value={value}
               precision={0.5}
               readOnly
             />
-            <span className="ms-3 viewReviewBtn">View reviews</span>
+            <HashLink
+              to="/shop/details#viewReviews"
+              className="ms-4 viewReviewBtn"
+            >
+              View reviews
+            </HashLink>
           </div>
           <div className="itemStarReview d-flex align-items-center">
             <span className="reviewCount">138 Reviews</span>
-            <span className="ms-3 writeReviewBtn">Write a Review</span>
+            <CustomComment
+              openModal={
+                <span className="ms-4 writeReviewBtn">Write a Review</span>
+              }
+            >
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Title" />
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Name" />
+              </div>
+              <div class="form-floating">
+                <textarea
+                  class="form-control"
+                  placeholder="Leave a comment here"
+                  style="height: 15rem"
+                ></textarea>
+                <label for="floatingTextarea2">Comments</label>
+              </div>
+              <div class="input-group mb-3">
+                <input type="file" class="form-control" />
+                <label class="input-group-text" for="inputGroupFile02">
+                  Upload
+                </label>
+              </div>
+            </CustomComment>
           </div>
-          <Divider className="my-4" />
-          <div className="itemDescription w-90 text-justify">
+          <Divider className="my-5" />
+          <div className="itemDescription w-90 ">
             The Kendall set is a collection as vibrant as you are; a collection
             that empowers you to let yourself glow. With performance and
             vibrance equally at the fore of design. It features a cross body
             top, impact sport bra and a leggings.
           </div>
-          <Divider className="my-4" />
-          <div className="selectHeader">Colors</div>
+          <Divider className="my-5" />
+          <h3 className="selectHeader">Colors</h3>
           <Paper elevation={3} className="paperColorPicker ">
             {color.map((color) => (
               <span
                 onClick={color.selectColor}
                 style={{ background: `${color.background}` }}
-                className="colorPicker cursor-pointer"
+                className="colorPicker cursor-pointer ms-4"
                 id="colorPicker"
               >
                 <span
@@ -199,12 +277,12 @@ function Details() {
               </span>
             ))}
           </Paper>
-          <div className="selectHeader">Colors</div>
+          <h3 className="selectHeader">Size</h3>
           <Paper elevation={3} className="paperSizePicker ">
             <span
               onClick={selectSize}
               id="sizePicker"
-              className="cursor-pointer"
+              className="cursor-pointer ms-4"
             >
               s
             </span>
@@ -215,10 +293,10 @@ function Details() {
         </Grid>
       </Grid>
       <div className="moreCatalog">
-        <div className="header text-center">Something Light</div>
-        <Divider variant="inset" className="my-5 w-30 mx-auto" />
+        <h2 className="header text-center">Something Light</h2>
+        <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
         <Grid container justifyContent="space-between">
-          <Grid items xs={12} md={2}>
+          <Grid items xs={12} md={2} className="containerCatalogItem">
             <div className="catalogItem mb-4"></div>
             <div className="catalogItemDetails">
               <div className="shop-col-text">
@@ -239,7 +317,7 @@ function Details() {
               </div>
             </div>
           </Grid>
-          <Grid items xs={12} md={2}>
+          <Grid items xs={12} md={2} className="containerCatalogItem">
             <div className="catalogItem mb-4"></div>
             <div className="catalogItemDetails">
               <div className="shop-col-text">
@@ -260,7 +338,7 @@ function Details() {
               </div>
             </div>
           </Grid>
-          <Grid items xs={12} md={2}>
+          <Grid items xs={12} md={2} className="containerCatalogItem">
             <div className="catalogItem mb-4"></div>
             <div className="catalogItemDetails">
               <div className="shop-col-text">
@@ -281,7 +359,7 @@ function Details() {
               </div>
             </div>
           </Grid>
-          <Grid items xs={12} md={2}>
+          <Grid items xs={12} md={2} className="containerCatalogItem">
             <div className="catalogItem mb-4"></div>
             <div className="catalogItemDetails">
               <div className="shop-col-text">
@@ -304,9 +382,9 @@ function Details() {
           </Grid>
         </Grid>
       </div>
-      <div className="reviews">
-        <div className="header text-center">Something Light</div>
-        <Divider variant="inset" className="my-5 w-30 mx-auto" />
+      <div className="reviews" id="viewReviews">
+        <h2 className="header text-center">Reviews</h2>
+        <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
         <Grid container justifyContent="space-between">
           <Grid items xs={12} md={5} className="customerReview">
             <div className="customer d-flex align-items-center">
@@ -373,6 +451,41 @@ function Details() {
         </Grid>
       </div>
     </CustomContainer>
+  );
+}
+
+function CustomComment(props) {
+  const { openModal } = props;
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <span>
+      <span variant="primary" onClick={handleShow}>
+        {openModal}
+      </span>
+
+      <Modal
+        size="sm"
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Review</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{props.children}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
+    </span>
   );
 }
 

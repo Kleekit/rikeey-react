@@ -52,7 +52,7 @@ function NavBar() {
               <RikeeyLogo />
             </Link>
           </Grid>
-          <Grid className="menuContainer" items md={4}>
+          <Grid className="menuContainer" items md={3}>
             <Link to="/">Home</Link>
             <Link to="/shop">Shop</Link>
             <Link to="/cart">Cart</Link>

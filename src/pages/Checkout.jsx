@@ -1,28 +1,41 @@
 import React from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import ArrowLeft from "@mui/icons-material/KeyboardArrowLeftRounded";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
-    marginTop: "10rem",
+    marginTop: "5rem",
+    "& .submitBtn": {
+      background: "rgba(115, 15, 17, 1)",
+    },
+    "& .mBottom": {
+      marginBottom: "7rem",
+    },
+    "& h3": {
+      marginBottom: "2.5rem",
+    },
+    "& .form-group": {
+      marginBottom: "3rem",
+    },
   },
 });
 
 function Checkout() {
   const classes = useStyles();
   const customConfig = {
-    customStyle: `${classes.root} pt-4 px-4 row `,
+    customStyle: `${classes.root} pt-4 px-5 row `,
   };
 
   return (
     <CustomContainer {...customConfig}>
-      <div className="col-md-6 mt-6 mb-15 mx-auto">
-        <div className="contact-info mb-5  br-3 px-3 py-4">
-          <h3 className="fw-600 px-2 mb-4">Contact Information</h3>
+      <div className="col-md-6 mt-6 mb-15 mx-auto ">
+        <div className="contact-info mBottom br-3 px-4 py-5">
+          <h3 className="fw-600 px-2 ">Contact Information</h3>
           <div className="form px-4">
-            <div className="form-group mb-4 fs-sm">
-              <label for="">Email address</label>
+            <div className="form-group  fs-sm">
+              <label className="mb-2">Email address</label>
               <input
                 type="email"
                 className="form-control w-80 no-border"
@@ -31,8 +44,8 @@ function Checkout() {
                 placeholder="johndoe@gmail.com"
               />
             </div>
-            <div className="form-group mb-4 fs-sm">
-              <label for="">Phone Number</label>
+            <div className="form-group  fs-sm">
+              <label className="mb-2">Phone Number</label>
               <input
                 type="text"
                 className="form-control w-80 no-border"
@@ -42,11 +55,11 @@ function Checkout() {
             </div>
           </div>
         </div>
-        <div className="contact-info br-3 px-3 py-4 mb-4">
-          <h3 className="fw-600 px-2 mb-4">Waybill Information</h3>
+        <div className="contact-info mBottom br-3 px-4 py-5">
+          <h3 className="fw-600 px-2 ">Waybill Information</h3>
           <div className="form px-4">
-            <div className="form-group mb-4 fs-sm">
-              <label for="">First Name</label>
+            <div className="form-group  fs-sm">
+              <label className="mb-2">First Name</label>
               <input
                 type="text"
                 className="form-control w-80 no-border"
@@ -55,8 +68,8 @@ function Checkout() {
                 placeholder="john"
               />
             </div>
-            <div className="form-group mb-4 mb-4 fs-sm">
-              <label for="">Last Name</label>
+            <div className="form-group   fs-sm">
+              <label className="mb-2">Last Name</label>
               <input
                 type="text"
                 className="form-control w-80 no-border"
@@ -64,8 +77,8 @@ function Checkout() {
                 placeholder="doe"
               />
             </div>
-            <div className="form-group mb-4 fs-sm">
-              <label for="">Address</label>
+            <div className="form-group  fs-sm">
+              <label className="mb-2">Address</label>
               <input
                 type="text"
                 className="form-control w-80 no-border"
@@ -74,8 +87,8 @@ function Checkout() {
               />
             </div>
             <div className="country-state-form w-80 d-flex justify-content-between">
-              <div className="form-group mb-4 w-40 fs-sm">
-                <label for="">Country</label>
+              <div className="form-group  w-40 fs-sm">
+                <label className="mb-2">Country</label>
                 <input
                   type="text"
                   className="form-control  no-border"
@@ -83,8 +96,8 @@ function Checkout() {
                   placeholder="Nigeria"
                 />
               </div>
-              <div className="form-group mb-4 w-40 fs-sm">
-                <label for="">State</label>
+              <div className="form-group  w-40 fs-sm">
+                <label className="mb-2">State</label>
                 <input
                   type="text"
                   className="form-control  no-border"
@@ -93,8 +106,8 @@ function Checkout() {
                 />
               </div>
             </div>
-            <div className="form-group mb-4 fs-sm">
-              <label for="">City</label>
+            <div className="form-group  fs-sm">
+              <label className="mb-2">City</label>
               <input
                 type="text"
                 className="form-control w-80 no-border"
@@ -102,55 +115,35 @@ function Checkout() {
                 placeholder="Warri"
               />
             </div>
-            <div className="form-group mb-4 form-check">
+            <div className="form-group form-check ">
               <input
                 type="checkbox"
                 className="form-check-input bg-grey"
                 id=""
               />
-              <label className="form-check-label fs-sm" for="">
-                Save my details
-              </label>
+              <label className="form-check-label fs-sm">Save my details</label>
             </div>
-            <Checkbox
-              sx={{
-                "&.Mui-checked": {
-                  color: "rgba(115, 15, 17, 1)",
-                },
-              }}
-            />
           </div>
         </div>
-        <div className="d-flex justify-content-between">
-          <a href="/cart" className="my-auto">
+        <div className="d-flex justify-content-between align-items-center">
+          <Link to="/cart" className="d-flex align-items-center">
             <div className="ms-3">
-              <svg
-                className="me-2"
-                width="8"
-                height="9.5"
-                viewBox="0 0 8 14"
-                fill="none"
-                xmlns="https://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7 13L1 7L7 1"
-                  stroke="black"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <ArrowLeft
+                sx={{
+                  fontSize: "2.2rem",
+                }}
+              />
               <span className="align-self-center">Return to cart </span>
             </div>
-          </a>
-          <a href="/checkout/payment">
+          </Link>
+          <Link to="/checkout/payment">
             <div
               type="submit"
-              className=" me-3 br-2 px-3 py-2 fw-600 bg-red justify-content-end white"
+              className="submitBtn me-3 br-2 py-3 px-5 fw-600 justify-content-end white"
             >
               Continue
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </CustomContainer>

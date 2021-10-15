@@ -1,19 +1,45 @@
 import React from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
+import { makeStyles } from "@material-ui/styles";
+import ArrowLeft from "@mui/icons-material/KeyboardArrowLeftRounded";
+import { Link } from "react-router-dom";
+
+const useStyles = makeStyles({
+  root: {
+    marginTop: "5rem",
+    "& .red": {
+      color: "rgba(115, 15, 17, 1)",
+      cursor: "pointer",
+    },
+    "& .submitBtn": {
+      background: "rgba(115, 15, 17, 1)",
+    },
+    "& .mBottom": {
+      marginBottom: "7rem",
+    },
+    "& h3": {
+      marginBottom: "2.5rem",
+    },
+    "& .form-group": {
+      marginBottom: "3rem",
+    },
+  },
+});
 
 function Payment() {
+  const classes = useStyles();
   const customConfig = {
-    customStyle: "pt-4 px-4 row ",
+    customStyle: `${classes.root} pt-4 px-5 row `,
   };
 
   return (
     <CustomContainer {...customConfig}>
       <div className="col-md-6 mt-6 mb-15 mx-auto">
-        <div className="contact-info mb-5  br-3 px-3 py-4">
-          <h5 className="fw-600 px-2 mb-4">Contact Information</h5>
+        <div className="contact-info mBottom  br-3 px-4 py-5">
+          <h3 className="fw-600 px-2 ">Contact Information</h3>
           <div className="form px-4">
-            <div className="form-group fs-sm">
-              <label for="">Email address</label>
+            <div className="form-group  fs-sm">
+              <label className="mb-2">Email address</label>
               <div className="d-flex ">
                 <input
                   type="email"
@@ -27,8 +53,8 @@ function Payment() {
                 </div>
               </div>
             </div>
-            <div className="form-group fs-sm ">
-              <label for="">Phone Number</label>
+            <div className="form-group mb-4 fs-sm ">
+              <label className="mb-2">Phone Number</label>
               <div className="d-flex ">
                 <input
                   type="text"
@@ -44,11 +70,11 @@ function Payment() {
           </div>
         </div>
 
-        <div className="waybill-info br-3 px-3 py-4 mb-4">
-          <h5 className="fw-600 px-2 mb-4">Waybill Information</h5>
+        <div className="waybill-info mBottom br-3 px-4 py-5 ">
+          <h3 className="fw-600 px-2 ">Waybill Information</h3>
           <div className="form px-4">
-            <div className="form-group fs-sm">
-              <label for="">Address</label>
+            <div className="form-group mb-4 fs-sm">
+              <label className="mb-2">Address</label>
               <div className="d-flex ">
                 <input
                   type="text"
@@ -64,10 +90,10 @@ function Payment() {
           </div>
         </div>
 
-        <div className="payment-info br-3 px-3 pt-4 pb-5 mb-4">
-          <h5 className="fw-600 px-2 mb-4">Payment Method</h5>
+        <div className="payment-info mBottom br-3 px-4 pt-5 pb-5 ">
+          <h3 className="fw-600 px-2 ">Payment Method</h3>
           <div className="form px-4 ">
-            <div className="form-check d-flex mb-1">
+            <div className="form-check d-flex mb-3">
               <div className="w-80">
                 <input
                   className="form-check-input"
@@ -77,9 +103,7 @@ function Payment() {
                   value="Card"
                   checked
                 />
-                <label className="form-check-label ms-3 fs-sm" for="">
-                  Card
-                </label>
+                <label className="form-check-label ms-3 fs-sm">Card</label>
               </div>
               <div className="w-20 ">
                 <img
@@ -98,9 +122,7 @@ function Payment() {
                   id="exampleRadios2"
                   value="Paystack"
                 />
-                <label className="form-check-label ms-3 fs-sm" for="">
-                  Paystack
-                </label>
+                <label className="form-check-label ms-3 fs-sm">Paystack</label>
               </div>
               <div className="w-20 ">
                 <img
@@ -113,31 +135,20 @@ function Payment() {
           </div>
         </div>
 
-        <div className="d-flex justify-content-between">
-          <a href="../cart/checkout" className="my-auto">
-            <div className="ms-3 ">
-              <svg
-                className="me-2"
-                width="8"
-                height="9.5"
-                viewBox="0 0 8 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7 13L1 7L7 1"
-                  stroke="black"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Return to Personal Information
+        <div className="d-flex justify-content-between align-items-center">
+          <Link to="/checkout">
+            <div className="ms-3 d-flex align-items-center">
+              <ArrowLeft
+                sx={{
+                  fontSize: "2rem",
+                }}
+              />
+              <span>Return to Personal Information</span>
             </div>
-          </a>
+          </Link>
           <div
             type="submit"
-            className=" me-3 br-2 px-3 py-2 fw-600 bg-red justify-content-end white"
+            className="submitBtn me-3 br-2 px-3 py-2 fw-600 justify-content-end white"
           >
             Make Payment
           </div>
