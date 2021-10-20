@@ -206,6 +206,12 @@ footer,
   text-align: end;
 }
 
+@media (max-width: 280px) {
+  body {
+    display: none;
+  }
+}
+
 @media (min-width: 320px) {
   .mx-s-auto {
     width: 100%;
