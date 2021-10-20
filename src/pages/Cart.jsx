@@ -2,7 +2,7 @@ import React from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
-import { Divider, Hidden } from "@mui/material";
+import { Divider } from "@mui/material";
 
 const useStyles = makeStyles({
   root: {
@@ -12,12 +12,20 @@ const useStyles = makeStyles({
     },
     "& .cart-bb": {
       height: "40vh",
-    },
-    "& .itemImg": {
-      ["@media (max-width: 960px )"]: {
-        width: "100%",
+      "@media (max-width: 600px )": {
+        height: "fit-content",
       },
     },
+    "& .itemImgContainer": {
+      "@media (max-width: 420px )": {
+        display: "none",
+      },
+    },
+    // "& .itemImg": {
+    //   "@media (max-width: 600px )": {
+    //     width: "100%",
+    //   },
+    // },
     "& .cartAddBtn": {
       padding: ".5rem 1.5rem",
       borderRadius: "1rem",
@@ -30,7 +38,7 @@ const useStyles = makeStyles({
     },
     "& .itemAmount": {
       padding: "0 2.5rem",
-      ["@media (max-width: 960px )"]: {
+      "@media (max-width: 960px )": {
         padding: "0 1rem",
       },
     },
@@ -44,7 +52,7 @@ const useStyles = makeStyles({
     },
     "& .total-sec": {
       width: "15%",
-      ["@media (max-width: 960px )"]: {
+      "@media (max-width: 960px )": {
         width: "50%",
       },
     },
@@ -60,7 +68,7 @@ const useStyles = makeStyles({
       width: "60%",
       display: "flex",
       flexWrap: "wrap",
-      ["@media (max-width: 960px )"]: {
+      "@media (max-width: 960px )": {
         padding: "2rem",
       },
     },
@@ -68,7 +76,7 @@ const useStyles = makeStyles({
       width: "40%",
       flexGrow: 0,
       display: "flex",
-      ["@media (max-width: 960px)"]: {
+      "@media (max-width: 960px)": {
         maxWidth: "100%",
         flexBasis: "100%",
         border: "none",
@@ -81,12 +89,22 @@ const useStyles = makeStyles({
       width: "30%",
       flexGrow: 0,
       display: "flex",
-      ["@media (max-width: 960px)"]: {
+      "@media (max-width: 960px)": {
         maxWidth: "50%",
         flexBasis: "50%",
         border: "none",
         display: "block",
         textAlign: "center",
+      },
+    },
+    "& .mdDown": {
+      "@media (max-width: 960px)": {
+        display: "none",
+      },
+    },
+    "& .mdUp": {
+      "@media (min-width: 960px)": {
+        display: "none",
       },
     },
   },
@@ -103,20 +121,18 @@ function Cart() {
       <div className="cart mx-auto">
         <div className="cart-head  ">
           <div className="w-40 my-auto ps-4">Items</div>
-          <Hidden smDown>
-            <div className="w-20 my-auto text-center">Quantity</div>
-            <div className="w-20 my-auto text-center">Prices</div>
-            <div className="w-20 my-auto text-center">Subtotal</div>
-          </Hidden>
+          <div className="w-20 my-auto mdDown text-center">Quantity</div>
+          <div className="w-20 my-auto mdDown text-center">Prices</div>
+          <div className="w-20 my-auto mdDown text-center">Subtotal</div>
         </div>
         <div className="cart-body ">
           <div className="cartRow">
             <div className="row smCartRow cart-bb">
-              <div className="w-40 cart-br d-flex">
+              <div className="w-40 cart-br p-3 d-flex">
                 <div className="row mx-0 px-4">
-                  <div className="col-md-6 h-75 text-center p-0 my-auto">
+                  <div className="col-md-6 h-75 itemImgContainer text-center p-0 my-auto">
                     <img
-                      className="itemImg w-70 h-100"
+                      className="itemImg w-80 h-100"
                       src="./images/women-set.png"
                       alt=""
                     />
@@ -128,9 +144,7 @@ function Cart() {
               </div>
               <div className="smCartTotal">
                 <div className="smCartQuantity cart-br">
-                  <Hidden smUp>
-                    <div className="smCartTitle">Quantity</div>
-                  </Hidden>
+                  <div className="smCartTitle mdUp">Quantity</div>
                   <div className="text-center m-auto">
                     <span className="fw-600 cartAddBtn">
                       <span className="decreaseBtn">-</span>
@@ -143,15 +157,11 @@ function Cart() {
                   </div>
                 </div>
                 <div className="smCartColumn cart-br">
-                  <Hidden smUp>
-                    <div className="smCartTitle">Total</div>
-                  </Hidden>
+                  <div className="smCartTitle mdUp">Total</div>
                   <div className="m-auto">$ 45.55</div>
                 </div>
                 <div className="smCartColumn">
-                  <Hidden smUp>
-                    <div className="smCartTitle">Sub Total</div>
-                  </Hidden>
+                  <div className="smCartTitle mdUp">Sub Total</div>
                   <div className="m-auto">$ 45.55</div>
                 </div>
               </div>

@@ -12,8 +12,6 @@ const useStyles = makeStyles({
     "& .menuContainer": {
       fontSize: "1.7rem",
       marginTop: "3.5rem",
-      // marginRight: "-3rem",
-      // paddingBottom: "3.5rem",
     },
     "& .menuItem": {
       width: "90%",
@@ -23,18 +21,18 @@ const useStyles = makeStyles({
       borderRadius: "unset",
       boxShadow: "none",
       marginBottom: "2rem",
+      "@media (max-width: 960px)": {
+        width: "95%",
+      },
     },
     "& .menuItemHeader": {
-      // fontSize: "1.7rem",
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
       fontWeight: 600,
-      // padding: "1rem",
-      // paddingRight: "3rem",
     },
     "& .menuItemContent": {
-      fontSize: "1.3rem",
+      fontSize: "1.8rem",
       fontWeight: 400,
       paddingTop: ".5rem",
       paddingLeft: "1rem",
@@ -48,16 +46,19 @@ const useStyles = makeStyles({
       flexGrow: 0,
       maxWidth: "30%",
       flexBasis: "30%",
-      ["@media (max-width: 960px)"]: {
-        maxWidth: "45%",
-        flexBasis: "45%",
+      "@media (max-width: 600px)": {
+        maxWidth: "46%",
+        flexBasis: "46%",
       },
     },
     "& .shopItemImg": {
       marginBottom: "3rem",
       height: "50vh",
-      ["@media (max-width: 960px)"]: {
-        height: "40vh",
+      "@media (max-width: 600px)": {
+        height: "37vh",
+      },
+      "@media (max-width: 480px)": {
+        height: "27vh",
       },
     },
     "& .filterHead": {
@@ -69,14 +70,18 @@ const useStyles = makeStyles({
       margin: "0 auto",
       marginBottom: "3.8rem",
       width: "60%",
-      ["@media (max-width: 960px)"]: {
+      fontSize: "1.8rem",
+      "@media (max-width: 960px)": {
+        width: "90%",
+      },
+      "@media (max-width: 600px)": {
         margin: "0rem",
         width: "100%",
-        fontSize: "1.5rem",
+        // fontSize: "1.8rem",
       },
     },
     "& .filterBorderBl": {
-      ["@media (max-width: 960px)"]: {
+      "@media (max-width: 960px)": {
         marginBottom: "3rem",
       },
     },
@@ -88,6 +93,19 @@ const useStyles = makeStyles({
     },
     "& .pagination": {
       marginTop: "8rem",
+      "& .MuiPaginationItem-root": {
+        minWidth: "4rem",
+        height: "4rem",
+        fontSize: "1rem",
+        "@media (max-width: 420px)": {
+          minWidth: "3.4rem",
+          height: "3.4rem",
+        },
+        "@media (max-width: 320px)": {
+          minWidth: "3rem",
+          height: "3rem",
+        },
+      },
     },
   },
 });
@@ -140,7 +158,7 @@ function Shop() {
   const filterTop = (
     <div className="filterBarLinks filterTop">
       <div className=" filterBorderBl filterHead px-1 ">
-        <div className="fw-700 col-7 ">Filter</div>{" "}
+        <div className=" col-7 ">Filter</div>{" "}
         <div className="col-2 cursor-pointer">Clear</div>
       </div>
       <Hidden smDown>
@@ -153,7 +171,7 @@ function Shop() {
           type="button"
           onClick={handleSexClick}
         >
-          <div className="fw-700 ps-2">Sex</div>
+          <div className="fw-600 ps-2">Sex</div>
           {openSex ? (
             <ExpandIcon className="menuIcon" />
           ) : (
@@ -181,7 +199,7 @@ function Shop() {
           type="button"
           onClick={handleSizeClick}
         >
-          <div className="fw-700 ps-2">Size</div>
+          <div className="fw-600 ps-2">Size</div>
           {openSize ? (
             <ExpandIcon className="menuIcon" />
           ) : (
@@ -215,7 +233,7 @@ function Shop() {
           type="button"
           onClick={handleColorClick}
         >
-          <div className="fw-700 ps-2">Color</div>
+          <div className="fw-600 ps-2">Color</div>
           {openColor ? (
             <ExpandIcon className="menuIcon" />
           ) : (
@@ -313,18 +331,18 @@ function Shop() {
         <ShopSideBar openFilter={openFilter}>
           <div className={classes.root}>{filterTop}</div>
         </ShopSideBar>
-        <Hidden smDown>
-          <Grid items xs={12} md={3} className="filter-col pe-0">
+        <Hidden mdDown>
+          <Grid items xs={12} sm={12} md={3} className="filter-col pe-0">
             <div className="filter-content fs-large pb-5 fw-500 ">
               {filterTop}
               {filterBottom}
             </div>
           </Grid>
         </Hidden>
-        <Grid items xs={12} md={9} className="shop-catalog ">
+        <Grid items xs={12} sm={12} md={9} className="shop-catalog ">
           <div className="row mx-0 px-4 justify-content-between">
             <Hidden mdDown>
-              <h3 className="mb-4">Women Bottom</h3>
+              <h3 className="catalogCategory mb-4">Women Bottom</h3>
             </Hidden>
             <div className="shop-col">
               <Link to="/shop/details">
@@ -332,6 +350,7 @@ function Shop() {
                   <img
                     className=" w-100 h-100"
                     src="assets/images/video-substitute.png"
+                    alt=""
                   />
                 </div>
                 <div className="shop-col-text">
@@ -354,7 +373,9 @@ function Shop() {
             </div>
           </div>
           <div className="d-l-none pagination d-flex justify-content-center">
-            <Pagination count={10} variant="outlined" color="primary" />
+            <Hidden mdUp>
+              <Pagination count={10} variant="outlined" color="primary" />
+            </Hidden>
           </div>
         </Grid>
       </Grid>

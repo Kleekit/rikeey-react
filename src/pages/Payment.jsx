@@ -23,6 +23,15 @@ const useStyles = makeStyles({
     "& .form-group": {
       marginBottom: "3rem",
     },
+    "& .customInput": {
+      width: "80%",
+    },
+    "& .returnBtn": {
+      fontSize: "1.7rem",
+      "@media (max-width: 480px)": {
+        fontSize: "1.5rem",
+      },
+    },
   },
 });
 
@@ -43,7 +52,7 @@ function Payment() {
               <div className="d-flex ">
                 <input
                   type="email"
-                  className="form-control w-80 no-border"
+                  className="form-control customInput no-border"
                   id=""
                   aria-describedby=""
                   placeholder="johndoe@gmail.com"
@@ -58,7 +67,7 @@ function Payment() {
               <div className="d-flex ">
                 <input
                   type="text"
-                  className="form-control w-80 no-border"
+                  className="form-control customInput no-border"
                   id=""
                   placeholder="+234 0345231265"
                 />
@@ -78,7 +87,7 @@ function Payment() {
               <div className="d-flex ">
                 <input
                   type="text"
-                  className="form-control w-80 no-border"
+                  className="form-control customInput no-border"
                   id=""
                   placeholder="Jakpa"
                 />
@@ -94,7 +103,7 @@ function Payment() {
           <h3 className="fw-600 px-2 ">Payment Method</h3>
           <div className="form px-4 ">
             <div className="form-check d-flex mb-3">
-              <div className="w-80">
+              <div className="customInput">
                 <input
                   className="form-check-input"
                   type="radio"
@@ -114,7 +123,7 @@ function Payment() {
               </div>
             </div>
             <div className="form-check d-flex">
-              <div className="w-80">
+              <div className="customInput">
                 <input
                   className="form-check-input"
                   type="radio"
@@ -137,10 +146,10 @@ function Payment() {
 
         <div className="d-flex justify-content-between align-items-center">
           <Link to="/checkout">
-            <div className="ms-3 d-flex align-items-center">
+            <div className="ms-3 returnBtn d-flex">
               <ArrowLeft
                 sx={{
-                  fontSize: "2rem",
+                  fontSize: "2.4rem",
                 }}
               />
               <span>Return to Personal Information</span>
@@ -148,7 +157,7 @@ function Payment() {
           </Link>
           <div
             type="submit"
-            className="submitBtn me-3 br-2 px-3 py-2 fw-600 justify-content-end white"
+            className="submitBtn me-3 br-2 px-4 py-3 fw-600 justify-content-end white"
           >
             Make Payment
           </div>

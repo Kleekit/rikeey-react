@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import {
+  Badge,
   Button,
   Collapse,
   Drawer,
@@ -13,7 +14,8 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseIcon from "@mui/icons-material/CloseRounded";
-import Notifications from "@mui/icons-material/NotificationsNoneRounded";
+// import Notifications from "@mui/icons-material/NotificationsNoneRounded";
+import ShoppingCart from "@mui/icons-material/ShoppingCartOutlined";
 import CollapseIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import ExpandIcon from "@mui/icons-material/KeyboardArrowRightRounded";
 import clsx from "clsx";
@@ -42,8 +44,11 @@ const useStyles = makeStyles({
         height: "100%",
         position: "relative",
         "& .navIcon": {
-          fontSize: "2.5rem",
+          fontSize: "3.5rem",
           color: "#000",
+          "@media (max-width: 420px)": {
+            fontSize: "3rem",
+          },
         },
         "& .menuIcon": {
           fontSize: "3rem",
@@ -56,8 +61,8 @@ const useStyles = makeStyles({
         },
         // "& .navigationContainer": {},
         "& .menuContainer": {
-          fontSize: "1.7rem",
-          marginTop: "3.5rem",
+          // fontSize: "3rem",
+          marginTop: "4.5rem",
           marginRight: "-3rem",
           paddingBottom: "3.5rem",
         },
@@ -67,27 +72,39 @@ const useStyles = makeStyles({
           fontSize: "initial",
           borderRadius: "unset",
           boxShadow: "none",
-          marginBottom: "4.1rem",
+          marginBottom: "5rem",
+          "@media (max-width: 420px)": {
+            marginBottom: "3.8rem",
+          },
         },
         "& .menuItemHeader": {
-          fontSize: "1.7rem",
+          fontSize: "2.5rem",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           fontWeight: 600,
           padding: "1rem",
           paddingRight: "3rem",
+          "@media (max-width: 420px)": {
+            fontSize: "2rem",
+          },
         },
         "& .menuItemContent": {
-          fontSize: "1.5rem",
+          fontSize: "2.2rem",
           fontWeight: 400,
-          paddingTop: ".5rem",
+          paddingTop: "1rem",
           paddingLeft: "1.8rem",
+          "@media (max-width: 420px)": {
+            fontSize: "1.8rem",
+          },
         },
         "& .contentList": {
-          marginBottom: "2rem",
+          marginBottom: "2.5rem",
           padding: "1.1rem",
           display: "block",
+          "@media (max-width: 420px)": {
+            marginBottom: "1.5rem",
+          },
         },
         "& .link:focus-within": {
           backgroundColor: "rgba(240, 240, 240, 1) !important",
@@ -106,9 +123,22 @@ const useStyles = makeStyles({
           borderRadius: "8rem",
           "& .searchInput": { fontSize: "1.7rem", color: "inherit" },
           "& .searchIcon": { width: "2.6rem", height: "2.6rem", color: "#000" },
+          "& customButton": { minWidth: "unset" },
         },
         "& .mTopMenu": {
           marginTop: "3.5rem",
+        },
+        "& .MuiBadge-root": {
+          "& > .MuiBadge-badge": {
+            top: "10%",
+            right: "-35%",
+            height: "2.1rem",
+            minWidth: "2.1rem",
+            fontSize: "1.2rem",
+            border: "0.1rem solid rgb(233, 233, 233)",
+            background: "rgb(119, 80, 80)",
+            fontWeight: 700,
+          },
         },
       },
       "& ul > li": {
@@ -122,6 +152,8 @@ const useStyles = makeStyles({
 
 export default function SideBar() {
   const classes = useStyles();
+
+  const [count, setCount] = React.useState(0);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -162,7 +194,16 @@ export default function SideBar() {
             }}
           >
             <div className="navigationContainer d-flex justify-content-between align-items-center">
-              <Notifications className="navIcon" />
+              <Badge overlap="circular" color="primary" badgeContent={count}>
+                <Link to="/cart">
+                  <ShoppingCart
+                    onClick={() => {
+                      setCount(count + 1);
+                    }}
+                    className="navIcon cursor-pointer"
+                  />
+                </Link>
+              </Badge>
               <CloseIcon
                 className="navIcon cursor-pointer"
                 onClick={() => setIsDrawerOpen(!isDrawerOpen)}

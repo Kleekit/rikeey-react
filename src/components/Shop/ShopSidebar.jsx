@@ -20,6 +20,15 @@ const useStyles = makeStyles({
       padding: 0,
       width: "65vw",
       height: "calc(90vh - 8rem)",
+      "@media (max-width: 960px)": {
+        width: "50vw",
+      },
+      "@media (max-width: 600px)": {
+        width: "65vw",
+      },
+      "@media (max-width: 320px)": {
+        width: "75vw",
+      },
       "& ul": {
         padding: 0,
         width: "100% !important",
@@ -61,7 +70,7 @@ export default function ShopSideBar(props) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <Hidden smUp>
+    <Hidden mdUp>
       <div
         className="cursor-pointer"
         onClick={() => setIsDrawerOpen(!isDrawerOpen)}
@@ -69,10 +78,10 @@ export default function ShopSideBar(props) {
         {openFilter}
       </div>
       <Drawer
-        anchor={"right"}
+        // anchor={"right"}
         open={isDrawerOpen}
         className={classes.drawer}
-        anchor="left"
+        anchor={"left"}
       >
         <List classes={classes.ulStyle}>
           <ListItem

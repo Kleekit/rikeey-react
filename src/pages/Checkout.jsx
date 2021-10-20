@@ -19,6 +19,12 @@ const useStyles = makeStyles({
     "& .form-group": {
       marginBottom: "3rem",
     },
+    "& .returnBtn": {
+      fontSize: "1.7rem",
+      "@media (max-width: 480px)": {
+        fontSize: "1.5rem",
+      },
+    },
   },
 });
 
@@ -126,14 +132,14 @@ function Checkout() {
           </div>
         </div>
         <div className="d-flex justify-content-between align-items-center">
-          <Link to="/cart" className="d-flex align-items-center">
-            <div className="ms-3">
+          <Link to="/cart">
+            <div className="ms-3 returnBtn d-flex">
               <ArrowLeft
                 sx={{
-                  fontSize: "2.2rem",
+                  fontSize: "2.4rem",
                 }}
               />
-              <span className="align-self-center">Return to cart </span>
+              <span>Return to cart </span>
             </div>
           </Link>
           <Link to="/checkout/payment">

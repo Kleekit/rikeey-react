@@ -12,46 +12,6 @@ footer,
   background: #f6f6f6;
 }
 
-/* small screen sidebar css */
-
-#sideBar {
-  position: fixed;
-  width: 0;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  overflow-x: hidden;
-  background: #fff;
-  z-index: 1;
-  transition: 0.35s;
-  overflow-y: scroll;
-}
-
-#sideBar .sidebar-nav {
-  height: 1.5rem;
-}
-
-#sideBar .sidebar-links {
-  position: relative;
-  top: 0.5rem;
-  left: 0.6rem;
-  line-height: 3rem;
-  transition: 0.1s;
-}
-
-#sideBar .sidebar-links .sub-links {
-  line-height: 1.2rem;
-}
-
-.nav-sm-container {
-  height: 100%;
-}
-
-.open-btn {
-  display: flex;
-  align-items: center;
-}
-
 /* welcome bg img */
 
 .hero-container {
@@ -84,19 +44,21 @@ footer,
 .catalog-label,
 .slider-label {
   background-color: rgba(115, 15, 17, 1);
-  color: #fff;
+  color: rgb(233, 233, 233);
   width: 30%;
-  height: 3.2rem;
   margin-left: 0;
   display: flex;
   margin-bottom: 2.5rem;
 }
 
-.catalog-label-text {
-  font-size: 1.5rem;
+.catalog-label-text,
+.slider-label-text {
+  font-size: 2rem;
+  padding: 1rem 0;
+  font-weight: 600;
 }
 
-/* catalog imgs */
+/* catalog img */
 
 .men-top,
 .women-short,
@@ -105,60 +67,19 @@ footer,
   position: relative;
 }
 
-.catalog-img {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
 .catalog-text-bg {
   position: absolute;
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
-  width: 10rem;
-  height: 3.2rem;
+  background-color: rgba(15, 7, 7, 0.38);
+  color: #fff !important;
+  font-weight: 600;
+  padding: 1rem !important;
   margin: 0;
   padding: 0;
-  display: flex;
-}
-
-.men-top-img,
-.men-bottom-img,
-.women-set-img,
-.women-short-img {
-  width: 100%;
-}
-
-.men-top-img,
-.women-set-img,
-.women-short-img,
-.men-bottom-img {
-  height: 100%;
-}
-
-/* slider section */
-
-.slider-container {
-  width: 25rem !important;
-  margin: auto;
-  border: 1px solid red;
-  overflow: visible !important;
-}
-
-.image-slide {
-  display: flex;
-  width: 300%;
-}
-
-.slide-img-container {
-  width: 25rem !important;
-  height: 30rem !important;
-}
-
-.slider-img {
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
 }
 
 /**********************************************
@@ -177,80 +98,13 @@ footer,
   z-index: 2;
 }
 
-.filter-borderbl {
-  border-bottom: 0.1rem solid #000;
-}
-
 .filter-mn {
   border-bottom: 0.2rem solid rgba(114, 27, 27, 1);
   border-bottom-left-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
 
-.filter-sublinks {
-  font-size: 0.85rem;
-  line-height: 2.3rem;
-}
-
 /* .shop-col */
-
-.shop-col {
-  position: relative;
-}
-
-.col-header {
-  position: absolute;
-  top: -2.2rem;
-  font-weight: 700;
-}
-
-.pages-catalog {
-  font-size: 0.85rem;
-  height: 1.4rem;
-  width: 1.4rem;
-  line-height: 1.5rem;
-  border-radius: 50%;
-  text-align: center;
-  font-weight: 700;
-}
-
-.pages-catalog:active {
-  background: rgba(51, 51, 51, 1);
-  color: #fff;
-}
-
-/* dropdown */
-
-.filter-borderbl .dropdown-menu {
-  position: static !important;
-  float: none;
-  border: transparent;
-  background: transparent;
-  transform: unset !important;
-  padding: 0;
-  margin: 0;
-}
-
-.filter-borderbl .dropdown-menu,
-.dropdown-item {
-  font-weight: 500 !important;
-  padding-left: 1rem;
-  line-height: 1.8rem;
-}
-
-.dropdown-item:active,
-.dropdown-item:hover {
-  background-color: rgba(114, 27, 27, 1) !important;
-  color: #fff;
-}
-
-.filter-borderbl .btn {
-  padding: unset;
-}
-
-.dropdown-toggle::after {
-  display: none;
-}
 
 /**********************************************
                 
@@ -340,7 +194,6 @@ footer,
 }
 
 .email-footer {
-  width: 25rem !important;
   height: 5rem;
   margin-left: auto;
 }
@@ -363,10 +216,6 @@ footer,
     margin-bottom: 5rem;
   }
 
-  .signup-align {
-    text-align: left;
-  }
-
   .signup-link {
     width: 100%;
     text-align: center;
@@ -386,7 +235,7 @@ footer,
   }
 
   .payment-icon {
-    text-align: center;
+    margin: auto;
   }
 }
 
@@ -417,7 +266,7 @@ footer,
   }
 
   .payment-icon {
-    text-align: unset;
+    margin: unset;
   }
 }
 
@@ -426,31 +275,12 @@ footer,
 ***********************************************/
 
 @media (min-width: 320px) {
-  /* nav/sidebar */
-
-  .bg-nav {
-    display: none;
-  }
-
-  .nav-logo-container {
-    height: 2rem !important;
-    align-self: center;
-  }
-
-  #sideBar .sidebar-links {
-    font-size: large;
-  }
-
-  #sideBar .sidebar-links .sub-links {
-    font-size: normal;
-  }
-
   /* main-content */
 
   /* hero container */
 
   .hero-container {
-    margin-bottom: 2rem;
+    margin-bottom: 8rem;
   }
 
   /* catalog-content */
@@ -463,54 +293,6 @@ footer,
 
   .catalog-label {
     display: none;
-  }
-
-  .catalog-image-container {
-    margin: 0 1rem;
-    height: unset;
-  }
-
-  .men-top {
-    order: 4;
-  }
-
-  .men-bottom {
-    order: 3;
-  }
-
-  .women-catalog {
-    order: 2;
-  }
-
-  .men-top,
-  .men-bottom {
-    height: 20rem;
-  }
-
-  .women-catalog {
-    height: calc((20rem + 1.5rem) * 2);
-  }
-
-  .women-short,
-  .women-set {
-    height: 48vh;
-  }
-
-  .men-top,
-  .women-catalog,
-  .women-short,
-  .men-bottom {
-    margin-bottom: 1.5rem;
-  }
-
-  /* slider section */
-
-  .slider-label {
-    height: 2.5rem;
-  }
-
-  .slider-label-text {
-    font-size: 0.8rem;
   }
 
   .open-filter {
@@ -580,64 +362,12 @@ footer,
     display: flex;
   }
 
-  .men-top {
-    order: 1;
-  }
-
-  .men-bottom {
-    order: 4;
-  }
-
-  .women-catalog {
-    order: 2;
-  }
-
-  .men-top,
-  .men-bottom,
-  .women-catalog {
-    height: 100vh;
-  }
-
-  .women-short,
-  .women-set {
-    height: 50vh;
-  }
-
-  .men-top,
-  .women-set,
-  .women-short,
-  .men-bottom {
-    margin-bottom: 0rem;
-  }
-
-  .catalog-image-container {
-    margin: 0 3rem;
-  }
-
-  /* slider section */
-
-  .slider-label {
-    height: 3.2rem;
-  }
-
-  .slider-label-text {
-    font-size: 1.5rem;
-  }
-
-  .open-filter {
-    display: none;
-  }
-
-  .close-filter {
-    display: none;
-  }
-
   /* shop */
 
   /* filter col */
 
   .filter-col {
-    margin-top: 2rem;
+    margin-top: 5rem;
   }
 
   .d-s-none {

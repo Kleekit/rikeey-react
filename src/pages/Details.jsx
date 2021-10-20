@@ -1,47 +1,67 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Button, Divider, Grid, Paper, Rating } from "@mui/material";
-import CustomContainer from "../components/Navigation/CustomContainer";
-import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import {
-  Modal,
-  ModalHeader,
-  ModalTitle,
-  ModalClose,
-  ModalBody,
-  ModalFooter,
-} from "react-modal-bootstrap";
-// import CommentModal from "../components/Shop/CommentModal";
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Grid,
+  Paper,
+  Rating,
+} from "@mui/material";
+import CustomContainer from "../components/Navigation/CustomContainer";
+// import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import Draggable from "react-draggable";
 // import clsx from "clsx";
 
 const useStyles = makeStyles({
   root: {
-    padding: "5rem 5rem",
-    "& .shopItemContainer": {
+    padding: "5rem 4rem",
+    "& .shopItemContent": {
       marginBottom: "10rem",
       "& .gridShopItem": {
         // padding: "0 3rem",
         "& .shopItemContainer": {
           width: "70%",
           margin: "auto",
-          ["@media (max-width: 960px)"]: {
-            width: "100%",
+          "@media (max-width: 960px)": {
+            width: "90%",
+          },
+          "@media (max-width: 600px) and (min-width: 420px)": {
+            width: "70%",
           },
           "& .itemCoverImg": {
             height: "80vh",
             border: "0.1rem solid #000",
             marginBottom: "6rem",
+            "@media (max-width: 960px)": {
+              height: "65vh",
+            },
+            "@media (max-width: 480px)": {
+              height: "50vh",
+            },
           },
           "& .subCoverImg": {
             height: "30vh",
             border: "0.1rem solid #000",
+            "@media (max-width: 960px)": {
+              height: "40vh",
+            },
+            "@media (max-width: 600px)": {
+              height: "30vh",
+            },
+            "@media (max-width: 600px) and (min-width: 480px)": {
+              height: "40vh",
+            },
           },
         },
       },
       "& .shopItemDetails": {
-        ["@media (max-width: 960px)"]: {
-          marginTop: "8rem",
+        "@media (max-width: 960px)": {
+          marginTop: "4rem",
         },
         "& .viewReviewBtn": {
           color: "rgba(13, 109, 163, 1)",
@@ -58,6 +78,10 @@ const useStyles = makeStyles({
           textAlign: "justify",
           lineHeight: "3.5rem",
           fontWeight: 600,
+          width: "90%",
+          "@media (max-width: 600px)": {
+            width: "100%",
+          },
         },
         "& .selectHeader": {
           marginBottom: "1.4rem",
@@ -115,7 +139,7 @@ const useStyles = makeStyles({
           width: "fit-content",
           padding: "1.3rem 5rem",
           borderRadius: "1rem",
-          ["@media (max-width: 960px)"]: {
+          "@media (max-width: 960px)": {
             margin: "0 auto",
           },
         },
@@ -125,8 +149,17 @@ const useStyles = makeStyles({
       marginBottom: "10rem",
       "& .catalogItem": {
         marginTop: "3rem",
-        height: "50vh",
+        height: "45vh",
         border: "0.1rem solid #000",
+        "@media (max-width: 860px)": {
+          height: "55vh",
+        },
+        "@media (max-width: 600px)": {
+          height: "35vh",
+        },
+        "@media (max-width: 480px)": {
+          height: "27vh",
+        },
       },
     },
     "& .reviews": {
@@ -137,6 +170,9 @@ const useStyles = makeStyles({
         borderRadius: "1rem",
         background: "rgba(251, 251, 251, 1)",
         border: "0.1rem solid rgba( 220, 220, 220, .5)",
+        "@media (max-width: 600px)": {
+          padding: "1.5rem 2.5rem",
+        },
         "& .customer": {
           marginBottom: "5rem",
           "& .customerImg": {
@@ -151,7 +187,7 @@ const useStyles = makeStyles({
     },
     "& .dividerHeader": {
       width: "25%",
-      ["@media (max-width: 960px)"]: {
+      "@media (max-width: 960px)": {
         width: "60%",
       },
     },
@@ -159,21 +195,74 @@ const useStyles = makeStyles({
       flexGrow: 0,
       maxWidth: "30%",
       flexBasis: "30%",
+      "@media (max-width: 960px)": {
+        maxWidth: "80%",
+        flexBasis: "80%",
+        margin: "auto",
+        marginBottom: "4rem",
+      },
     },
     "& .containerCatalogItem": {
       flexGrow: 0,
       maxWidth: "22%",
       flexBasis: "22%",
+      "@media (max-width: 860px)": {
+        maxWidth: "46%",
+        flexBasis: "46%",
+        marginBottom: "5rem",
+      },
+    },
+    "& .reviewContainer": {
+      width: "90%",
+      margin: "auto",
+      "@media (max-width: 860px)": {
+        width: "100%",
+      },
+    },
+    "& .customerReview": {
+      flexGrow: 0,
+      maxWidth: "45%",
+      flexBasis: "45%",
+      "@media (max-width: 600px)": {
+        maxWidth: "100%",
+        flexBasis: "100%",
+        marginBottom: "5rem",
+      },
     },
   },
 });
 
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+
 function Details() {
   const classes = useStyles();
+
   const customConfig = {
     customStyle: `${classes.root}`,
   };
-  const [value, setValue] = React.useState(2.5);
+
+  const [count, setCount] = React.useState(0);
+
+  const [value] = React.useState(2.5);
+  // setValue
+  const [openComment, setOpenComment] = React.useState(false);
+
+  const handleClickOpenComment = () => {
+    setOpenComment(true);
+  };
+
+  const handleCloseComment = () => {
+    setOpenComment(false);
+  };
 
   const selectColor = () => {
     document
@@ -190,14 +279,73 @@ function Details() {
     document.getElementById("sizePicker").classList.toggle("sizeSelected");
   };
 
+  const CommentDialog = (
+    <div>
+      <span
+        onClick={handleClickOpenComment}
+        className="ms-4 writeReviewBtn cursor-pointer"
+      >
+        Write a Review
+      </span>
+      <Dialog
+        open={openComment}
+        onClose={handleCloseComment}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+        style={{ fontSize: "1.5rem" }}
+      >
+        <DialogTitle
+          style={{ cursor: "move", fontSize: "1.8rem", fontWeight: 600 }}
+          id="draggable-dialog-title"
+        >
+          Add a Comment
+        </DialogTitle>
+        <DialogContent className="pt-3">
+          <div className="input-group mb-4">
+            <input type="text" className="form-control" placeholder="Title" />
+          </div>
+          <div className="input-group mb-4">
+            <input type="text" className="form-control" placeholder="Name" />
+          </div>
+          <div className="form-floating">
+            <textarea
+              className="form-control mb-4"
+              placeholder="Leave a comment here"
+              style={{ height: "15rem" }}
+            ></textarea>
+            <label for="floatingTextarea2">Comments</label>
+          </div>
+          <div className="input-group mb-4">
+            <input type="file" className="form-control" />
+            <label className="input-group-text" for="inputGroupFile02">
+              Upload
+            </label>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            style={{ fontSize: "1.2rem" }}
+            autoFocus
+            onClick={handleCloseComment}
+          >
+            Cancel
+          </Button>
+          <Button style={{ fontSize: "1.2rem" }} onClick={handleCloseComment}>
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+
   return (
     <CustomContainer {...customConfig}>
       <Grid
         container
         justifyContent="space-between"
-        className="shopItemContainer"
+        className="shopItemContent"
       >
-        <Grid items xs={12} md={6} className="gridShopItem">
+        <Grid items xs={12} sm={6} md={6} className="gridShopItem">
           <div className="shopItemContainer">
             <div className="itemCoverImg"></div>
             <Grid container justifyContent="space-between" className="subCover">
@@ -207,7 +355,7 @@ function Details() {
             </Grid>
           </div>
         </Grid>
-        <Grid items xs={12} md={5} className="shopItemDetails">
+        <Grid items xs={12} sm={5} md={5} className="shopItemDetails">
           <h1 className="itemName mb-4">Contour Seamless Leggings</h1>
           <h3 className="itemPrice fw-600 mb-4"># 7,000.00 / $ 17</h3>
           <div className="itemStarReview mb-2 d-flex align-items-center">
@@ -226,35 +374,11 @@ function Details() {
           </div>
           <div className="itemStarReview d-flex align-items-center">
             <span className="reviewCount">138 Reviews</span>
-            <CustomComment
-              openModal={
-                <span className="ms-4 writeReviewBtn">Write a Review</span>
-              }
-            >
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Title" />
-              </div>
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Name" />
-              </div>
-              <div class="form-floating">
-                <textarea
-                  class="form-control"
-                  placeholder="Leave a comment here"
-                  style="height: 15rem"
-                ></textarea>
-                <label for="floatingTextarea2">Comments</label>
-              </div>
-              <div class="input-group mb-3">
-                <input type="file" class="form-control" />
-                <label class="input-group-text" for="inputGroupFile02">
-                  Upload
-                </label>
-              </div>
-            </CustomComment>
+            {CommentDialog}
+            {/* <DraggableDialog /> */}
           </div>
           <Divider className="my-5" />
-          <div className="itemDescription w-90 ">
+          <div className="itemDescription  ">
             The Kendall set is a collection as vibrant as you are; a collection
             that empowers you to let yourself glow. With performance and
             vibrance equally at the fore of design. It features a cross body
@@ -287,7 +411,13 @@ function Details() {
               s
             </span>
           </Paper>
-          <span type="button" className="addToCart fw-700">
+          <span
+            type="button"
+            onClick={() => {
+              setCount(count + 1);
+            }}
+            className="addToCart fw-700"
+          >
             Add to Cart
           </span>
         </Grid>
@@ -300,7 +430,7 @@ function Details() {
             <div className="catalogItem mb-4"></div>
             <div className="catalogItemDetails">
               <div className="shop-col-text">
-                <p className="fw-700">Lycra Atheletic Short</p>
+                <p className="fw-700">Lycra Athletic Short</p>
                 <p># 7,000.00 / $ 17</p>
                 <p className="fs-sm mb-m8">Available in 3 colors</p>
                 <svg
@@ -321,7 +451,7 @@ function Details() {
             <div className="catalogItem mb-4"></div>
             <div className="catalogItemDetails">
               <div className="shop-col-text">
-                <p className="fw-700">Lycra Atheletic Short</p>
+                <p className="fw-700">Lycra Athletic Short</p>
                 <p># 7,000.00 / $ 17</p>
                 <p className="fs-sm mb-m8">Available in 3 colors</p>
                 <svg
@@ -385,7 +515,11 @@ function Details() {
       <div className="reviews" id="viewReviews">
         <h2 className="header text-center">Reviews</h2>
         <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
-        <Grid container justifyContent="space-between">
+        <Grid
+          container
+          justifyContent="space-between"
+          className="reviewContainer"
+        >
           <Grid items xs={12} md={5} className="customerReview">
             <div className="customer d-flex align-items-center">
               <div className="customerImg"></div>
@@ -451,41 +585,6 @@ function Details() {
         </Grid>
       </div>
     </CustomContainer>
-  );
-}
-
-function CustomComment(props) {
-  const { openModal } = props;
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  return (
-    <span>
-      <span variant="primary" onClick={handleShow}>
-        {openModal}
-      </span>
-
-      <Modal
-        size="sm"
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Add Review</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{props.children}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary">Understood</Button>
-        </Modal.Footer>
-      </Modal>
-    </span>
   );
 }
 
