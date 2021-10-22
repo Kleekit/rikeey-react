@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     },
     "& .comfort-text ": {
       fontSize: "6rem",
+      marginBottom: "1rem",
       "@media (max-width: 900px)": {
         fontSize: "4rem",
       },
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
     },
     "& .complete-text ": {
       fontSize: "3.5rem",
+      marginBottom: "2rem",
       "@media (max-width: 900px)": {
         fontSize: "2.2rem",
       },
@@ -106,9 +108,7 @@ function LandingPage() {
         <div className="hero-layer">
           <div className="hero-text">
             <h1 className="comfort-text ">Made for your comfort</h1>
-            <h3 className="complete-text fw-600 mb-4">
-              The complete sporty look
-            </h3>
+            <h3 className="complete-text fw-600">The complete sporty look</h3>
             <Link to="/shop">
               <div className="shop-text p-3 py-2 br-2 border-white btn white">
                 <h2>Shop Now</h2>
