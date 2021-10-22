@@ -1,7 +1,5 @@
 import React from "react";
-// import React, { Component } from "react";
 import Carousel from "react-grid-carousel";
-import { Item } from "react-grid-carousel";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
@@ -13,31 +11,29 @@ const useStyles = makeStyles({
     },
     "& .sc-ifAKCX  > .sc-bdVaJa": {
       position: "absolute",
-      top: "-8%",
+      top: "-6vh",
       right: "15%",
       "& span": {
         background: "#d1b9b9",
       },
       "@media (max-width: 600px)": {
-        display: "block",
-        top: "50%",
+        // display: "block",
+        // top: "50%",
         right: "-4% !important",
       },
     },
     "& .sc-ifAKCX  > .sc-bdVaJa:first-of-type": {
       left: "70%",
+      "@media (max-width: 767px)": {
+        left: "60% !important",
+      },
       "@media (max-width: 600px)": {
         left: "-4% !important",
       },
     },
-    // "& .sc-dnqmqq": {
-    //   "@media (max-width: 767px) and (min-width: 600px)": {
-    //     width: "30%",
-    //   },
-    // },
-    "& .carouselStyle": {
+    "& .carouselImg": {
       height: "70vh",
-      "@media (max-width: 600px)": {
+      "@media (max-width: 767px)": {
         height: "50vh",
       },
       "@media (max-width: 480px)": {
@@ -59,26 +55,32 @@ const carouselImg = [
   { src: "https://picsum.photos/800/600?random=9", alt: "" },
 ];
 
-export default function CustomCarousel(carouselStyle) {
-  // export default class CustomCarousel extends Component {
-  // render() {
+export default function CustomCarousel() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Carousel cols={3} rows={1} gap={40} loop={true} autoplay={5000}>
+      <Carousel
+        cols={3}
+        rows={1}
+        gap={40}
+        mobileBreakpoint={600}
+        loop={true}
+        autoplay={3000}
+        scrollSnap={true}
+        hideArrow={false}
+      >
         {carouselImg.map((item) => (
-          <Item>
+          <Carousel.Item>
             <img
               key={`${item.src}_0`}
               alt={item.alt}
-              className={"carouselStyle"}
+              className={"carouselImg"}
               width="100%"
               src={item.src}
             />
-          </Item>
+          </Carousel.Item>
         ))}
       </Carousel>
     </div>
   );
-  // }
 }

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CustomCarousel from "../components/LandingPage/CustomCarousel";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
+import ArrowRight from "@mui/icons-material/ArrowRightAlt";
 
 const useStyles = makeStyles({
   root: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles({
       },
     },
     "& .comfort-text ": {
-      fontSize: "5rem",
+      fontSize: "6rem",
       "@media (max-width: 900px)": {
         fontSize: "4rem",
       },
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
       },
     },
     "& .complete-text ": {
-      fontSize: "3rem",
+      fontSize: "3.5rem",
       "@media (max-width: 900px)": {
         fontSize: "2.2rem",
       },
@@ -37,6 +38,9 @@ const useStyles = makeStyles({
     "& .men-top, .men-bottom, .women-catalog": {
       height: "80vh",
       padding: 0,
+      "@media (max-width: 767px) and (min-width: 600px)": {
+        height: "60vh",
+      },
       "@media (max-width: 600px)": {
         padding: "0 5rem",
         // height: "50vh",
@@ -74,6 +78,18 @@ const useStyles = makeStyles({
         display: "none",
       },
     },
+    "& .shopTextCon_2": {
+      display: "flex",
+      justifyContent: "end",
+      width: "75%",
+      marginTop: "6rem",
+    },
+    "& .shopText_2": {
+      border: "0.2rem solid #730F11",
+    },
+    "& .arrowRight": {
+      fontSize: "3rem",
+    },
   },
 });
 
@@ -82,25 +98,6 @@ function LandingPage() {
   const customConfig = {
     customStyle: `${classes.root}`,
   };
-  // const [imageIndex, setImageIndex] = useState(0);
-
-  // const changeImage = () => {
-  //   setInterval(() => {
-  //     if (imageIndex > 5) {
-  //       setImageIndex(0);
-  //     } else {
-  //       console.log(imageIndex);
-  //       let newValue = imageIndex + 1;
-  //       setImageIndex(newValue);
-  //     }
-  //   }, 1500);
-  // };
-  // useEffect(() => {
-  //   changeImage();
-  //   // return () => {
-  //   //   cleanup;
-  //   // };
-  // }, []);
 
   return (
     <CustomContainer {...customConfig}>
@@ -113,14 +110,13 @@ function LandingPage() {
               The complete sporty look
             </h3>
             <Link to="/shop">
-              <div className="shop-text br-2 border-white btn bg-transparent white fw-700">
+              <div className="shop-text p-3 py-2 br-2 border-white btn white">
                 <h2>Shop Now</h2>
               </div>
             </Link>
           </div>
         </div>
       </div>
-
       <div className="catalog-section">
         <div className="catalog-label">
           <div className="catalog-label-text m-auto">
@@ -178,13 +174,18 @@ function LandingPage() {
           </Grid>
         </Grid>
       </div>
-
       <div className="slider-section position-relative">
         <div className="slider-label">
           <div className="slider-label-text m-auto ">Take a tour...</div>
         </div>
-
-        <CustomCarousel carouselStyle="carouselStyle" />
+        <CustomCarousel />
+        <Link to="/shop" className="shopTextCon_2 mx-auto">
+          <div className="p-5 py-2 br-4 shopText_2">
+            <h2 className="d-flex align-items-center">
+              Shop Now <ArrowRight className="arrowRight ms-2" />
+            </h2>
+          </div>
+        </Link>
       </div>
     </CustomContainer>
   );
