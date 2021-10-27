@@ -6,6 +6,9 @@ import ShopSideBar from "../components/Shop/ShopSidebar";
 import CollapseIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import ExpandIcon from "@mui/icons-material/KeyboardArrowRightRounded";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
+import { useMutation, useQuery } from "react-query";
+import { getProduct } from "../methods/product.method";
 
 const useStyles = makeStyles({
   root: {
@@ -41,6 +44,11 @@ const useStyles = makeStyles({
       marginBottom: ".5rem",
       padding: ".5rem",
       display: "block",
+    },
+    "& .shopRow": {
+      flexWrap: "wrap",
+      display: "flex",
+      justifyContent: "flex-start",
     },
     "& .shop-col": {
       flexGrow: 0,
@@ -111,30 +119,56 @@ const useStyles = makeStyles({
 });
 
 function Shop() {
+  const { isLoading, isError, data } = useQuery("getProduct", getProduct);
+
   const classes = useStyles();
   const customConfig = {
     customStyle: `${classes.root} pt-4 d-flex`,
   };
+  const items = data;
+  // const items = [
+  //   { title: "all stars", price: 500, description: " original rocker" },
+  //   { title: "addidas", price: 200, description: " original lace" },
+  //   { title: "nike", price: 1500, description: " original lace" },
+  //   { title: "addidas", price: 200, description: " original lace" },
+  //   { title: "addidas", price: 200, description: " original lace" },
+  // ];
+  // asyncMutate("/product");
+  return (
+    <CustomContainer {...customConfig}>
+      <Grid container justifyContent="space-between">
+        <ShopSideBar openFilter={openFilter}>
+          <div className={classes.root}>
+            <FilterTop />
+          </div>
+        </ShopSideBar>
+        <Hidden mdDown>
+          <Grid items xs={12} sm={12} md={3} className="filter-col pe-0">
+            <div className="filter-content fs-large pb-5 fw-500 ">
+              <FilterTop />
+              <FilterBottom />
+            </div>
+          </Grid>
+        </Hidden>
+        <Grid items xs={12} sm={12} md={9} className="shop-catalog ">
+          {isLoading ? (
+            <h3>loading....</h3>
+          ) : (
+            <Category categoryTitle={"Tega's Shoes"} items={data} />
+          )}
+          <div className="d-l-none pagination d-flex justify-content-center">
+            <Hidden mdUp>
+              <Pagination count={10} variant="outlined" color="primary" />
+            </Hidden>
+          </div>
+        </Grid>
+      </Grid>
+    </CustomContainer>
+  );
+}
 
-  const [openSex, setOpenSex] = React.useState(true);
-
-  const handleSexClick = () => {
-    setOpenSex(!openSex);
-  };
-
-  const [openSize, setOpenSize] = React.useState(true);
-
-  const handleSizeClick = () => {
-    setOpenSize(!openSize);
-  };
-
-  const [openColor, setOpenColor] = React.useState(true);
-
-  const handleColorClick = () => {
-    setOpenColor(!openColor);
-  };
-
-  const openFilter = (
+const openFilter = () => {
+  return (
     <div className="open-filter">
       <svg
         width="68"
@@ -154,8 +188,27 @@ function Shop() {
       </svg>
     </div>
   );
+};
 
-  const FilterTop = () => (
+const FilterTop = () => {
+  const [openSex, setOpenSex] = React.useState(true);
+
+  const handleSexClick = () => {
+    setOpenSex(!openSex);
+  };
+
+  const [openSize, setOpenSize] = React.useState(true);
+
+  const handleSizeClick = () => {
+    setOpenSize(!openSize);
+  };
+
+  const [openColor, setOpenColor] = React.useState(true);
+
+  const handleColorClick = () => {
+    setOpenColor(!openColor);
+  };
+  return (
     <div className="filterBarLinks filterTop">
       <div className=" filterBorderBl filterHead px-1 ">
         <div className=" col-7 ">Filter</div>{" "}
@@ -259,31 +312,18 @@ function Shop() {
       </div>
     </div>
   );
-  const FilterBottom = () => (
+};
+
+const FilterBottom = () => {
+  return (
     <span>
       <div className="filterBarLinks mx-auto w-60">
         <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">New</div>
-        <div className="filterSubLinks px-2">
-          <div>Bra Top</div>
-
-          <div>Tees</div>
-
-          <div>Leggings</div>
-
-          <div>Women Full Set</div>
-        </div>
       </div>
 
       <div className="filterBarLinks mx-auto w-60">
         <div className="filter-mn fs-nm fw-700 mb-3 px-2">
           Women Active Wear
-        </div>
-        <div className="filterSubLinks px-2">
-          <div>Full set</div>
-
-          <div>Tops & Bra tops</div>
-
-          <div>Bottoms</div>
         </div>
       </div>
 
@@ -291,21 +331,11 @@ function Shop() {
         <div className="filter-mn fs-nm fw-700 w-90 mb-3 px-2">
           Men Active Wear
         </div>
-        <div className="filterSubLinks px-2">
-          <div>Tops</div>
-
-          <div>Bottoms</div>
-        </div>
       </div>
 
       <div className="filterBarLinks mx-auto w-60">
         <div className="filter-mn fs-nm fw-700 w-80 mb-3 px-2">
           Waist Trainer
-        </div>
-        <div className="filterSubLinks px-2">
-          <div>Steel Bone Latex Trainer</div>
-
-          <div>Strap Compression Belt 2.0</div>
         </div>
       </div>
 
@@ -313,92 +343,53 @@ function Shop() {
         <div className="filter-mn fs-nm fw-700 mb-3 px-2">
           Fitness Equipment
         </div>
-        <div className="filterSubLinks px-2">
-          <div>Jump Ropes</div>
-
-          <div>Resistance Band</div>
-
-          <div>Yoga Mat</div>
-        </div>
       </div>
     </span>
   );
-
-  const items = [
-    { title: "all stars", price: 500, description: " original rocker" },
-    { title: "addidas", price: 200, description: " original lace" },
-    { title: "nike", price: 1500, description: " original lace" },
-  ];
-
-  return (
-    <CustomContainer {...customConfig}>
-      <Grid container justifyContent="space-between">
-        <ShopSideBar openFilter={openFilter}>
-          <div className={classes.root}>
-            <FilterTop />
-          </div>
-        </ShopSideBar>
-        <Hidden mdDown>
-          <Grid items xs={12} sm={12} md={3} className="filter-col pe-0">
-            <div className="filter-content fs-large pb-5 fw-500 ">
-              <FilterTop />
-              <FilterBottom />
-            </div>
-          </Grid>
-        </Hidden>
-        <Grid items xs={12} sm={12} md={9} className="shop-catalog ">
-          <Category categoryTitle={"Tega's Shoes"} items={items} />
-          <div className="d-l-none pagination d-flex justify-content-center">
-            <Hidden mdUp>
-              <Pagination count={10} variant="outlined" color="primary" />
-            </Hidden>
-          </div>
-        </Grid>
-      </Grid>
-    </CustomContainer>
-  );
-}
+};
 
 const Category = (props) => {
+  const classes = useStyles();
   const categoryTitle = props.categoryTitle;
-  const items = props.items;
+  const { body } = props.items;
 
   return (
-    <div className="row mx-0 px-4 justify-content-between">
+    <div className={classes.root}>
       <Hidden mdDown>
-        <h3 className="catalogCategory mb-4">{categoryTitle}</h3>
+        <h3 className="catalogCategory px-4 mb-4">{categoryTitle}</h3>
       </Hidden>
-
-      {items.map((item) => (
-        <Link
-          to={{ state: item, pathname: "/shop/details" }}
-          className="shop-col"
-        >
-          <div className="shopItemImg">
-            <img
-              className=" w-100 h-100"
-              src="assets/images/video-substitute.png"
-              alt=""
-            />
-          </div>
-          <div className="shop-col-text">
-            <p className="fw-700">{item.title}</p>
-            <p># {item.price} / $ 17</p>
-            <p className="fs-sm mb-m8">Available in 3 colors</p>
-            <svg
-              width="60"
-              height="13"
-              viewBox="0 0 64 16"
-              fill="none"
-              xmlns="https://www.w3.org/2000/svg"
-            >
-              <circle cx="8" cy="8" r="8" fill="#CA3030" />
-              <circle cx="32" cy="8" r="8" fill="#B9F43B" />
-              <circle cx="56" cy="8" r="8" fill="#B73333" />
-            </svg>
-          </div>
-        </Link>
-      ))}
+      <div className={"shopRow mx-0 px-4 "}>
+        {body.map((item) => (
+          <Link
+            to={{ state: item, pathname: "/shop/details" }}
+            className="shop-col "
+          >
+            <div className="shopItemImg">
+              <img
+                className=" w-100 h-100"
+                src={item.displayImage.url}
+                alt=""
+              />
+            </div>
+            <div className="shop-col-text">
+              <p className="fw-700">{item.title}</p>
+              <p># {item.price} / $ 17</p>
+              <p className="fs-sm mb-m8">Available in 3 colors</p>
+              <svg
+                width="60"
+                height="13"
+                viewBox="0 0 64 16"
+                fill="none"
+                xmlns="https://www.w3.org/2000/svg"
+              >
+                <circle cx="8" cy="8" r="8" fill="#CA3030" />
+                <circle cx="32" cy="8" r="8" fill="#B9F43B" />
+                <circle cx="56" cy="8" r="8" fill="#B73333" />
+              </svg>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

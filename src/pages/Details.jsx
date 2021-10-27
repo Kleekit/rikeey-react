@@ -1,4 +1,6 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+// import { Link } from "react-dom";
 import { makeStyles } from "@material-ui/styles";
 import {
   Button,
@@ -12,10 +14,11 @@ import {
   Rating,
 } from "@mui/material";
 import CustomContainer from "../components/Navigation/CustomContainer";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import Draggable from "react-draggable";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import { addItemToCart } from "../methods/cart.method";
 // import clsx from "clsx";
 
 const useStyles = makeStyles({
@@ -246,8 +249,25 @@ function PaperComponent(props) {
 
 function Details(props) {
   const item = props.location.state;
-  const slug = item.title.replace(" ", "-");
+  const slug = item.name.replace(" ", "-");
   const classes = useStyles();
+  const history = useHistory();
+  const { mutateAsync, isSuccess, isLoading } = useMutation((item) =>
+    addItemToCart(item)
+  );
+  const handleAddItemToCart = async () => {
+    const payload = {
+      productId: item._id,
+      productName: item.name,
+      price: item.price,
+    };
+    console.log(payload);
+    const res = await mutateAsync(payload);
+    // console.log({ va });
+    if (res.status) {
+      history.replace("/cart");
+    }
+  };
 
   const customConfig = {
     customStyle: `${classes.root}`,
@@ -356,7 +376,13 @@ function Details(props) {
       >
         <Grid items xs={12} sm={6} md={6} className="gridShopItem">
           <div className="shopItemContainer">
-            <div className="itemCoverImg"></div>
+            <div className="itemCoverImg">
+              <img
+                className="w-100 h-100"
+                src={item.displayImage.url}
+                alt={item.name}
+              />
+            </div>
             <Grid container justifyContent="space-between" className="subCover">
               <Grid items xs={3} md={3} className="subCoverImg"></Grid>
               <Grid items xs={3} md={3} className="subCoverImg"></Grid>
@@ -407,16 +433,18 @@ function Details(props) {
               </span>
             ))}
           </Paper>
-          <h3 className="selectHeader">Size</h3>
-          <Paper elevation={3} className="paperSizePicker ">
-            <span
-              onClick={selectSize}
-              id="sizePicker"
-              className="cursor-pointer ms-4"
-            >
-              s
-            </span>
-          </Paper>
+          {item.sizes.length > 0 && <h3 className="selectHeader">Size</h3>}
+          {item.sizes.map((size) => (
+            <Paper elevation={3} className="paperSizePicker ">
+              <span
+                onClick={selectSize}
+                id="sizePicker"
+                className="cursor-pointer ms-4"
+              >
+                {size}
+              </span>
+            </Paper>
+          ))}
           <span
             type="button"
             onClick={() => {
@@ -426,6 +454,16 @@ function Details(props) {
           >
             Add to Cart
           </span>
+
+          {!isLoading && (
+            <span
+              type="button"
+              onClick={handleAddItemToCart}
+              className="addToCart fw-700"
+            >
+              Buy Now
+            </span>
+          )}
         </Grid>
       </Grid>
       <div className="moreCatalog">

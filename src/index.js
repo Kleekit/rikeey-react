@@ -6,11 +6,15 @@ import "./components/LandingPage/queries.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 // import reportWebVitals from './reportWebVitals';
 
+const queryClient = new QueryClient();
 ReactDOM.render(
   <Router>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </Router>,
   document.getElementById("root")
 );

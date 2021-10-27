@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
 import { Divider } from "@mui/material";
+import { useMutation, useQuery } from "react-query";
+import { getCartItem, removeItemFormCart } from "../methods/cart.method";
+// import {removeItemFormCart} from '../methods/cart.method'
 
 const useStyles = makeStyles({
   root: {
@@ -111,10 +114,22 @@ const useStyles = makeStyles({
 });
 
 function Cart() {
+  const { isLoading, data, isError, refetch } = useQuery(
+    "getCartItem",
+    getCartItem
+  );
   const classes = useStyles();
   const customConfig = {
     customStyle: `${classes.root} pt-4 px-5 row`,
   };
+
+  if (isError) {
+    return <h3>Error....</h3>;
+  }
+  console.log({ isLoading, data, isError });
+  // if (isError) {
+  //   return <h3>Error....</h3>;
+  // }
 
   return (
     <CustomContainer {...customConfig}>
@@ -126,48 +141,8 @@ function Cart() {
           <div className="w-20 my-auto mdDown text-center">Subtotal</div>
         </div>
         <div className="cart-body ">
-          <div className="cartRow">
-            <div className="row smCartRow cart-bb">
-              <div className="w-40 cart-br p-3 d-flex">
-                <div className="row mx-0 px-4">
-                  <div className="col-md-6 h-75 itemImgContainer text-center p-0 my-auto">
-                    <img
-                      className="itemImg w-80 h-100"
-                      src="./images/women-set.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="col-md-6 p-0 my-auto text-center ">
-                    Contour Seamless Leggings
-                  </div>
-                </div>
-              </div>
-              <div className="smCartTotal">
-                <div className="smCartQuantity cart-br">
-                  <div className="smCartTitle mdUp">Quantity</div>
-                  <div className="text-center m-auto">
-                    <span className="fw-600 cartAddBtn">
-                      <span className="decreaseBtn">-</span>
-                      <span className="itemAmount ">2</span>
-                      <span className="increaseBtn">+</span>
-                    </span>
-                    <div className="fs-sm mt-3 text-center fw-600 red">
-                      Remove
-                    </div>
-                  </div>
-                </div>
-                <div className="smCartColumn cart-br">
-                  <div className="smCartTitle mdUp">Total</div>
-                  <div className="m-auto">$ 45.55</div>
-                </div>
-                <div className="smCartColumn">
-                  <div className="smCartTitle mdUp">Sub Total</div>
-                  <div className="m-auto">$ 45.55</div>
-                </div>
-              </div>
-            </div>
-            <Divider className="bDivider" />
-          </div>
+          {data &&
+            data.body.map((item) => <CartItem item={item} refetch={refetch} />)}
         </div>
         <div className="total-sec  mt-5 ms-auto">
           <div className="cart-total mb-5 d-flex ps-5 pe-2 pb-2 justify-content-between">
@@ -190,5 +165,85 @@ function Cart() {
     </CustomContainer>
   );
 }
+
+const CartItem = ({ item, refetch }) => {
+  const { mutateAsync, isSuccess, isLoading } = useMutation((item) =>
+    removeItemFormCart(item)
+  );
+
+  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(0);
+
+  const increaseQuantity = () => {
+    // const amount = ;
+    setQuantity(quantity + 1);
+  };
+  const decreaseQuantity = () => {
+    // const amount = ;
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+  const handleRemoveItem = async () => {
+    const payload = {
+      _id: item._id,
+      // productName: item.name,
+      // price: item.price,
+    };
+    console.log(payload);
+    const res = await mutateAsync(payload);
+    // console.log({ va });
+    if (res.status) {
+      refetch();
+    }
+  };
+  return (
+    <div className="cartRow">
+      <div className="row smCartRow cart-bb">
+        <div className="w-40 cart-br p-3 d-flex">
+          <div className="row mx-0 px-4">
+            <div className="col-md-6 h-75 itemImgContainer text-center p-0 my-auto">
+              <img className="itemImg w-80 h-100" src={item.productId} alt="" />
+            </div>
+            <div className="col-md-6 p-0 my-auto text-center ">
+              {item.productName}
+            </div>
+          </div>
+        </div>
+        <div className="smCartTotal">
+          <div className="smCartQuantity cart-br">
+            <div className="smCartTitle mdUp">Quantity</div>
+            <div className="text-center m-auto">
+              <span className="fw-600 cartAddBtn">
+                <span className="decreaseBtn" onClick={decreaseQuantity}>
+                  -
+                </span>
+                <span className="itemAmount ">{quantity}</span>
+                <span className="increaseBtn" onClick={increaseQuantity}>
+                  +
+                </span>
+              </span>
+              <div
+                onClick={handleRemoveItem}
+                className="fs-sm mt-3 text-center fw-600 red"
+              >
+                Remove
+              </div>
+            </div>
+          </div>
+          <div className="smCartColumn cart-br">
+            <div className="smCartTitle mdUp">Total</div>
+            <div className="m-auto">$ {item.price}</div>
+          </div>
+          <div className="smCartColumn">
+            <div className="smCartTitle mdUp">Sub Total</div>
+            <div className="m-auto">$ {item.price * quantity}</div>
+          </div>
+        </div>
+      </div>
+      <Divider className="bDivider" />
+    </div>
+  );
+};
 
 export default Cart;
