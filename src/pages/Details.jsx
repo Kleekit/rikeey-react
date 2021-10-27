@@ -15,6 +15,7 @@ import CustomContainer from "../components/Navigation/CustomContainer";
 // import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import Draggable from "react-draggable";
+import { useQuery } from "react-query";
 // import clsx from "clsx";
 
 const useStyles = makeStyles({
@@ -243,7 +244,9 @@ function PaperComponent(props) {
   );
 }
 
-function Details() {
+function Details(props) {
+  const item = props.location.state;
+  const slug = item.title.replace(" ", "-");
   const classes = useStyles();
 
   const customConfig = {
@@ -279,7 +282,7 @@ function Details() {
     document.getElementById("sizePicker").classList.toggle("sizeSelected");
   };
 
-  const CommentDialog = (
+  const CommentDialog = () => (
     <div>
       <span
         onClick={handleClickOpenComment}
@@ -338,6 +341,12 @@ function Details() {
     </div>
   );
 
+  // const { isLoading, isError, data, error } = useQuery(
+  //   "getMarkets",
+  //   getRequest
+  // );
+  // console.log({ isLoading, isError, data, error });
+
   return (
     <CustomContainer {...customConfig}>
       <Grid
@@ -356,8 +365,10 @@ function Details() {
           </div>
         </Grid>
         <Grid items xs={12} sm={5} md={5} className="shopItemDetails">
-          <h1 className="itemName mb-4">Contour Seamless Leggings</h1>
-          <h3 className="itemPrice fw-600 mb-4"># 7,000.00 / $ 17</h3>
+          <h1 className="itemName mb-4">{item.title}</h1>
+          <h3 className="itemPrice fw-600 mb-4">
+            # {item.price} / $ {item.price / 20}
+          </h3>
           <div className="itemStarReview mb-2 d-flex align-items-center">
             <Rating
               name="customers-rating"
@@ -374,16 +385,11 @@ function Details() {
           </div>
           <div className="itemStarReview d-flex align-items-center">
             <span className="reviewCount">138 Reviews</span>
-            {CommentDialog}
-            {/* <DraggableDialog /> */}
+
+            <CommentDialog />
           </div>
           <Divider className="my-5" />
-          <div className="itemDescription  ">
-            The Kendall set is a collection as vibrant as you are; a collection
-            that empowers you to let yourself glow. With performance and
-            vibrance equally at the fore of design. It features a cross body
-            top, impact sport bra and a leggings.
-          </div>
+          <div className="itemDescription  ">{item.description}</div>
           <Divider className="my-5" />
           <h3 className="selectHeader">Colors</h3>
           <Paper elevation={3} className="paperColorPicker ">

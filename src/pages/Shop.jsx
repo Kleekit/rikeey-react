@@ -155,7 +155,7 @@ function Shop() {
     </div>
   );
 
-  const filterTop = (
+  const FilterTop = () => (
     <div className="filterBarLinks filterTop">
       <div className=" filterBorderBl filterHead px-1 ">
         <div className=" col-7 ">Filter</div>{" "}
@@ -259,8 +259,7 @@ function Shop() {
       </div>
     </div>
   );
-
-  const filterBottom = (
+  const FilterBottom = () => (
     <span>
       <div className="filterBarLinks mx-auto w-60">
         <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">New</div>
@@ -325,53 +324,30 @@ function Shop() {
     </span>
   );
 
+  const items = [
+    { title: "all stars", price: 500, description: " original rocker" },
+    { title: "addidas", price: 200, description: " original lace" },
+    { title: "nike", price: 1500, description: " original lace" },
+  ];
+
   return (
     <CustomContainer {...customConfig}>
       <Grid container justifyContent="space-between">
         <ShopSideBar openFilter={openFilter}>
-          <div className={classes.root}>{filterTop}</div>
+          <div className={classes.root}>
+            <FilterTop />
+          </div>
         </ShopSideBar>
         <Hidden mdDown>
           <Grid items xs={12} sm={12} md={3} className="filter-col pe-0">
             <div className="filter-content fs-large pb-5 fw-500 ">
-              {filterTop}
-              {filterBottom}
+              <FilterTop />
+              <FilterBottom />
             </div>
           </Grid>
         </Hidden>
         <Grid items xs={12} sm={12} md={9} className="shop-catalog ">
-          <div className="row mx-0 px-4 justify-content-between">
-            <Hidden mdDown>
-              <h3 className="catalogCategory mb-4">Women Bottom</h3>
-            </Hidden>
-            <div className="shop-col">
-              <Link to="/shop/details">
-                <div className="shopItemImg">
-                  <img
-                    className=" w-100 h-100"
-                    src="assets/images/video-substitute.png"
-                    alt=""
-                  />
-                </div>
-                <div className="shop-col-text">
-                  <p className="fw-700">Lycra Atheletic Short</p>
-                  <p># 7,000.00 / $ 17</p>
-                  <p className="fs-sm mb-m8">Available in 3 colors</p>
-                  <svg
-                    width="60"
-                    height="13"
-                    viewBox="0 0 64 16"
-                    fill="none"
-                    xmlns="https://www.w3.org/2000/svg"
-                  >
-                    <circle cx="8" cy="8" r="8" fill="#CA3030" />
-                    <circle cx="32" cy="8" r="8" fill="#B9F43B" />
-                    <circle cx="56" cy="8" r="8" fill="#B73333" />
-                  </svg>
-                </div>
-              </Link>
-            </div>
-          </div>
+          <Category categoryTitle={"Tega's Shoes"} items={items} />
           <div className="d-l-none pagination d-flex justify-content-center">
             <Hidden mdUp>
               <Pagination count={10} variant="outlined" color="primary" />
@@ -382,5 +358,49 @@ function Shop() {
     </CustomContainer>
   );
 }
+
+const Category = (props) => {
+  const categoryTitle = props.categoryTitle;
+  const items = props.items;
+
+  return (
+    <div className="row mx-0 px-4 justify-content-between">
+      <Hidden mdDown>
+        <h3 className="catalogCategory mb-4">{categoryTitle}</h3>
+      </Hidden>
+
+      {items.map((item) => (
+        <Link
+          to={{ state: item, pathname: "/shop/details" }}
+          className="shop-col"
+        >
+          <div className="shopItemImg">
+            <img
+              className=" w-100 h-100"
+              src="assets/images/video-substitute.png"
+              alt=""
+            />
+          </div>
+          <div className="shop-col-text">
+            <p className="fw-700">{item.title}</p>
+            <p># {item.price} / $ 17</p>
+            <p className="fs-sm mb-m8">Available in 3 colors</p>
+            <svg
+              width="60"
+              height="13"
+              viewBox="0 0 64 16"
+              fill="none"
+              xmlns="https://www.w3.org/2000/svg"
+            >
+              <circle cx="8" cy="8" r="8" fill="#CA3030" />
+              <circle cx="32" cy="8" r="8" fill="#B9F43B" />
+              <circle cx="56" cy="8" r="8" fill="#B73333" />
+            </svg>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+};
 
 export default Shop;
