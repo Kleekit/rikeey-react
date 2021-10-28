@@ -1,4 +1,5 @@
 import { apiCaller } from "../apiCaller/apicaller";
+import { getOrStoreId } from "../helpers/getOrStore.helper";
 
 // const addItemToCart
 export const addItemToCart = async (body) => {
@@ -19,3 +20,12 @@ export const removeItemFormCart = async (body) => {
   console.log({ data });
   return data;
 };
+
+export const getUser = async function () {
+  const userId = getOrStoreId();
+  console.log(userId);
+  let { data } = await apiCaller.get(`/user/${userId}`);
+  return data;
+};
+
+// user///

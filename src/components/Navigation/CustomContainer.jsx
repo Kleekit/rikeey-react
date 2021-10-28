@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import "../LandingPage/landing.css";
 import "../LandingPage/queries.css";
+// import "";
+import { getOrStoreId } from "../../helpers/getOrStore.helper";
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +33,17 @@ const useStyles = makeStyles({
 function CustomContainer(props) {
   const classes = useStyles();
   const { customStyle } = props;
+
+  const LookForId = () => {
+    const id = getOrStoreId();
+    if (!id) {
+      getOrStoreId("cacacascs");
+    }
+  };
+
+  useEffect(() => {
+    LookForId();
+  }, []);
 
   return (
     <div className={classes.root}>

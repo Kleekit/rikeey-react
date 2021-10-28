@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
-import { Divider } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import { useMutation, useQuery } from "react-query";
-import { getCartItem, removeItemFormCart } from "../methods/cart.method";
+import {
+  getCartItem,
+  getUser,
+  removeItemFormCart,
+} from "../methods/cart.method";
 // import {removeItemFormCart} from '../methods/cart.method'
 
 const useStyles = makeStyles({
@@ -114,6 +118,7 @@ const useStyles = makeStyles({
 });
 
 function Cart() {
+  const [total, setTotal] = useState(0);
   const { isLoading, data, isError, refetch } = useQuery(
     "getCartItem",
     getCartItem
@@ -126,10 +131,16 @@ function Cart() {
   if (isError) {
     return <h3>Error....</h3>;
   }
-  console.log({ isLoading, data, isError });
-  // if (isError) {
-  //   return <h3>Error....</h3>;
+  console.log(data);
+  // if (isLoading) {
+  //   return ;
   // }
+
+  const calTotal = () => {
+    const total = data.body.reduce((total, item) => item.price + total, 0);
+    setTotal(total);
+    return total;
+  };
 
   return (
     <CustomContainer {...customConfig}>
@@ -141,58 +152,110 @@ function Cart() {
           <div className="w-20 my-auto mdDown text-center">Subtotal</div>
         </div>
         <div className="cart-body ">
+          {isLoading && <h3>Loading...</h3>}
           {data &&
-            data.body.map((item) => <CartItem item={item} refetch={refetch} />)}
+            data.body.map((item) => (
+              <CartItem
+                item={item}
+                refetch={refetch}
+                key={item.name}
+                setTotal={setTotal}
+                total={total}
+                calTotal={calTotal}
+              />
+            ))}
         </div>
         <div className="total-sec  mt-5 ms-auto">
           <div className="cart-total mb-5 d-flex ps-5 pe-2 pb-2 justify-content-between">
             <div>Total</div>
-            <div>$ 232.2</div>
+            <div>$ {total}</div>
           </div>
           <Link to="/shop">
             <div className="d-flex  justify-content-end pe-4 fs-lgr red">
               Continue shopping
             </div>
           </Link>
-          <Link
-            to="/checkout"
-            className="d-flex ms-auto py-3 justify-content-center me-3 w-80 br-2 submitBtn"
-          >
-            Checkout
-          </Link>
+          <CheckoutButton />
         </div>
       </div>
     </CustomContainer>
   );
 }
 
-const CartItem = ({ item, refetch }) => {
+const CheckoutButton = () => {
+  const [detail, setDetail] = useState(false);
+  const { isLoading, data, isError } = useQuery(
+    "verifyUser",
+    getUser
+    // { enabled: false }
+  );
+
+  // const verifyUser = async () => {
+  // const userExist = await refetch();
+  // // const id = getOrStoreId();
+  // if (userExist) {
+  //   setDetail(true);
+  // }
+  // };
+  console.log(data);
+
+  return (
+    <Link
+      to={data && data.status ? "/checkout/payment" : "/checkout"}
+      className="d-flex ms-auto py-3 justify-content-center me-3 w-80 br-2 submitBtn"
+    >
+      {data && data.status ? "Checkout" : "time to checkout"}
+    </Link>
+  );
+};
+const CartItem = ({ item, refetch, setTotal, total, calTotal }) => {
   const { mutateAsync, isSuccess, isLoading } = useMutation((item) =>
     removeItemFormCart(item)
   );
 
   const [quantity, setQuantity] = useState(1);
-  // const [quantity, setQuantity] = useState(0);
 
   const increaseQuantity = () => {
-    // const amount = ;
-    setQuantity(quantity + 1);
+    if (total > 0) {
+      const oldSubTotal = quantity * item.price;
+      const deductedTotal = total - oldSubTotal;
+      const newQuantity = quantity + 1;
+      const newSubTotal = newQuantity * item.price;
+      const newTotal = deductedTotal + newSubTotal;
+      setQuantity(quantity + 1);
+      setTotal(newTotal);
+    } else {
+      const oldSubTotal = quantity * item.price;
+      const deductedTotal = calTotal() - oldSubTotal;
+      const newQuantity = quantity + 1;
+      const newSubTotal = newQuantity * item.price;
+      const newTotal = deductedTotal + newSubTotal;
+      setQuantity(quantity + 1);
+      setTotal(newTotal);
+    }
+    // const
+
+    // const subTotal = quantity * item.price;
   };
   const decreaseQuantity = () => {
-    // const amount = ;
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      if (true) {
+        // const oldSubTotal = quantity * item.price;
+        const newTotal = total - item.price;
+        // const newQuantity = quantity + 1;
+        // const newSubTotal = newQuantity * item.price;
+        // const newTotal = deductedTotal + newSubTotal;
+        setQuantity(quantity - 1);
+        setTotal(newTotal);
+      }
     }
+    // calTotal();
   };
   const handleRemoveItem = async () => {
     const payload = {
       _id: item._id,
-      // productName: item.name,
-      // price: item.price,
     };
-    console.log(payload);
     const res = await mutateAsync(payload);
-    // console.log({ va });
     if (res.status) {
       refetch();
     }
@@ -215,20 +278,24 @@ const CartItem = ({ item, refetch }) => {
             <div className="smCartTitle mdUp">Quantity</div>
             <div className="text-center m-auto">
               <span className="fw-600 cartAddBtn">
-                <span className="decreaseBtn" onClick={decreaseQuantity}>
+                <span onClick={decreaseQuantity} className="decreaseBtn">
                   -
                 </span>
                 <span className="itemAmount ">{quantity}</span>
-                <span className="increaseBtn" onClick={increaseQuantity}>
+                <span onClick={increaseQuantity} className="increaseBtn">
                   +
                 </span>
               </span>
-              <div
-                onClick={handleRemoveItem}
-                className="fs-sm mt-3 text-center fw-600 red"
-              >
-                Remove
-              </div>
+              {!isLoading ? (
+                <div
+                  onClick={handleRemoveItem}
+                  className="fs-sm mt-3 text-center fw-600 red"
+                >
+                  Remove
+                </div>
+              ) : (
+                <h1>load spinner</h1>
+              )}
             </div>
           </div>
           <div className="smCartColumn cart-br">

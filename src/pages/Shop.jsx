@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import { Collapse, Divider, Grid, Hidden, Pagination } from "@mui/material";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { useMutation, useQuery } from "react-query";
 import { getProduct } from "../methods/product.method";
+import { getOrStoreId } from "../helpers/getOrStore.helper";
 
 const useStyles = makeStyles({
   root: {
@@ -126,14 +127,14 @@ function Shop() {
     customStyle: `${classes.root} pt-4 d-flex`,
   };
   const items = data;
-  // const items = [
-  //   { title: "all stars", price: 500, description: " original rocker" },
-  //   { title: "addidas", price: 200, description: " original lace" },
-  //   { title: "nike", price: 1500, description: " original lace" },
-  //   { title: "addidas", price: 200, description: " original lace" },
-  //   { title: "addidas", price: 200, description: " original lace" },
-  // ];
-  // asyncMutate("/product");
+
+  //
+  //
+
+  if (isError) {
+    <h1>Something Went Wrong</h1>;
+  }
+
   return (
     <CustomContainer {...customConfig}>
       <Grid container justifyContent="space-between">
