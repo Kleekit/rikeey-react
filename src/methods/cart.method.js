@@ -21,11 +21,17 @@ export const removeItemFormCart = async (body) => {
   return data;
 };
 
+// user///
 export const getUser = async function () {
   const userId = getOrStoreId();
   console.log(userId);
   let { data } = await apiCaller.get(`/user/${userId}`);
   return data;
 };
+export const register = async function (body) {
+  let { data } = await apiCaller.post("/user", body);
+  console.log({ data });
+  return data;
+};
 
-// user///
+///

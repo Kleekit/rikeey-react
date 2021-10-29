@@ -233,21 +233,12 @@ const CartItem = ({ item, refetch, setTotal, total, calTotal }) => {
       setQuantity(quantity + 1);
       setTotal(newTotal);
     }
-    // const
-
-    // const subTotal = quantity * item.price;
   };
   const decreaseQuantity = () => {
     if (quantity > 1) {
-      if (true) {
-        // const oldSubTotal = quantity * item.price;
-        const newTotal = total - item.price;
-        // const newQuantity = quantity + 1;
-        // const newSubTotal = newQuantity * item.price;
-        // const newTotal = deductedTotal + newSubTotal;
-        setQuantity(quantity - 1);
-        setTotal(newTotal);
-      }
+      const newTotal = total - item.price;
+      setQuantity(quantity - 1);
+      setTotal(newTotal);
     }
     // calTotal();
   };
