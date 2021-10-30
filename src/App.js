@@ -3,6 +3,7 @@ import { Route, Switch, useLocation } from "react-router-dom";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Details from "./pages/Details";
+import FeedBack from "./pages/FeedBack";
 import LandingPage from "./pages/LandingPage";
 import Payment from "./pages/Payment";
 import Shop from "./pages/Shop";
@@ -17,6 +18,7 @@ function App() {
       <Route path="/cart" exact component={Cart} />
       <Route path="/checkout" exact component={Checkout} />
       <Route path="/checkout/payment" exact component={Payment} />
+      <Route path="/IKnU" exact component={FeedBack} />
     </Switch>
   );
 }

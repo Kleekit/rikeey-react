@@ -54,7 +54,13 @@ function Checkout() {
     const user = await mutateAsync(value);
     console.log({ user });
     if (user.status) {
-      history.replace("/checkout/payment");
+      history.replace({
+        pathname: `/IKnU`,
+        state: {
+          title: "Notification",
+          message: user.body,
+        },
+      });
     }
   };
 
