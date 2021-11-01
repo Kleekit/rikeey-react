@@ -44,15 +44,15 @@ const useStyles = makeStyles({
 });
 
 const carouselImg = [
-  { src: "https://picsum.photos/800/600?random=1", alt: "" },
-  { src: "https://picsum.photos/800/600?random=2", alt: "" },
-  { src: "https://picsum.photos/800/600?random=3", alt: "" },
-  { src: "https://picsum.photos/800/600?random=4", alt: "" },
-  { src: "https://picsum.photos/800/600?random=5", alt: "" },
-  { src: "https://picsum.photos/800/600?random=6", alt: "" },
-  { src: "https://picsum.photos/800/600?random=7", alt: "" },
-  { src: "https://picsum.photos/800/600?random=8", alt: "" },
-  { src: "https://picsum.photos/800/600?random=9", alt: "" },
+  { src: "./images/slide1.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/slide3.png", alt: "" },
+  { src: "./images/slide1.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/slide3.png", alt: "" },
+  { src: "./images/slide1.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/slide3.png", alt: "" },
 ];
 
 export default function CustomCarousel() {

@@ -26,6 +26,7 @@
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "react-swipeable-views": "^0.14.0",
+    "swiper": "6.8.4",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },

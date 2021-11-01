@@ -5,6 +5,7 @@ import CustomCarousel from "../components/LandingPage/CustomCarousel";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import ArrowRight from "@mui/icons-material/ArrowRightAlt";
+import SwiperX from "../components/LandingPage/SwiperX";
 
 const useStyles = makeStyles({
   root: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles({
       margin: "0 auto",
     },
     "& .men-top, .men-bottom, .women-catalog": {
-      height: "80vh",
+      height: "85vh",
       padding: 0,
       "@media (max-width: 767px) and (min-width: 600px)": {
         height: "60vh",
@@ -178,6 +179,7 @@ function LandingPage() {
         <div className="slider-label">
           <div className="slider-label-text m-auto ">Take a tour...</div>
         </div>
+        {/* <SwiperX /> */}
         <CustomCarousel />
         <Link to="/shop" className="shopTextCon_2 mx-auto">
           <div className="p-5 py-2 br-4 shopText_2">
