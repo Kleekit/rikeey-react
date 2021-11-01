@@ -1,11 +1,11 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import CustomCarousel from "../components/LandingPage/CustomCarousel";
+import CarouselSwiper from "../components/LandingPage/CarouselSwiper";
+// import CustomCarousel from "../components/LandingPage/CustomCarousel";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import ArrowRight from "@mui/icons-material/ArrowRightAlt";
-import SwiperX from "../components/LandingPage/SwiperX";
 
 const useStyles = makeStyles({
   root: {
@@ -179,8 +179,8 @@ function LandingPage() {
         <div className="slider-label">
           <div className="slider-label-text m-auto ">Take a tour...</div>
         </div>
-        {/* <SwiperX /> */}
-        <CustomCarousel />
+        <CarouselSwiper />
+        {/* <CustomCarousel /> */}
         <Link to="/shop" className="shopTextCon_2 mx-auto">
           <div className="p-5 py-2 br-4 shopText_2">
             <h2 className="d-flex align-items-center">

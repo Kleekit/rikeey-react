@@ -1,17 +1,25 @@
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, Navigation } from "swiper";
+import SwiperCore, {
+  Autoplay,
+  EffectCoverflow,
+  Keyboard,
+  Navigation,
+} from "swiper";
 import { makeStyles } from "@material-ui/styles";
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.min.css";
+import "swiper/components/effect-coverflow/effect-coverflow.min.css";
 import "swiper/components/navigation/navigation.min.css";
-import "swiper/components/pagination/pagination.min.css";
+
+SwiperCore.use([Autoplay, EffectCoverflow, Keyboard, Navigation]);
 
 const useStyles = makeStyles({
   root: {
-    width: "85%",
+    width: "90%",
     margin: "0 auto",
     "@media (max-width: 600px)": {
-      width: "90%",
+      width: "75%",
     },
     // "& .swiper-button-prev, .swiper-button-next": {
     //   position: "relative",
@@ -19,7 +27,7 @@ const useStyles = makeStyles({
     "& .carouselImg": {
       height: "70vh",
       "@media (max-width: 767px)": {
-        height: "50vh",
+        height: "60vh",
       },
       "@media (max-width: 480px)": {
         height: "42vh",
@@ -40,25 +48,38 @@ const carouselImg = [
   { src: "./images/slide3.png", alt: "" },
 ];
 
-function SwiperX() {
+function CarouselSwiper() {
   const classes = useStyles();
   return (
     <Swiper
       className={classes.root}
-      modules={[Keyboard, Navigation]}
-      grabCursor
+      spaceBetween={20}
+      slidesPerView={1}
+      breakpoints={{
+        600: {
+          slidesPerView: 3,
+          spaceBetween: 80,
+        },
+      }}
       autoplay={{
-        delay: 500,
+        delay: 2500,
         disableOnInteraction: false,
       }}
-      spaceBetween={60}
-      slidesPerView={3}
+      effect={"coverflow"}
+      coverflowEffect={{
+        rotate: 12,
+        stretch: 0,
+        depth: 40,
+        modifier: 1,
+        slideShadows: true,
+      }}
       navigation
       loop
+      grabCursor
       keyboard={{ enabled: true }}
-      pagination={{ clickable: true }}
-      // onSwiper={(swiper) => console.log(swiper)}
-      // onSlideChange={() => console.log("slide change")}
+      // onSlideChange={(swiper) => {
+      //   console.log("Slide index changed to: ", swiper.activeIndex);
+      // }}
     >
       {carouselImg.map((item) => (
         <SwiperSlide>
@@ -71,9 +92,8 @@ function SwiperX() {
           />
         </SwiperSlide>
       ))}
-      ...
     </Swiper>
   );
 }
 
-export default SwiperX;
+export default CarouselSwiper;
