@@ -40,12 +40,15 @@ const carouselImg = [
   { src: "./images/slide1.png", alt: "" },
   { src: "./images/slide2.png", alt: "" },
   { src: "./images/slide3.png", alt: "" },
+  { src: "./images/men-button.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/women-set.png", alt: "" },
   { src: "./images/slide1.png", alt: "" },
   { src: "./images/slide2.png", alt: "" },
   { src: "./images/slide3.png", alt: "" },
-  { src: "./images/slide1.png", alt: "" },
+  { src: "./images/men-button.png", alt: "" },
   { src: "./images/slide2.png", alt: "" },
-  { src: "./images/slide3.png", alt: "" },
+  { src: "./images/women-set.png", alt: "" },
 ];
 
 function CarouselSwiper() {
