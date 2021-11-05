@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { Button } from "@mui/material";
 import { useMutation } from "react-query";
 import { register } from "../methods/cart.method";
+import { getOrStoreId } from "../helpers/getOrStore.helper";
 
 const useStyles = makeStyles({
   root: {
@@ -51,16 +52,13 @@ function Checkout() {
   );
 
   const handleFormSubmit = async (value) => {
+    value.sharedPreference = getOrStoreId();
+
     const user = await mutateAsync(value);
     console.log({ user });
     if (user.status) {
-      history.replace({
-        pathname: `/IKnU`,
-        state: {
-          title: "Notification",
-          message: user.body,
-        },
-      });
+      getOrStoreId(user.body.sharedPreference);
+      window.location.href = user.body.pay;
     }
   };
 
@@ -99,7 +97,6 @@ function Checkout() {
         .required("Required, dispatch rider needs to call you"),
     }),
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
       handleFormSubmit(values);
     },
   });

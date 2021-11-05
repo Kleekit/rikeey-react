@@ -154,6 +154,7 @@ function Cart() {
         <div className="cart-body ">
           {isLoading && <h3>Loading...</h3>}
           {data &&
+            data.status &&
             data.body.map((item) => (
               <CartItem
                 item={item}

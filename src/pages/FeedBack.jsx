@@ -2,8 +2,6 @@ import CustomContainer from "../components/Navigation/CustomContainer";
 import React from "react";
 // import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
-import ArrowLeft from "@mui/icons-material/KeyboardArrowLeftRounded";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -36,13 +34,18 @@ const useStyles = makeStyles({
   },
 });
 
-const FeedBack = (props) => {
-  console.log(props);
+const FeedBack = (
+  {
+    location: {
+      state: { title = "$404", message = "Page  not found" },
+    },
+  },
+  props
+) => {
   const classes = useStyles();
   const customConfig = {
     customStyle: `${classes.root} pt-4 px-5 row `,
   };
-  const { title = "$404", message = "Page  not found" } = props;
   return (
     <CustomContainer {...customConfig}>
       <div className="col-md-6 mt-6 mb-15 mx-auto">
@@ -50,7 +53,12 @@ const FeedBack = (props) => {
           <h3 className="fw-600 px-2 ">{title}</h3>
           <div className="form px-4">
             <div className="form-group  fs-sm">
-              <label className="mb-2">{message}</label>
+              <a
+                href="http://localhost:3000/rik/xuytxrzjkjjnx"
+                className="mb-2"
+              >
+                {message}
+              </a>
               {/* <div className="d-flex ">
                 <input
                   type="email"

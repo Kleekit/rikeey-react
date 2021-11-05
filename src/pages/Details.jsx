@@ -19,6 +19,7 @@ import { HashLink } from "react-router-hash-link";
 import Draggable from "react-draggable";
 import { useMutation, useQuery } from "react-query";
 import { addItemToCart } from "../methods/cart.method";
+import { getOrStoreId } from "../helpers/getOrStore.helper";
 // import clsx from "clsx";
 
 const useStyles = makeStyles({
@@ -260,6 +261,7 @@ function Details(props) {
       productId: item._id,
       productName: item.name,
       price: item.price,
+      sharedPreference: getOrStoreId(),
     };
     console.log(payload);
     const res = await mutateAsync(payload);
