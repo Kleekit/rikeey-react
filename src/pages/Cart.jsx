@@ -7,8 +7,10 @@ import { useMutation, useQuery } from "react-query";
 import {
   getCartItem,
   getUser,
+  register,
   removeItemFormCart,
 } from "../methods/cart.method";
+import { getOrStoreId } from "../helpers/getOrStore.helper";
 // import {removeItemFormCart} from '../methods/cart.method'
 
 const useStyles = makeStyles({
@@ -185,28 +187,45 @@ function Cart() {
 
 const CheckoutButton = () => {
   const [detail, setDetail] = useState(false);
-  const { isLoading, data, isError } = useQuery(
-    "verifyUser",
-    getUser
-    // { enabled: false }
+  const user = useQuery("verifyUser", getUser);
+
+  const { isError, isLoading, data, mutateAsync } = useMutation((payload) =>
+    register(payload)
   );
 
-  // const verifyUser = async () => {
-  // const userExist = await refetch();
-  // // const id = getOrStoreId();
-  // if (userExist) {
-  //   setDetail(true);
-  // }
-  // };
-  console.log(data);
-
+  const checkoutUser = async () => {
+    const sharedPreference = getOrStoreId();
+    const user = await mutateAsync({ sharedPreference });
+    // console.log({ user });
+    if (user.status) {
+      getOrStoreId(user.body.sharedPreference);
+      window.location.href = user.body.pay;
+    }
+  };
   return (
-    <Link
-      to={data && data.status ? "/checkout/payment" : "/checkout"}
-      className="d-flex ms-auto py-3 justify-content-center me-3 w-80 br-2 submitBtn"
-    >
-      {data && data.status ? "Checkout" : "time to checkout"}
-    </Link>
+    <>
+      {!isLoading ? (
+        <>
+          {user.data && user.data.status ? (
+            <Button
+              onClick={checkoutUser}
+              className="d-flex ms-auto py-3 justify-content-center me-3 w-80 br-2 submitBtn"
+            >
+              Checkout
+            </Button>
+          ) : (
+            <Link
+              to="/checkout"
+              className="d-flex ms-auto py-3 justify-content-center me-3 w-80 br-2 submitBtn"
+            >
+              time to checkout
+            </Link>
+          )}
+        </>
+      ) : (
+        <h1>Loading......</h1>
+      )}
+    </>
   );
 };
 const CartItem = ({ item, refetch, setTotal, total, calTotal }) => {
