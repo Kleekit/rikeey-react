@@ -10,6 +10,7 @@ export const addItemToCart = async (body) => {
 
 export const getCartItem = async (body) => {
   let { data } = await apiCaller.get(`/item/${getOrStoreId()}`);
+  console.log(data);
   return data;
 };
 

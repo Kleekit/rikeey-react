@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import RikeeyLogo from "../Reuseable/RikeeyLogo";
 import { Badge, Grid, Hidden } from "@mui/material";
@@ -6,6 +6,9 @@ import { makeStyles } from "@material-ui/styles";
 import SearchIcon from "@mui/icons-material/SearchOutlined";
 import SideBar from "../Sidebar/SideBar";
 import clsx from "clsx";
+import { apiCaller } from "../../apiCaller/apicaller";
+import { useMutation, useQuery } from "react-query";
+import { getCartItem } from "../../methods/cart.method";
 
 const useStyles = makeStyles({
   root: {
@@ -58,6 +61,8 @@ function NavBar() {
 
   const [count, setCount] = React.useState(0);
 
+  const { data, isLoading, isError } = useQuery("getCartItem", getCartItem);
+
   return (
     <div className={classes.root}>
       <Hidden smDown>
@@ -75,15 +80,20 @@ function NavBar() {
           <Grid className="menuContainer menuLink" items sm={4} md={3}>
             <Link to="/">Home</Link>
             <Link to="/shop">Shop</Link>
-            <Badge overlap="circular" color="primary" badgeContent={count}>
-              <Link
-                onClick={() => {
-                  setCount(count + 1);
-                }}
-                to="/cart"
+            <Badge
+              overlap="circular"
+              color="primary"
+              badgeContent={data ? data.body.length : 0}
+            >
+              <button
+              // onClick={() => {
+              //   // setCount(count + 1);
+              //   getCartItems();
+              // }}
+              // to="/cart"
               >
                 Cart
-              </Link>
+              </button>
             </Badge>
           </Grid>
           <Grid items sm={2} md={2}>
