@@ -1,28 +1,16 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-// import { Link } from "react-dom";
 import { makeStyles } from "@material-ui/styles";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  Grid,
-  Paper,
-  Rating,
-} from "@mui/material";
+import { Button, Divider, Grid, Paper, Rating } from "@mui/material";
 import CustomContainer from "../components/Navigation/CustomContainer";
 // import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
-import Draggable from "react-draggable";
+// import { HashLink } from "react-router-hash-link";
 import { useMutation, useQuery } from "react-query";
 import { addItemToCart } from "../methods/cart.method";
 import { getOrStoreId } from "../helpers/getOrStore.helper";
-import ShopItem from "../components/Shop/ShopItem";
 import MoreCatalog from "../components/ItemDetails/MoreCatalog";
-// import clsx from "clsx";
+import ViewDetails from "../components/ItemDetails/ViewDetails";
+import CommentDialog from "../components/ItemDetails/CommentDialog";
 
 const useStyles = makeStyles({
   root: {
@@ -152,46 +140,6 @@ const useStyles = makeStyles({
         },
       },
     },
-    // "& .moreCatalog": {
-    //   marginBottom: "10rem",
-    //   "& .catalogItem": {
-    //     marginTop: "3rem",
-    //     height: "45vh",
-    //     border: "0.1rem solid #000",
-    //     "@media (max-width: 860px)": {
-    //       height: "55vh",
-    //     },
-    //     "@media (max-width: 600px)": {
-    //       height: "35vh",
-    //     },
-    //     "@media (max-width: 480px)": {
-    //       height: "27vh",
-    //     },
-    //   },
-    // },
-    "& .reviews": {
-      marginBottom: "10rem",
-      "& .customerReview": {
-        marginTop: "3rem",
-        padding: "3rem 4.5rem",
-        borderRadius: "1rem",
-        background: "rgba(251, 251, 251, 1)",
-        border: "0.1rem solid rgba( 220, 220, 220, .5)",
-        "@media (max-width: 600px)": {
-          padding: "1.5rem 2.5rem",
-        },
-        "& .customer": {
-          marginBottom: "5rem",
-          "& .customerImg": {
-            width: "8rem",
-            height: "8rem",
-            clipPath: "circle() !important",
-            background: "grey",
-            marginRight: "3rem",
-          },
-        },
-      },
-    },
     "& .dividerHeader": {
       width: "25%",
       "@media (max-width: 960px)": {
@@ -209,46 +157,8 @@ const useStyles = makeStyles({
         marginBottom: "4rem",
       },
     },
-    // "& .containerCatalogItem": {
-    //   flexGrow: 0,
-    //   maxWidth: "22%",
-    //   flexBasis: "22%",
-    //   "@media (max-width: 860px)": {
-    //     maxWidth: "46%",
-    //     flexBasis: "46%",
-    //     marginBottom: "5rem",
-    //   },
-    // },
-    "& .reviewContainer": {
-      width: "90%",
-      margin: "auto",
-      "@media (max-width: 860px)": {
-        width: "100%",
-      },
-    },
-    "& .customerReview": {
-      flexGrow: 0,
-      maxWidth: "45%",
-      flexBasis: "45%",
-      "@media (max-width: 600px)": {
-        maxWidth: "100%",
-        flexBasis: "100%",
-        marginBottom: "5rem",
-      },
-    },
   },
 });
-
-function PaperComponent(props) {
-  return (
-    <Draggable
-      handle="#draggable-dialog-title"
-      cancel={'[class*="MuiDialogContent-root"]'}
-    >
-      <Paper {...props} />
-    </Draggable>
-  );
-}
 
 function Details(props) {
   const item = props.location.state;
@@ -280,16 +190,6 @@ function Details(props) {
   const [count, setCount] = React.useState(0);
 
   const [value] = React.useState(2.5);
-  // setValue
-  const [openComment, setOpenComment] = React.useState(false);
-
-  const handleClickOpenComment = () => {
-    setOpenComment(true);
-  };
-
-  const handleCloseComment = () => {
-    setOpenComment(false);
-  };
 
   const selectColor = () => {
     document
@@ -306,69 +206,8 @@ function Details(props) {
     document.getElementById("sizePicker").classList.toggle("sizeSelected");
   };
 
-  const CommentDialog = () => (
-    <div>
-      <span
-        onClick={handleClickOpenComment}
-        className="ms-4 writeReviewBtn cursor-pointer"
-      >
-        Write a Review
-      </span>
-      <Dialog
-        open={openComment}
-        onClose={handleCloseComment}
-        PaperComponent={PaperComponent}
-        aria-labelledby="draggable-dialog-title"
-        style={{ fontSize: "1.5rem" }}
-      >
-        <DialogTitle
-          style={{ cursor: "move", fontSize: "1.8rem", fontWeight: 600 }}
-          id="draggable-dialog-title"
-        >
-          Add a Comment
-        </DialogTitle>
-        <DialogContent className="pt-3">
-          <div className="input-group mb-4">
-            <input type="text" className="form-control" placeholder="Title" />
-          </div>
-          <div className="input-group mb-4">
-            <input type="text" className="form-control" placeholder="Name" />
-          </div>
-          <div className="form-floating">
-            <textarea
-              className="form-control mb-4"
-              placeholder="Leave a comment here"
-              style={{ height: "15rem" }}
-            ></textarea>
-            <label for="floatingTextarea2">Comments</label>
-          </div>
-          <div className="input-group mb-4">
-            <input type="file" className="form-control" />
-            <label className="input-group-text" for="inputGroupFile02">
-              Upload
-            </label>
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            style={{ fontSize: "1.2rem" }}
-            autoFocus
-            onClick={handleCloseComment}
-          >
-            Cancel
-          </Button>
-          <Button style={{ fontSize: "1.2rem" }} onClick={handleCloseComment}>
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+  // const { isLoading, isError, data } = useQuery("addItemToCart", addItemToCart);
 
-  // const { isLoading, isError, data, error } = useQuery(
-  //   "getMarkets",
-  //   getRequest
-  // );
   // console.log({ isLoading, isError, data, error });
 
   return (
@@ -406,12 +245,12 @@ function Details(props) {
               precision={0.5}
               readOnly
             />
-            <HashLink
-              to="/shop/details#viewReviews"
+            {/* <HashLink
+              to={{ state: item, pathname: "/shop/details#viewReviews" }}
               className="ms-4 viewReviewBtn"
             >
               View reviews
-            </HashLink>
+            </HashLink> */}
           </div>
           <div className="itemStarReview d-flex align-items-center">
             <span className="reviewCount">138 Reviews</span>
@@ -449,176 +288,38 @@ function Details(props) {
               </span>
             </Paper>
           ))}
-          <span
-            type="button"
-            onClick={() => {
-              setCount(count + 1);
-            }}
-            className="addToCart fw-700"
-          >
-            Add to Cart
-          </span>
-
-          {!isLoading && (
+          <div className="d-flex">
             <span
               type="button"
-              onClick={handleAddItemToCart}
-              className="addToCart fw-700"
+              onClick={() => {
+                setCount(count + 1);
+              }}
+              className="addToCart fw-700 me-4"
             >
-              Buy Now
+              Add to Cart
             </span>
-          )}
+
+            {!isLoading && (
+              <span
+                type="button"
+                onClick={handleAddItemToCart}
+                className="addToCart fw-700"
+              >
+                Buy Now
+              </span>
+            )}
+          </div>
         </Grid>
       </Grid>
-      {/* <div className="moreCatalog">
+      <div className="more-catalog">
         <h2 className="header text-center">Something Light</h2>
         <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
-        <Grid container justifyContent="space-between">
-          <Grid items xs={12} md={2} className="containerCatalogItem">
-            <ShopItem
-              link={"/shop/details"}
-              // imgSrc={item.displayImage.url}
-              title={"title"}
-              price={"price"}
-            />
-          </Grid>
-          <Grid items xs={12} md={2} className="containerCatalogItem">
-            <div className="catalogItem mb-4"></div>
-            <div className="catalogItemDetails">
-              <div className="shop-col-text">
-                <p className="fw-700">Lycra Athletic Short</p>
-                <p># 7,000.00 / $ 17</p>
-                <p className="fs-sm mb-m8">Available in 3 colors</p>
-                <svg
-                  width="60"
-                  height="13"
-                  viewBox="0 0 64 16"
-                  fill="none"
-                  xmlns="https://www.w3.org/2000/svg"
-                >
-                  <circle cx="8" cy="8" r="8" fill="#CA3030" />
-                  <circle cx="32" cy="8" r="8" fill="#B9F43B" />
-                  <circle cx="56" cy="8" r="8" fill="#B73333" />
-                </svg>
-              </div>
-            </div>
-          </Grid>
-          <Grid items xs={12} md={2} className="containerCatalogItem">
-            <div className="catalogItem mb-4"></div>
-            <div className="catalogItemDetails">
-              <div className="shop-col-text">
-                <p className="fw-700">Lycra Atheletic Short</p>
-                <p># 7,000.00 / $ 17</p>
-                <p className="fs-sm mb-m8">Available in 3 colors</p>
-                <svg
-                  width="60"
-                  height="13"
-                  viewBox="0 0 64 16"
-                  fill="none"
-                  xmlns="https://www.w3.org/2000/svg"
-                >
-                  <circle cx="8" cy="8" r="8" fill="#CA3030" />
-                  <circle cx="32" cy="8" r="8" fill="#B9F43B" />
-                  <circle cx="56" cy="8" r="8" fill="#B73333" />
-                </svg>
-              </div>
-            </div>
-          </Grid>
-          <Grid items xs={12} md={2} className="containerCatalogItem">
-            <div className="catalogItem mb-4"></div>
-            <div className="catalogItemDetails">
-              <div className="shop-col-text">
-                <p className="fw-700">Lycra Atheletic Short</p>
-                <p># 7,000.00 / $ 17</p>
-                <p className="fs-sm mb-m8">Available in 3 colors</p>
-                <svg
-                  width="60"
-                  height="13"
-                  viewBox="0 0 64 16"
-                  fill="none"
-                  xmlns="https://www.w3.org/2000/svg"
-                >
-                  <circle cx="8" cy="8" r="8" fill="#CA3030" />
-                  <circle cx="32" cy="8" r="8" fill="#B9F43B" />
-                  <circle cx="56" cy="8" r="8" fill="#B73333" />
-                </svg>
-              </div>
-            </div>
-          </Grid>
-        </Grid>
-      </div> */}
-      <MoreCatalog />
+        <MoreCatalog />
+      </div>
       <div className="reviews" id="viewReviews">
         <h2 className="header text-center">Reviews</h2>
         <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
-        <Grid
-          container
-          justifyContent="space-between"
-          className="reviewContainer"
-        >
-          <Grid items xs={12} md={5} className="customerReview">
-            <div className="customer d-flex align-items-center">
-              <div className="customerImg"></div>
-              <div className="customerInfo">
-                <div className="customerName mb-4 fw-600">Adrian</div>
-                <Rating
-                  name="customers-rating"
-                  value={value}
-                  precision={0.5}
-                  readOnly
-                />
-              </div>
-            </div>
-            <div className="reviewInfo">
-              <div className="reviewTitle fw-700 mb-4">
-                Lorem ipsum dolor sit amet consectetur
-              </div>
-              <div className="reviewComment">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Tempore impedit perspiciatis ipsum! Perspiciatis modi ipsa minus
-                fuga voluptatum ea cumque nemo exercitationem, explicabo,
-                molestiae, autem quas earum dolor laborum quidem facilis.
-                Corrupti tempora explicabo ullam, expedita cupiditate obcaecati.
-                Amet quae asperiores dolorem earum illum culpa molestias
-                adipisci ipsum nobis voluptate ex magni repellat atque sed sit
-                ad, dolorum unde doloribus, perspiciatis nisi temporibus quod
-                exercitationem corrupti ab. Facilis fugiat nihil explicabo
-              </div>
-              <div className="customerName mt-4 fw-600">Adrian</div>
-            </div>
-          </Grid>
-          <Grid items xs={12} md={5} className="customerReview">
-            <div className="customer d-flex align-items-center">
-              <div className="customerImg"></div>
-              <div className="customerInfo">
-                <div className="customerName mb-4 fw-600">Adrian</div>
-                <Rating
-                  name="customers-rating"
-                  value={value}
-                  precision={0.5}
-                  readOnly
-                />
-              </div>
-            </div>
-            <div className="reviewInfo">
-              <div className="reviewTitle fw-700 mb-4">
-                Lorem ipsum dolor sit amet consectetur
-              </div>
-              <div className="reviewComment">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Tempore impedit perspiciatis ipsum! Perspiciatis modi ipsa minus
-                fuga voluptatum ea cumque nemo exercitationem, explicabo,
-                molestiae, autem quas earum dolor laborum quidem facilis.
-                Corrupti tempora explicabo ullam, expedita cupiditate obcaecati.
-                Amet quae asperiores dolorem earum illum culpa molestias
-                adipisci ipsum nobis voluptate ex magni repellat atque sed sit
-                ad, dolorum unde doloribus, perspiciatis nisi temporibus quod
-                exercitationem corrupti ab. Facilis fugiat nihil explicabo
-              </div>
-              <div className="customerName mt-4 fw-600">Adrian</div>
-            </div>
-          </Grid>
-        </Grid>
+        <ViewDetails />
       </div>
     </CustomContainer>
   );

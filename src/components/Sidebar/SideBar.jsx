@@ -229,7 +229,7 @@ export default function SideBar() {
                   Shop
                 </Link>
               </div>
-              <div className="menuItem">
+              {/* <div className="menuItem">
                 <div
                   className="menuItemHeader link"
                   tabIndex="1"
@@ -291,7 +291,7 @@ export default function SideBar() {
                 <Link className="menuItemHeader link" to="/shop">
                   Fitness Equipment
                 </Link>
-              </div>
+              </div> */}
             </div>
           </ListItem>
         </List>

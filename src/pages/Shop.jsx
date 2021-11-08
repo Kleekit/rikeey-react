@@ -119,7 +119,7 @@ function Shop() {
         <Hidden mdDown>
           <Grid items xs={12} sm={12} md={3} className="filter-col pe-0">
             <div className="filter-content fs-large pb-5 fw-500 ">
-              <FilterTop />
+              {/* <FilterTop /> */}
               <FIlterBottom />
             </div>
           </Grid>

@@ -11,6 +11,12 @@ export const getProduct = async (body) => {
   return data;
 };
 
+export const getCategory = async (body) => {
+  let { data } = await apiCaller.get("/categories");
+  console.log(data);
+  return data;
+};
+
 // export const loginUser = async (body) => {
 //   let { data } = await apiCaller.post("/user/login", body);
 //   console.log({ data });
