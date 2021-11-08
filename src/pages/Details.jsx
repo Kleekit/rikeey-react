@@ -14,12 +14,14 @@ import {
   Rating,
 } from "@mui/material";
 import CustomContainer from "../components/Navigation/CustomContainer";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import Draggable from "react-draggable";
 import { useMutation, useQuery } from "react-query";
 import { addItemToCart } from "../methods/cart.method";
 import { getOrStoreId } from "../helpers/getOrStore.helper";
+import ShopItem from "../components/Shop/ShopItem";
+import MoreCatalog from "../components/ItemDetails/MoreCatalog";
 // import clsx from "clsx";
 
 const useStyles = makeStyles({
@@ -150,23 +152,23 @@ const useStyles = makeStyles({
         },
       },
     },
-    "& .moreCatalog": {
-      marginBottom: "10rem",
-      "& .catalogItem": {
-        marginTop: "3rem",
-        height: "45vh",
-        border: "0.1rem solid #000",
-        "@media (max-width: 860px)": {
-          height: "55vh",
-        },
-        "@media (max-width: 600px)": {
-          height: "35vh",
-        },
-        "@media (max-width: 480px)": {
-          height: "27vh",
-        },
-      },
-    },
+    // "& .moreCatalog": {
+    //   marginBottom: "10rem",
+    //   "& .catalogItem": {
+    //     marginTop: "3rem",
+    //     height: "45vh",
+    //     border: "0.1rem solid #000",
+    //     "@media (max-width: 860px)": {
+    //       height: "55vh",
+    //     },
+    //     "@media (max-width: 600px)": {
+    //       height: "35vh",
+    //     },
+    //     "@media (max-width: 480px)": {
+    //       height: "27vh",
+    //     },
+    //   },
+    // },
     "& .reviews": {
       marginBottom: "10rem",
       "& .customerReview": {
@@ -207,16 +209,16 @@ const useStyles = makeStyles({
         marginBottom: "4rem",
       },
     },
-    "& .containerCatalogItem": {
-      flexGrow: 0,
-      maxWidth: "22%",
-      flexBasis: "22%",
-      "@media (max-width: 860px)": {
-        maxWidth: "46%",
-        flexBasis: "46%",
-        marginBottom: "5rem",
-      },
-    },
+    // "& .containerCatalogItem": {
+    //   flexGrow: 0,
+    //   maxWidth: "22%",
+    //   flexBasis: "22%",
+    //   "@media (max-width: 860px)": {
+    //     maxWidth: "46%",
+    //     flexBasis: "46%",
+    //     marginBottom: "5rem",
+    //   },
+    // },
     "& .reviewContainer": {
       width: "90%",
       margin: "auto",
@@ -468,30 +470,17 @@ function Details(props) {
           )}
         </Grid>
       </Grid>
-      <div className="moreCatalog">
+      {/* <div className="moreCatalog">
         <h2 className="header text-center">Something Light</h2>
         <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
         <Grid container justifyContent="space-between">
           <Grid items xs={12} md={2} className="containerCatalogItem">
-            <div className="catalogItem mb-4"></div>
-            <div className="catalogItemDetails">
-              <div className="shop-col-text">
-                <p className="fw-700">Lycra Athletic Short</p>
-                <p># 7,000.00 / $ 17</p>
-                <p className="fs-sm mb-m8">Available in 3 colors</p>
-                <svg
-                  width="60"
-                  height="13"
-                  viewBox="0 0 64 16"
-                  fill="none"
-                  xmlns="https://www.w3.org/2000/svg"
-                >
-                  <circle cx="8" cy="8" r="8" fill="#CA3030" />
-                  <circle cx="32" cy="8" r="8" fill="#B9F43B" />
-                  <circle cx="56" cy="8" r="8" fill="#B73333" />
-                </svg>
-              </div>
-            </div>
+            <ShopItem
+              link={"/shop/details"}
+              // imgSrc={item.displayImage.url}
+              title={"title"}
+              price={"price"}
+            />
           </Grid>
           <Grid items xs={12} md={2} className="containerCatalogItem">
             <div className="catalogItem mb-4"></div>
@@ -557,7 +546,8 @@ function Details(props) {
             </div>
           </Grid>
         </Grid>
-      </div>
+      </div> */}
+      <MoreCatalog />
       <div className="reviews" id="viewReviews">
         <h2 className="header text-center">Reviews</h2>
         <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
