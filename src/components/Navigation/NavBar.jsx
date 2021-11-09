@@ -86,11 +86,11 @@ function NavBar() {
               badgeContent={data ? data.body.length : 0}
             >
               <Link
-              // onClick={() => {
-              //   // setCount(count + 1);
-              //   getCartItems();
-              // }}
-              // to="/cart"
+                // onClick={() => {
+                //   // setCount(count + 1);
+                //   getCartItems();
+                // }}
+                to="/cart"
               >
                 Cart
               </Link>

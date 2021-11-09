@@ -84,10 +84,9 @@ function CarouselSwiper() {
       //   console.log("Slide index changed to: ", swiper.activeIndex);
       // }}
     >
-      {carouselImg.map((item) => (
-        <SwiperSlide>
+      {carouselImg.map((item, itemIdx) => (
+        <SwiperSlide key={itemIdx}>
           <img
-            key={`${item.src}_0`}
             alt={item.alt}
             className={"carouselImg"}
             width="100%"

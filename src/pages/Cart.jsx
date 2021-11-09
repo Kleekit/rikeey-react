@@ -161,7 +161,7 @@ function Cart() {
               <CartItem
                 item={item}
                 refetch={refetch}
-                key={item.name}
+                key={item.productName}
                 setTotal={setTotal}
                 total={total}
                 calTotal={calTotal}

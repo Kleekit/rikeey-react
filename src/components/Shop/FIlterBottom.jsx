@@ -11,7 +11,10 @@ export default function FIlterBottom() {
       {data &&
         data.status &&
         data.body.map((body) => (
-          <div className="filterBarLinks mx-auto w-60">
+          <div
+            className="filterBarLinks mx-auto w-60"
+            key={body.category.categoryName}
+          >
             <Link to="/">
               <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">
                 {body.category.categoryName}
@@ -20,7 +23,7 @@ export default function FIlterBottom() {
             <div className="subCat mt-3">
               {body.subCategories.length > 0 &&
                 body.subCategories.map((subCat) => (
-                  <Link to="/">
+                  <Link to="/" key={subCat.subCategoryName}>
                     <h4 className="mb-3 ms-2">{subCat.subCategoryName}</h4>
                   </Link>
                 ))}

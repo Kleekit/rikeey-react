@@ -49,13 +49,13 @@ export default function Category(props) {
         <h3 className="catalogCategory px-4 mb-4">{categoryTitle}</h3>
       </Hidden>
       <div className={"shopRow row"}>
-        {body.map((item) => (
-          <div className="shop-col">
+        {body.map((item, itemIdx) => (
+          <div className="shop-col" key={itemIdx + Number(item.price)}>
             <ShopItem
               className="shopItemImg"
               link={{ state: item, pathname: "/shop/details" }}
               imgSrc={item.displayImage.url}
-              title={item.title}
+              title={item.productName}
               price={item.price}
             />
           </div>

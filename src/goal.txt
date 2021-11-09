@@ -1,0 +1,23 @@
+type http request
+get,
+post, 
+put,
+delete
+
+type of  request client
+axios,
+fetch
+request
+ajax
+
+useQuery
+useMutate
+
+
+
+axios('endpoint/anything', {username, lastName})// post &&  put
+axios('endpoint/anything', )// get && delete
+
+
+
+state management 

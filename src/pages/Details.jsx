@@ -261,7 +261,7 @@ function Details(props) {
           <div className="itemDescription  ">{item.description}</div>
           <Divider className="my-5" />
           <h3 className="selectHeader">Colors</h3>
-          <Paper elevation={3} className="paperColorPicker ">
+          {/* <Paper elevation={3} className="paperColorPicker ">
             {color.map((color) => (
               <span
                 onClick={color.selectColor}
@@ -275,10 +275,10 @@ function Details(props) {
                 ></span>
               </span>
             ))}
-          </Paper>
-          {item.sizes.length > 0 && <h3 className="selectHeader">Size</h3>}
+          </Paper> */}
+          {/* {item.sizes.length > 0 && <h3 className="selectHeader">Size</h3>}
           {item.sizes.map((size) => (
-            <Paper elevation={3} className="paperSizePicker ">
+            <Paper  elevation={3} className="paperSizePicker ">
               <span
                 onClick={selectSize}
                 id="sizePicker"
@@ -287,7 +287,7 @@ function Details(props) {
                 {size}
               </span>
             </Paper>
-          ))}
+          ))} */}
           <div className="d-flex">
             <span
               type="button"
