@@ -2,11 +2,11 @@ import CustomContainer from "../components/Navigation/CustomContainer";
 import React, { useEffect } from "react";
 // import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "react-query";
-import { createTransaction, prepareTransaction } from "../methods/cart.method";
-import { getOrStoreId } from "../helpers/getOrStore.helper";
+import { createTransaction } from "../methods/cart.method";
+// import { getOrStoreId } from "../helpers/getOrStore.helper";
 import queryString from "query-string";
 
 const useStyles = makeStyles({
@@ -44,7 +44,7 @@ const Callback = (props) => {
   const history = useHistory();
   const { search } = useLocation();
   const { reference } = queryString.parse(search);
-  const { isLoading, isError, data, mutateAsync } = useMutation((reference) =>
+  const { isLoading, isError, mutateAsync } = useMutation((reference) =>
     createTransaction(reference)
   );
 

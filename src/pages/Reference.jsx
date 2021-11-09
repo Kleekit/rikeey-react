@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 // import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import { useParams } from "react-router";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useMutation } from "react-query";
 import { prepareTransaction } from "../methods/cart.method";
 
@@ -39,9 +39,9 @@ const useStyles = makeStyles({
 });
 
 const Reference = (props) => {
-  const history = useHistory();
+  // const history = useHistory();
   const { reference } = useParams();
-  const { isLoading, isError, data, mutateAsync } = useMutation((reference) =>
+  const { isLoading, isError, mutateAsync } = useMutation((reference) =>
     prepareTransaction(reference)
   );
   //   console.log(params);

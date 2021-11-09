@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import {
   Badge,
   Button,
-  Collapse,
+  // Collapse,
   Drawer,
   Hidden,
   InputBase,
@@ -16,8 +16,8 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseIcon from "@mui/icons-material/CloseRounded";
 // import Notifications from "@mui/icons-material/NotificationsNoneRounded";
 import ShoppingCart from "@mui/icons-material/ShoppingCartOutlined";
-import CollapseIcon from "@mui/icons-material/KeyboardArrowDownRounded";
-import ExpandIcon from "@mui/icons-material/KeyboardArrowRightRounded";
+// import CollapseIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+// import ExpandIcon from "@mui/icons-material/KeyboardArrowRightRounded";
 import clsx from "clsx";
 // import Divider from "@mui/material/Divider";
 
@@ -157,17 +157,17 @@ export default function SideBar() {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const [openWomen, setOpenWomen] = React.useState(true);
+  // const [openWomen, setOpenWomen] = React.useState(true);
 
-  const handleWomenClick = () => {
-    setOpenWomen(!openWomen);
-  };
+  // const handleWomenClick = () => {
+  //   setOpenWomen(!openWomen);
+  // };
 
-  const [openMen, setOpenMen] = React.useState(true);
+  // const [openMen, setOpenMen] = React.useState(true);
 
-  const handleMenClick = () => {
-    setOpenMen(!openMen);
-  };
+  // const handleMenClick = () => {
+  //   setOpenMen(!openMen);
+  // };
 
   return (
     <Hidden smUp>

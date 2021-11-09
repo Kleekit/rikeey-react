@@ -3,8 +3,8 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { getCategory } from "../../methods/product.method";
 
-export default function FIlterBottom() {
-  const { isLoading, isError, data } = useQuery("getCategory", getCategory);
+export default function FilterBottom() {
+  const { data } = useQuery("getCategory", getCategory);
 
   return (
     <span>

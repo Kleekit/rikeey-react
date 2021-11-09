@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import { Grid, Hidden, Pagination } from "@mui/material";
 import ShopSideBar from "../components/Shop/ShopSidebar";
 import OpenFIlter from "../components/Shop/OpenFIlter";
 import FilterTop from "../components/Shop/FilterTop";
-import FIlterBottom from "../components/Shop/FIlterBottom";
+import FilterBottom from "../components/Shop/FilterBottom";
 import Category from "../components/Shop/Category";
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { getProduct } from "../methods/product.method";
 // import { getOrStoreId } from "../helpers/getOrStore.helper";
 // import { Link } from "react-router-dom";
@@ -96,12 +96,11 @@ const useStyles = makeStyles({
 });
 
 function Shop() {
-  const { isLoading, isError, data } = useQuery("getProduct", getProduct);
-
   const classes = useStyles();
   const customConfig = {
     customStyle: `${classes.root} pt-4 d-flex`,
   };
+  const { isLoading, isError, data } = useQuery("getProduct", getProduct);
   // const items = data;
   //
   if (isError) {
@@ -120,7 +119,7 @@ function Shop() {
           <Grid items xs={12} sm={12} md={3} className="filter-col pe-0">
             <div className="filter-content fs-large pb-5 fw-500 ">
               {/* <FilterTop /> */}
-              <FIlterBottom />
+              <FilterBottom />
             </div>
           </Grid>
         </Hidden>

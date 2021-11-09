@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import RikeeyLogo from "../Reuseable/RikeeyLogo";
 import { Badge, Grid, Hidden } from "@mui/material";
@@ -6,8 +6,8 @@ import { makeStyles } from "@material-ui/styles";
 import SearchIcon from "@mui/icons-material/SearchOutlined";
 import SideBar from "../Sidebar/SideBar";
 import clsx from "clsx";
-import { apiCaller } from "../../apiCaller/apicaller";
-import { useMutation, useQuery } from "react-query";
+// import { apiCaller } from "../../apiCaller/apicaller";
+import { useQuery } from "react-query";
 import { getCartItem } from "../../methods/cart.method";
 
 const useStyles = makeStyles({
@@ -59,9 +59,9 @@ const useStyles = makeStyles({
 function NavBar() {
   const classes = useStyles();
 
-  const [count, setCount] = React.useState(0);
+  // const [count, setCount] = React.useState(0);
 
-  const { data, isLoading, isError } = useQuery("getCartItem", getCartItem);
+  const { data } = useQuery("getCartItem", getCartItem);
 
   return (
     <div className={classes.root}>

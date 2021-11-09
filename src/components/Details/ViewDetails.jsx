@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Rating } from "@mui/material";
+import { Grid } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 import CustomerReviews from "../Reuseable/CustomerReviews";
 
@@ -48,7 +48,6 @@ const useStyles = makeStyles({
 
 export default function ViewDetails() {
   const classes = useStyles();
-  const [value] = React.useState(2.5);
 
   return (
     <div className={classes.root}>

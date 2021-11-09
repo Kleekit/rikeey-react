@@ -1,6 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-
+// import { useHistory } from "react-router-dom";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import ArrowLeft from "@mui/icons-material/KeyboardArrowLeftRounded";
@@ -11,6 +10,7 @@ import { Button } from "@mui/material";
 import { useMutation } from "react-query";
 import { register } from "../methods/cart.method";
 import { getOrStoreId } from "../helpers/getOrStore.helper";
+import CustomInput from "../components/Reuseable/CustomInput";
 
 const useStyles = makeStyles({
   root: {
@@ -36,18 +36,16 @@ const useStyles = makeStyles({
   },
 });
 
-function Checkout() {
-  // routing
-  const history = useHistory();
-
+export default function Checkout() {
   //styles
   const classes = useStyles();
   const customConfig = {
     customStyle: `${classes.root} pt-4 px-5 row `,
   };
+  // routing
 
   //mutate call
-  const { isError, isLoading, data, mutateAsync } = useMutation((payload) =>
+  const { isLoading, mutateAsync } = useMutation((payload) =>
     register(payload)
   );
 
@@ -231,36 +229,3 @@ function Checkout() {
     </CustomContainer>
   );
 }
-
-const CustomInput = ({
-  formik,
-  formikTag,
-  type,
-  label,
-  labelText,
-  placeholder,
-}) => {
-  return (
-    <div className="form-group  fs-sm">
-      <label className="mb-2" htmlFor={label}>
-        {labelText}
-      </label>
-      <input
-        className="form-control w-80 no-border"
-        aria-describedby=""
-        placeholder={placeholder}
-        id={label} // accessability
-        name={formikTag} // formik
-        type={type} // html
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values[formikTag]}
-      />
-      {formik.touched[formikTag] && formik.errors[formikTag] ? (
-        <div>{formik.errors[formikTag]}</div>
-      ) : null}
-    </div>
-  );
-};
-
-export default Checkout;
