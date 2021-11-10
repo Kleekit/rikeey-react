@@ -90,47 +90,16 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
+export default function CartItem({ item, refetch }) {
   const classes = useStyles();
   const { mutateAsync, isLoading } = useMutation((item) =>
     removeItemFormCart(item)
   );
 
-  const [quantity, setQuantity] = useState(1);
-
-  const increaseQuantity = () => {
-    if (total > 0) {
-      const oldSubTotal = quantity * item.price;
-      const deductedTotal = total - oldSubTotal;
-      const newQuantity = quantity + 1;
-      const newSubTotal = newQuantity * item.price;
-      const newTotal = deductedTotal + newSubTotal;
-      setQuantity(quantity + 1);
-      setTotal(newTotal);
-    } else {
-      const oldSubTotal = quantity * item.price;
-      const deductedTotal = calTotal() - oldSubTotal;
-      const newQuantity = quantity + 1;
-      const newSubTotal = newQuantity * item.price;
-      const newTotal = deductedTotal + newSubTotal;
-      setQuantity(quantity + 1);
-      setTotal(newTotal);
-    }
-    // return quantity;
-  };
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      const newTotal = total - item.price;
-      setQuantity(quantity - 1);
-      setTotal(newTotal);
-    }
-    // return quantity;
-  };
   const handleRemoveItem = async () => {
     const payload = {
       cartItemId: item._id,
     };
-    console.log(payload);
     const res = await mutateAsync(payload);
     if (res.status) {
       refetch();
@@ -157,12 +126,7 @@ export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
           <div className="smCartQuantity cart-br">
             <div className="smCartTitle mdUp">Quantity</div>
             <div className="text-center m-auto">
-              <ChangeQuantity
-                decreaseQuantity={decreaseQuantity}
-                quantity={quantity}
-                increaseQuantity={increaseQuantity}
-                _id={item._id}
-              />
+              <ChangeQuantity item={item} refetch={refetch} />
               {!isLoading ? (
                 <div
                   onClick={handleRemoveItem}
@@ -181,7 +145,7 @@ export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
           </div>
           <div className="smCartColumn">
             <div className="smCartTitle mdUp">Sub Total</div>
-            <div className="m-auto">$ {item.price * quantity}</div>
+            <div className="m-auto">$ {item.price * item.quantity}</div>
           </div>
         </div>
       </div>
@@ -190,41 +154,33 @@ export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
   );
 }
 
-const ChangeQuantity = ({
-  decreaseQuantity,
-  quantity,
-  increaseQuantity,
-  _id,
-}) => {
+const ChangeQuantity = ({ item, refetch }) => {
   const { mutateAsync, isLoading } = useMutation((item) =>
     changeQuantity(item)
   );
 
-  const handleQuantity = async ({ target: { id } }) => {
-    //check which button was clicked
-    //increase or decrease
-    id == "decrease" ? decreaseQuantity() : increaseQuantity();
-    // call the endpoint
-    const body = {
-      _id,
-      quantity,
-    };
-    await mutateAsync(body);
+  const handleQuantity = async (num) => {
+    if (num > 0) {
+      await mutateAsync({ _id: item._id, quantity: num });
+      // refetch
+      refetch();
+    }
   };
+
   return (
     <>
       {!isLoading && (
         <span className="fw-600 cartAddBtn">
           <span
-            onClick={(event) => handleQuantity(event)}
+            onClick={() => handleQuantity(item.quantity - 1)}
             className="decreaseBtn"
             id="decrease"
           >
             -
           </span>
-          <span className="itemAmount ">{quantity}</span>
+          <span className="itemAmount ">{item.quantity}</span>
           <span
-            onClick={(event) => handleQuantity(event)}
+            onClick={() => handleQuantity(item.quantity + 1)}
             className="increaseBtn"
             id="increase"
           >

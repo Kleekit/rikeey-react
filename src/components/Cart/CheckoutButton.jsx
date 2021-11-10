@@ -19,33 +19,19 @@ const useStyles = makeStyles({
 export default function CheckoutButton() {
   const classes = useStyles();
 
-  const user = useQuery("verifyUser", getUser);
-
-  const { isLoading, mutateAsync } = useMutation((payload) =>
-    register(payload)
-  );
-
-  const checkoutUser = async () => {
-    const sharedPreference = getOrStoreId();
-    const user = await mutateAsync({ sharedPreference });
-    // console.log({ user });
-    if (user.status) {
-      getOrStoreId(user.body.sharedPreference);
-      window.location.href = user.body.pay;
-    }
-  };
+  const { isLoading, data } = useQuery("verifyUser", getUser);
 
   return (
     <div className={classes.root}>
       {!isLoading ? (
         <>
-          {user.data && user.data.status ? (
-            <Button
-              onClick={checkoutUser}
+          {data && data.status ? (
+            <Link
+              to="/checkout/payment"
               className="d-flex ms-auto py-3 justify-content-center me-3 w-80 br-2 submitBtn"
             >
               Checkout
-            </Button>
+            </Link>
           ) : (
             <Link
               to="/checkout"

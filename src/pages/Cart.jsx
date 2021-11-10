@@ -48,6 +48,13 @@ export default function Cart() {
   if (isError) {
     return <h3>Error....</h3>;
   }
+  let overallAllTotal = 0;
+
+  if (data && data.status) {
+    for (let item of data.body) {
+      overallAllTotal += item.price * item.quantity;
+    }
+  }
 
   const calTotal = () => {
     const total = data.body.reduce((total, item) => item.price + total, 0);
@@ -82,7 +89,7 @@ export default function Cart() {
         <div className="total-sec  mt-5 ms-auto">
           <div className="cart-total mb-5 d-flex ps-5 pe-2 pb-2 justify-content-between">
             <div>Total</div>
-            <div>$ {total}</div>
+            <div>$ {overallAllTotal}</div>
           </div>
           <Link to="/shop">
             <div className="d-flex  justify-content-end pe-4 fs-lgr red">
