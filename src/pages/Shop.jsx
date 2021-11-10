@@ -116,14 +116,14 @@ function Shop() {
           </div>
         </ShopSideBar>
         <Hidden mdDown>
-          <Grid items xs={12} sm={12} md={3} className="filter-col pe-0">
+          <Grid item={true} xs={12} sm={12} md={3} className="filter-col pe-0">
             <div className="filter-content fs-large pb-5 fw-500 ">
               {/* <FilterTop /> */}
               <FilterBottom />
             </div>
           </Grid>
         </Hidden>
-        <Grid items xs={12} sm={12} md={9} className="shop-catalog ">
+        <Grid item={true} xs={12} sm={12} md={9} className="shop-catalog ">
           {isLoading ? (
             <h3>loading....</h3>
           ) : (

@@ -30,6 +30,7 @@ export default function Details(props) {
     <CustomContainer {...customConfig}>
       <ProductDetails
         displayImage={item.displayImage.url}
+        item={item}
         alt={item.name}
         title={item.title}
         price={item.price}

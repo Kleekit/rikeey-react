@@ -72,12 +72,12 @@ function NavBar() {
           alignItems="center"
           className={clsx("bg-nav navigation fixed-top")}
         >
-          <Grid items sm={2} md={2}>
+          <Grid item={true} sm={2} md={2}>
             <Link className="logo-container d-block" to="/">
               <RikeeyLogo />
             </Link>
           </Grid>
-          <Grid className="menuContainer menuLink" items sm={4} md={3}>
+          <Grid className="menuContainer menuLink" item={true} sm={4} md={3}>
             <Link to="/">Home</Link>
             <Link to="/shop">Shop</Link>
             <Badge
@@ -96,7 +96,7 @@ function NavBar() {
               </Link>
             </Badge>
           </Grid>
-          <Grid items sm={2} md={2}>
+          <Grid item={true} sm={2} md={2}>
             <div className="input-group search-nav">
               <label className="search-nav-label my-auto me-2">
                 <SearchIcon fontSize="large" />

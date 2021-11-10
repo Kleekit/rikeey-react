@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Divider } from "@mui/material";
 import { useMutation } from "react-query";
 import { makeStyles } from "@material-ui/styles";
-import { removeItemFormCart } from "../../methods/cart.method";
+import { changeQuantity, removeItemFormCart } from "../../methods/cart.method";
 
 const useStyles = makeStyles({
   root: {
@@ -116,6 +116,7 @@ export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
       setQuantity(quantity + 1);
       setTotal(newTotal);
     }
+    // return quantity;
   };
   const decreaseQuantity = () => {
     if (quantity > 1) {
@@ -123,12 +124,13 @@ export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
       setQuantity(quantity - 1);
       setTotal(newTotal);
     }
-    // calTotal();
+    // return quantity;
   };
   const handleRemoveItem = async () => {
     const payload = {
-      _id: item._id,
+      cartItemId: item._id,
     };
+    console.log(payload);
     const res = await mutateAsync(payload);
     if (res.status) {
       refetch();
@@ -140,7 +142,11 @@ export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
         <div className="w-40 cart-br p-3 d-flex">
           <div className="row w-100 mx-0 px-4">
             <div className="col-md-6 h-75 itemImgContainer text-center p-0 my-auto">
-              <img className="itemImg w-80 h-100" src={item.productId} alt="" />
+              <img
+                className="itemImg w-80 h-100"
+                src={item.productId.displayImage.url}
+                alt=""
+              />
             </div>
             <div className="col-md-6 p-0 my-auto text-center ">
               {item.productName}
@@ -151,15 +157,12 @@ export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
           <div className="smCartQuantity cart-br">
             <div className="smCartTitle mdUp">Quantity</div>
             <div className="text-center m-auto">
-              <span className="fw-600 cartAddBtn">
-                <span onClick={decreaseQuantity} className="decreaseBtn">
-                  -
-                </span>
-                <span className="itemAmount ">{quantity}</span>
-                <span onClick={increaseQuantity} className="increaseBtn">
-                  +
-                </span>
-              </span>
+              <ChangeQuantity
+                decreaseQuantity={decreaseQuantity}
+                quantity={quantity}
+                increaseQuantity={increaseQuantity}
+                _id={item._id}
+              />
               {!isLoading ? (
                 <div
                   onClick={handleRemoveItem}
@@ -186,3 +189,49 @@ export default function CartItem({ item, refetch, setTotal, total, calTotal }) {
     </div>
   );
 }
+
+const ChangeQuantity = ({
+  decreaseQuantity,
+  quantity,
+  increaseQuantity,
+  _id,
+}) => {
+  const { mutateAsync, isLoading } = useMutation((item) =>
+    changeQuantity(item)
+  );
+
+  const handleQuantity = async ({ target: { id } }) => {
+    //check which button was clicked
+    //increase or decrease
+    id == "decrease" ? decreaseQuantity() : increaseQuantity();
+    // call the endpoint
+    const body = {
+      _id,
+      quantity,
+    };
+    await mutateAsync(body);
+  };
+  return (
+    <>
+      {!isLoading && (
+        <span className="fw-600 cartAddBtn">
+          <span
+            onClick={(event) => handleQuantity(event)}
+            className="decreaseBtn"
+            id="decrease"
+          >
+            -
+          </span>
+          <span className="itemAmount ">{quantity}</span>
+          <span
+            onClick={(event) => handleQuantity(event)}
+            className="increaseBtn"
+            id="increase"
+          >
+            +
+          </span>
+        </span>
+      )}
+    </>
+  );
+};

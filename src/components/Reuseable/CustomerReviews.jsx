@@ -39,7 +39,7 @@ export default function CustomerReviews() {
   const [value] = React.useState(2.5);
 
   return (
-    <Grid items xs={12} md={5} className={classes.root}>
+    <Grid item={true} xs={12} md={5} className={classes.root}>
       <div className="customer d-flex align-items-center">
         <div className="customerImg"></div>
         <div className="customerInfo">

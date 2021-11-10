@@ -3,8 +3,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Hidden } from "@mui/material";
 import ShopItem from "./ShopItem";
-// import { FaCircle } from "react-icons/fa";
-// import { useMutation, useQuery } from "react-query";
+
 // import { getProduct } from "../../methods/product.method";
 // import { getOrStoreId } from "../../helpers/getOrStore.helper";
 

@@ -40,7 +40,7 @@ export default function MoreCatalog() {
   return (
     <div className={classes.root}>
       <Grid container justifyContent="space-between">
-        <Grid items xs={12} md={2} className="containerCatalogItem">
+        <Grid item={true} xs={12} md={2} className="containerCatalogItem">
           <ShopItem
             className={"catalogItem"}
             link={"/shop/details"}
@@ -49,7 +49,7 @@ export default function MoreCatalog() {
             price={"price"}
           />
         </Grid>
-        <Grid items xs={12} md={2} className="containerCatalogItem">
+        <Grid item={true} xs={12} md={2} className="containerCatalogItem">
           <ShopItem
             className={"catalogItem"}
             link={"/shop/details"}
@@ -58,7 +58,7 @@ export default function MoreCatalog() {
             price={"price"}
           />
         </Grid>
-        <Grid items xs={12} md={2} className="containerCatalogItem">
+        <Grid item={true} xs={12} md={2} className="containerCatalogItem">
           <ShopItem
             className={"catalogItem"}
             link={"/shop/details"}
@@ -67,7 +67,7 @@ export default function MoreCatalog() {
             price={"price"}
           />
         </Grid>
-        <Grid items xs={12} md={2} className="containerCatalogItem">
+        <Grid item={true} xs={12} md={2} className="containerCatalogItem">
           <ShopItem
             className={"catalogItem"}
             link={"/shop/details"}

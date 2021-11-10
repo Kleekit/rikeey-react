@@ -45,9 +45,9 @@ function Footer() {
   return (
     <footer className={classes.root}>
       <Grid container justifyContent="center">
-        <Grid items xs={12} sm={11} md={11}>
+        <Grid item={true} xs={12} sm={11} md={11}>
           <Grid container justifyContent="space-between" className="mt-3">
-            <Grid items xs={5} sm={5} md={5}>
+            <Grid item={true} xs={5} sm={5} md={5}>
               <Link className="footerLogo d-block" to="/">
                 <RikeeyLogo />
               </Link>
@@ -65,7 +65,7 @@ function Footer() {
               </div>
             </Grid>
 
-            <Grid items xs={5} sm={5} md={5} className="d-flex">
+            <Grid item={true} xs={5} sm={5} md={5} className="d-flex">
               <div className="mx-s-auto ">
                 <div className="email-text-align">
                   <p className="fw-600 signup-align me-2 mb-3">

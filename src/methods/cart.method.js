@@ -15,7 +15,15 @@ export const getCartItem = async (body) => {
 };
 
 export const removeItemFormCart = async (body) => {
-  let { data } = await apiCaller.put("/item", body);
+  console.log(body);
+  let { data } = await apiCaller.delete(`/item/${body.cartItemId}`);
+
+  return data;
+};
+export const changeQuantity = async (body) => {
+  console.log(body);
+  let { data } = await apiCaller.put(`/item`, body);
+  console.log(data);
 
   return data;
 };

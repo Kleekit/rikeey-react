@@ -129,7 +129,7 @@ function LandingPage() {
           justifyContent="center"
           className="catalog-image-container"
         >
-          <Grid items xs={12} sm={4} md={4} className="men-top">
+          <Grid item={true} xs={12} sm={4} md={4} className="men-top">
             <img
               alt=""
               src="./images/men-top.png"
@@ -139,7 +139,7 @@ function LandingPage() {
               <div className="catalog-text-bg">Men Top</div>
             </Link>
           </Grid>
-          <Grid items xs={12} sm={4} md={4} className="women-catalog">
+          <Grid item={true} xs={12} sm={4} md={4} className="women-catalog">
             <div className="d-flex mx-0 women-short">
               <img
                 alt=""
@@ -161,7 +161,7 @@ function LandingPage() {
               </Link>
             </div>
           </Grid>
-          <Grid items xs={12} sm={4} md={4} className="men-bottom">
+          <Grid item={true} xs={12} sm={4} md={4} className="men-bottom">
             <img
               alt=""
               src="./images/men-button.png"

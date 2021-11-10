@@ -1,4 +1,4 @@
-module.exports.generateRandomString = function ({ name, length }) {
+export const generateRandomString = function ({ name, length }) {
   var result = "";
   var characters = `${name}ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`;
   var charactersLength = characters.length;

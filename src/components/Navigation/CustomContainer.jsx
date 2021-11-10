@@ -7,6 +7,7 @@ import "../LandingPage/landing.css";
 import "../LandingPage/queries.css";
 // import "";
 import { getOrStoreId } from "../../helpers/getOrStore.helper";
+import { generateRandomString } from "../../helpers/generateRandomString";
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +38,8 @@ function CustomContainer(props) {
   const LookForId = () => {
     const id = getOrStoreId();
     if (!id) {
-      getOrStoreId("cacacascs");
+      const t = new Date().getTime().toString();
+      getOrStoreId(generateRandomString({ name: t, length: 12 }));
     }
   };
 

@@ -161,7 +161,7 @@ export default function ProductDetails(props) {
       price: item.price,
       sharedPreference: getOrStoreId(),
     };
-    console.log(payload);
+
     const res = await mutateAsync(payload);
     // console.log({ va });
     if (res.status) {
@@ -194,7 +194,7 @@ export default function ProductDetails(props) {
 
   return (
     <Grid container justifyContent="space-between" className={classes.root}>
-      <Grid items xs={12} sm={6} md={6} className="gridShopItem">
+      <Grid item={true} xs={12} sm={6} md={6} className="gridShopItem">
         <div className="shopItemContainer">
           <div className="itemCoverImg">
             <img
@@ -204,13 +204,13 @@ export default function ProductDetails(props) {
             />
           </div>
           <Grid container justifyContent="space-between" className="subCover">
-            <Grid items xs={3} md={3} className="subCoverImg"></Grid>
-            <Grid items xs={3} md={3} className="subCoverImg"></Grid>
-            <Grid items xs={3} md={3} className="subCoverImg"></Grid>
+            <Grid item={true} xs={3} md={3} className="subCoverImg"></Grid>
+            <Grid item={true} xs={3} md={3} className="subCoverImg"></Grid>
+            <Grid item={true} xs={3} md={3} className="subCoverImg"></Grid>
           </Grid>
         </div>
       </Grid>
-      <Grid items xs={12} sm={5} md={5} className="shopItemDetails">
+      <Grid item={true} xs={12} sm={5} md={5} className="shopItemDetails">
         <h1 className="itemName mb-4">{props.title}</h1>
         <h3 className="itemPrice fw-600 mb-4">
           # {props.price} / $ {props.price / 20}
