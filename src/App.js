@@ -16,6 +16,8 @@ function App() {
     <Switch location={location}>
       <Route path="/" exact component={LandingPage} />
       <Route path="/shop" exact component={Shop} />
+      <Route path="/shop/:category" exact component={Shop} />
+      <Route path="/shop/:category/:subCategory" exact component={Shop} />
       <Route path="/shop/details" exact component={Details} />
       <Route path="/cart" exact component={Cart} />
       <Route path="/checkout" exact component={Checkout} />
