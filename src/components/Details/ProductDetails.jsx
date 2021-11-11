@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
-import { Divider, Grid, Rating } from "@mui/material";
+import { Paper, Divider, Grid, Rating } from "@mui/material";
 // import { Link } from "react-router-dom";
 // import { HashLink } from "react-router-hash-link";
 import { useMutation } from "react-query";
@@ -154,6 +154,19 @@ export default function ProductDetails(props) {
   const history = useHistory();
   const { mutateAsync, isLoading } = useMutation((item) => addItemToCart(item));
 
+  const handleAddToCartClick = async () => {
+    const payload = {
+      productId: item._id,
+      productName: item.name,
+      price: item.price,
+      sharedPreference: getOrStoreId(),
+    };
+    const res = await mutateAsync(payload);
+    if (res.status) {
+      window.location.reload();
+    }
+  };
+
   const handleAddItemToCart = async () => {
     const payload = {
       productId: item._id,
@@ -168,8 +181,6 @@ export default function ProductDetails(props) {
       history.replace("/cart");
     }
   };
-
-  const [count, setCount] = React.useState(0);
 
   const [value] = React.useState(2.5);
 
@@ -187,10 +198,6 @@ export default function ProductDetails(props) {
   // const selectSize = () => {
   //   document.getElementById("sizePicker").classList.toggle("sizeSelected");
   // };
-
-  // const { isLoading, isError, data } = useQuery("addItemToCart", addItemToCart);
-
-  // console.log({ isLoading, isError, data, error });
 
   return (
     <Grid container justifyContent="space-between" className={classes.root}>
@@ -211,7 +218,7 @@ export default function ProductDetails(props) {
         </div>
       </Grid>
       <Grid item={true} xs={12} sm={5} md={5} className="shopItemDetails">
-        <h1 className="itemName mb-4">{props.title}</h1>
+        <h1 className="itemName mb-4">{props.name}</h1>
         <h3 className="itemPrice fw-600 mb-4">
           # {props.price} / $ {props.price / 20}
         </h3>
@@ -253,23 +260,22 @@ export default function ProductDetails(props) {
             ))}
           </Paper> */}
         {/* {item.sizes.length > 0 && <h3 className="selectHeader">Size</h3>}
-          {item.sizes.map((size) => (
-            <Paper  elevation={3} className="paperSizePicker ">
-              <span
-                onClick={selectSize}
-                id="sizePicker"
-                className="cursor-pointer ms-4"
-              >
-                {size}
-              </span>
-            </Paper>
+          {item.sizes.map((size) => ( */}
+        <Paper elevation={3} className="paperSizePicker ">
+          <span
+            // onClick={selectSize}
+            id="sizePicker"
+            className="cursor-pointer ms-4"
+          >
+            {props.size}
+          </span>
+        </Paper>
+        {/*
           ))} */}
         <div className="d-flex">
           <span
             type="button"
-            onClick={() => {
-              setCount(count + 1);
-            }}
+            onClick={handleAddToCartClick}
             className="addToCart fw-700 me-4"
           >
             Add to Cart

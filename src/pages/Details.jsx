@@ -20,6 +20,7 @@ const useStyles = makeStyles({
 
 export default function Details(props) {
   const item = props.location.state;
+  console.log(item);
   const classes = useStyles();
 
   const customConfig = {
@@ -32,9 +33,10 @@ export default function Details(props) {
         displayImage={item.displayImage.url}
         item={item}
         alt={item.name}
-        title={item.title}
+        name={item.name}
         price={item.price}
         description={item.description}
+        size={item.sizes}
       />
       <div className="more-catalog">
         <h2 className="header text-center">Something Light</h2>

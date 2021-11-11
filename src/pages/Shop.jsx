@@ -109,33 +109,40 @@ function Shop() {
 
   return (
     <CustomContainer {...customConfig}>
-      <Grid container justifyContent="space-between">
-        <ShopSideBar openFilter={<OpenFIlter />}>
-          <div className={classes.root}>
-            <FilterTop />
-          </div>
-        </ShopSideBar>
-        <Hidden mdDown>
-          <Grid item={true} xs={12} sm={12} md={3} className="filter-col pe-0">
-            <div className="filter-content fs-large pb-5 fw-500 ">
-              {/* <FilterTop /> */}
-              <FilterBottom />
+      {isLoading ? (
+        <h3>loading....</h3>
+      ) : data && data.status ? (
+        <Grid container justifyContent="space-between">
+          <ShopSideBar openFilter={<OpenFIlter />}>
+            <div className={classes.root}>
+              <FilterTop />
+            </div>
+          </ShopSideBar>
+          <Hidden mdDown>
+            <Grid
+              item={true}
+              xs={12}
+              sm={12}
+              md={3}
+              className="filter-col pe-0"
+            >
+              <div className="filter-content fs-large pb-5 fw-500 ">
+                {/* <FilterTop /> */}
+                <FilterBottom />
+              </div>
+            </Grid>
+          </Hidden>
+          <Grid item={true} xs={12} sm={12} md={9} className="shop-catalog ">
+            <Category categoryTitle={"Tega's Shoes"} items={data} />
+
+            <div className="d-l-none pagination d-flex justify-content-center">
+              <Hidden mdUp>
+                <Pagination count={10} variant="outlined" color="primary" />
+              </Hidden>
             </div>
           </Grid>
-        </Hidden>
-        <Grid item={true} xs={12} sm={12} md={9} className="shop-catalog ">
-          {isLoading ? (
-            <h3>loading....</h3>
-          ) : (
-            <Category categoryTitle={"Tega's Shoes"} items={data} />
-          )}
-          <div className="d-l-none pagination d-flex justify-content-center">
-            <Hidden mdUp>
-              <Pagination count={10} variant="outlined" color="primary" />
-            </Hidden>
-          </div>
         </Grid>
-      </Grid>
+      ) : null}
     </CustomContainer>
   );
 }

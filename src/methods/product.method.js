@@ -8,6 +8,7 @@ import { apiCaller } from "../apiCaller/apicaller";
 
 export const getProduct = async (body) => {
   let { data } = await apiCaller.get("/products");
+  console.log(data);
   return data;
 };
 

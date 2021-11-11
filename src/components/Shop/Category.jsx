@@ -39,26 +39,39 @@ const useStyles = makeStyles({
 
 export default function Category(props) {
   const classes = useStyles();
-  const categoryTitle = props.categoryTitle;
+  // const categoryTitle = props.categoryTitle;
   const { body } = props.items;
+  console.log(body);
 
   return (
     <div className={classes.root}>
-      <Hidden mdDown>
-        <h3 className="catalogCategory px-4 mb-4">{categoryTitle}</h3>
-      </Hidden>
+      {body.map((item) => (
+        // <span >
+        <Hidden key={item.subCategory} mdDown>
+          <h3 className="catalogCategory px-4 mb-4">{item.subCategory}</h3>
+        </Hidden>
+      ))}
       <div className={"shopRow row"}>
-        {body.map((item, itemIdx) => (
-          <div className="shop-col" key={itemIdx + Number(item.price)}>
-            <ShopItem
-              className="shopItemImg"
-              link={{ state: item, pathname: "/shop/details" }}
-              imgSrc={item.displayImage.url}
-              title={item.productName}
-              price={item.price}
-            />
-          </div>
-        ))}
+        {body.subCategory
+          ? body.map((item, itemIdx) => (
+              <div className="shop-col" key={itemIdx + Number(item.price)}>
+                <ShopItem
+                  className="shopItemImg"
+                  link={{ state: item, pathname: "/shop/details" }}
+                  imgSrc={item.displayImage.url}
+                  name={item.name}
+                  price={item.price}
+                  colors={
+                    item.colors.length > 0 ? (
+                      <p className="fs-sm mb-m8">
+                        Available in {item.colors} colors
+                      </p>
+                    ) : null
+                  }
+                />
+              </div>
+            ))
+          : null}
       </div>
     </div>
   );
