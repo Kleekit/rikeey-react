@@ -6,6 +6,8 @@ import { Paper, Divider, Grid } from "@mui/material";
 // import { HashLink } from "react-router-hash-link";
 import { useMutation } from "react-query";
 // import CommentDialog from "./CommentDialog";
+// import { useQuery } from "react-query";
+// getCartItem,
 import { addItemToCart } from "../../methods/cart.method";
 import { getOrStoreId } from "../../helpers/getOrStore.helper";
 
@@ -133,17 +135,17 @@ const useStyles = makeStyles({
         },
       },
     },
-  },
-  "& .subCoverImg": {
-    flexGrow: 0,
-    maxWidth: "33.333%",
-    flexBasis: "33.333%",
-    padding: "0 2%",
-    "@media (max-width: 960px)": {
-      maxWidth: "80%",
-      flexBasis: "80%",
-      margin: "auto",
-      marginBottom: "4rem",
+    "& .subCoverImg": {
+      flexGrow: 0,
+      maxWidth: "33.333%",
+      flexBasis: "33.333%",
+      padding: "0 2%",
+      "@media (max-width: 960px)": {
+        maxWidth: "80%",
+        flexBasis: "80%",
+        margin: "auto",
+        marginBottom: "4rem",
+      },
     },
   },
 });
@@ -154,6 +156,28 @@ export default function ProductDetails(props) {
   const classes = useStyles();
   const history = useHistory();
   const { mutateAsync, isLoading } = useMutation((item) => addItemToCart(item));
+
+  // const cart = useQuery("getCartItem", getCartItem);
+
+  // if (cart.isLoading) {
+  //   return "Loading.......";
+  // }
+  // let cartItem;
+  // if (cart.data && cart.data.status) {
+  //   cartItem = cart.data.body;
+  // }
+
+  // const addedToCart = cartItem.filter(
+  //   (cart) => cart.productId._id === item._id
+  // );
+  // console.log(addedToCart[0].productId._id);
+  // console.log(item._id);
+
+  // const removeCartBtn = () => {
+  //   addedToCart > 0 && addedToCart[0].productId._id
+  //     ? document.getElementsByClassName("cartBtn").addClass("d-none")
+  //     : null;
+  // };
 
   const handleAddToCartClick = async () => {
     const payload = {
@@ -219,7 +243,10 @@ export default function ProductDetails(props) {
           </div>
           <div className="subCover row">
             {allImages.map((items) => (
-              <div className="subCoverImg col-4">
+              <div
+                className="subCoverImg col-4"
+                key={`${props.displayAlt} ${items.originalname}`}
+              >
                 <img
                   className="w-100 h-100"
                   src={items.url}
@@ -271,7 +298,11 @@ export default function ProductDetails(props) {
             <h3 className="selectHeader">Size</h3>
             <Paper elevation={3} className="paperSizePicker ">
               {props.size.map((item) => (
-                <span id="sizePicker" className="cursor-pointer ms-4">
+                <span
+                  key={`${item}_1`}
+                  id="sizePicker"
+                  className="cursor-pointer ms-4"
+                >
                   {item}
                 </span>
               ))}
@@ -281,7 +312,7 @@ export default function ProductDetails(props) {
         {isLoading ? (
           <h4>abeg wait</h4>
         ) : (
-          <div className="d-flex">
+          <div className="d-flex cartBtn">
             <span
               type="button"
               onClick={handleAddToCartClick}

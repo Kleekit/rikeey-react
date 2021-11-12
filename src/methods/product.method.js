@@ -15,7 +15,7 @@ export const getProduct = async () => {
 export const getProductDetails = async ({ queryKey }) => {
   const productId = queryKey[1].productId;
   let { data } = await apiCaller.get(`/product/${productId}`);
-  console.log(data);
+  // console.log(data);
   return data;
 };
 

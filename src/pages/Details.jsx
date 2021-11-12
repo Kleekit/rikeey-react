@@ -48,7 +48,7 @@ export default function Details(props) {
     item = data.body;
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <CustomContainer {...customConfig}>

@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import {
   Badge,
-  Button,
+  // Button,
   // Collapse,
   Drawer,
   Hidden,
-  InputBase,
+  // InputBase,
   List,
   ListItem,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseIcon from "@mui/icons-material/CloseRounded";
 // import Notifications from "@mui/icons-material/NotificationsNoneRounded";
