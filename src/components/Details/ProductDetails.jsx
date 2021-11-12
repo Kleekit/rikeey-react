@@ -162,10 +162,10 @@ export default function ProductDetails(props) {
       price: item.price,
       sharedPreference: getOrStoreId(),
     };
-    const res = await mutateAsync(payload);
-    if (res.status) {
-      window.location.reload();
-    }
+    await mutateAsync(payload);
+    // if (res.status) {
+    //   window.location.reload();
+    // }
   };
 
   const handleAddItemToCart = async () => {

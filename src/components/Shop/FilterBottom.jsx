@@ -9,6 +9,13 @@ export default function FilterBottom() {
 
   return (
     <span>
+      <div className="filterBarLinks mx-auto mt-4 w-60">
+        <Link to={`/shop`}>
+          <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">
+            All Products
+          </div>
+        </Link>
+      </div>
       {data &&
         data.status &&
         data.body.map((body) => (
