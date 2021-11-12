@@ -3,7 +3,7 @@ import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import ArrowLeft from "@mui/icons-material/KeyboardArrowLeftRounded";
 import { Link } from "react-router-dom";
-import { useMutation, useQueries, useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { getUser, register } from "../methods/cart.method";
 import { getOrStoreId } from "../helpers/getOrStore.helper";
 
@@ -44,7 +44,7 @@ function Payment() {
     customStyle: `${classes.root} pt-4 px-5 row `,
   };
 
-  const { isLoading, data, isError } = useQuery("getUser", getUser);
+  const { isLoading, data } = useQuery("getUser", getUser);
 
   return (
     <CustomContainer {...customConfig}>
@@ -172,9 +172,7 @@ function Payment() {
 }
 
 const CheckoutButton = () => {
-  const { isLoading, mutateAsync } = useMutation((payload) =>
-    register(payload)
-  );
+  const { mutateAsync } = useMutation((payload) => register(payload));
 
   const checkoutUser = async () => {
     const sharedPreference = getOrStoreId();

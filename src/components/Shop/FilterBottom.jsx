@@ -9,38 +9,42 @@ export default function FilterBottom() {
 
   return (
     <span>
-      <div className="filterBarLinks mx-auto mt-4 w-60">
-        <Link to={`/shop`}>
-          <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">
-            All Products
-          </div>
-        </Link>
-      </div>
-      {data &&
-        data.status &&
-        data.body.map((body) => (
-          <div
-            className="filterBarLinks mx-auto w-60"
-            key={body.category.categoryName}
-          >
-            <Link to={`/shop/${body.category.categoryName}`}>
+      {data && data.status ? (
+        <span>
+          <div className="filterBarLinks mx-auto mt-4 w-60">
+            <Link to={`/shop`}>
               <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">
-                {body.category.categoryName}
+                All Products
               </div>
             </Link>
-            <div className="subCat mt-3">
-              {body.subCategories.length > 0 &&
-                body.subCategories.map((subCat) => (
-                  <Link
-                    to={`/shop/${body.category.categoryName}/${subCat.subCategoryName}`}
-                    key={subCat.subCategoryName}
-                  >
-                    <h4 className="mb-3 ms-2">{subCat.subCategoryName}</h4>
-                  </Link>
-                ))}
-            </div>
           </div>
-        ))}
+          {data.body.map((body) => (
+            <div
+              className="filterBarLinks mx-auto w-60"
+              key={body.category.categoryName}
+            >
+              <Link to={`/shop/${body.category.categoryName}`}>
+                <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">
+                  {body.category.categoryName}
+                </div>
+              </Link>
+              <div className="subCat mt-3">
+                {body.subCategories.length > 0 &&
+                  body.subCategories.map((subCat) => (
+                    <Link
+                      to={`/shop/${body.category.categoryName}/${subCat.subCategoryName}`}
+                      key={subCat.subCategoryName}
+                    >
+                      <h4 className="mb-3 ms-2">{subCat.subCategoryName}</h4>
+                    </Link>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </span>
+      ) : (
+        <h2>abeg wait small</h2>
+      )}
     </span>
   );
 }

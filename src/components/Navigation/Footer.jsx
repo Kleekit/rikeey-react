@@ -14,7 +14,7 @@ import RightIcon from "@mui/icons-material/KeyboardArrowRightRounded";
 const useStyles = makeStyles({
   root: {
     padding: "5rem 2rem",
-    fontSize: "1.5rem",
+    fontSize: "1.8rem",
     "& .footerLogo": {
       width: "6rem",
     },

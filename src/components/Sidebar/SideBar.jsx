@@ -19,6 +19,8 @@ import ShoppingCart from "@mui/icons-material/ShoppingCartOutlined";
 // import CollapseIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 // import ExpandIcon from "@mui/icons-material/KeyboardArrowRightRounded";
 import clsx from "clsx";
+import { useQuery } from "react-query";
+import { getCartItem } from "../../methods/cart.method";
 // import Divider from "@mui/material/Divider";
 
 const useStyles = makeStyles({
@@ -153,9 +155,11 @@ const useStyles = makeStyles({
 export default function SideBar() {
   const classes = useStyles();
 
-  const [count, setCount] = React.useState(0);
+  // const [count, setCount] = useState(0);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const { data } = useQuery("getCartItem", getCartItem);
 
   // const [openWomen, setOpenWomen] = React.useState(true);
 
@@ -194,14 +198,13 @@ export default function SideBar() {
             }}
           >
             <div className="navigationContainer d-flex justify-content-between align-items-center">
-              <Badge overlap="circular" color="primary" badgeContent={count}>
+              <Badge
+                overlap="circular"
+                color="primary"
+                badgeContent={data ? data.body.length : 0}
+              >
                 <Link to="/cart">
-                  <ShoppingCart
-                    onClick={() => {
-                      setCount(count + 1);
-                    }}
-                    className="navIcon cursor-pointer"
-                  />
+                  <ShoppingCart className="navIcon cursor-pointer" />
                 </Link>
               </Badge>
               <CloseIcon
@@ -212,12 +215,12 @@ export default function SideBar() {
             <div></div>
           </ListItem>
           <ListItem>
-            <div className=" searchBar" component="form">
+            {/* <div className=" searchBar" component="form">
               <InputBase className="searchInput w-100" placeholder="Search" />
               <Button className="customButton">
                 <SearchIcon className="searchIcon" />
               </Button>
-            </div>
+            </div> */}
             <div className="menuContainer">
               <div className="menuItem">
                 <Link className="menuItemHeader link" to="/">

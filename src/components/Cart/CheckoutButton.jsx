@@ -1,9 +1,9 @@
 import React from "react";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
-import { getUser, register } from "../../methods/cart.method";
-import { getOrStoreId } from "../../helpers/getOrStore.helper";
+import { useQuery } from "react-query";
+import { getUser } from "../../methods/cart.method";
+// import { getOrStoreId } from "../../helpers/getOrStore.helper";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({

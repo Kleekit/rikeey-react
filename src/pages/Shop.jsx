@@ -1,14 +1,14 @@
 import React from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Hidden, Pagination } from "@mui/material";
+import { Grid, Hidden } from "@mui/material";
 import ShopSideBar from "../components/Shop/ShopSidebar";
 import OpenFIlter from "../components/Shop/OpenFIlter";
-import FilterTop from "../components/Shop/FilterTop";
+// import FilterTop from "../components/Shop/FilterTop";
 import FilterBottom from "../components/Shop/FilterBottom";
 import Category from "../components/Shop/Category";
 import { useQuery } from "react-query";
-import { getCategory, getProduct } from "../methods/product.method";
+import { getProduct } from "../methods/product.method";
 import { useParams } from "react-router";
 // import { getOrStoreId } from "../helpers/getOrStore.helper";
 // import { Link } from "react-router-dom";
@@ -100,12 +100,12 @@ function Shop() {
   const classes = useStyles();
   const shopParams = useParams();
 
-  console.log({ shopParams });
+  // console.log({ shopParams });
   const customConfig = {
     customStyle: `${classes.root} pt-4 d-flex`,
   };
 
-  const { filterData } = useQuery("getCategory", getCategory);
+  // const { filterData } = useQuery("getCategory", getCategory);
 
   const { isLoading, isError, data } = useQuery("getProduct", getProduct);
   // const items = data;
@@ -149,7 +149,8 @@ function Shop() {
         <Grid container justifyContent="space-between">
           <ShopSideBar openFilter={<OpenFIlter />}>
             <div className={classes.root}>
-              <FilterTop />
+              {/* <FilterTop /> */}
+              <FilterBottom />
             </div>
           </ShopSideBar>
           <Hidden mdDown>
@@ -168,11 +169,11 @@ function Shop() {
           </Hidden>
           <Grid item={true} xs={12} sm={12} md={9} className="shop-catalog ">
             <Category items={allProducts} displayCategory={displayCategory} />
-            <div className="d-l-none pagination d-flex justify-content-center">
+            {/* <div className="d-l-none pagination d-flex justify-content-center">
               <Hidden mdUp>
                 <Pagination count={10} variant="outlined" color="primary" />
               </Hidden>
-            </div>
+            </div> */}
           </Grid>
         </Grid>
       ) : null}

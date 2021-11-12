@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
-import { Paper, Divider, Grid, Rating } from "@mui/material";
+import { Paper, Divider, Grid } from "@mui/material";
 // import { Link } from "react-router-dom";
 // import { HashLink } from "react-router-hash-link";
 import { useMutation } from "react-query";

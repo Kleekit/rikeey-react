@@ -41,6 +41,9 @@ export default function MoreCatalog(productId, subCat) {
 
   const { isLoading, isError, data } = useQuery("getProduct", getProduct);
 
+  if (isError) {
+    return "bros error de";
+  }
   if (isLoading) {
     return "Loading.......";
   }
@@ -50,20 +53,15 @@ export default function MoreCatalog(productId, subCat) {
     item = data.body;
   }
 
-  // const item = data.body;
-  // console.log(item);
-
   const filteredProduct = item.filter(
-    (data) => (data.subCategory = subCat && data._id != productId)
+    (data) => (data.subCategory = subCat && data._id !== productId)
   );
-
-  console.log(filteredProduct);
 
   return (
     <div className={classes.root}>
       <div className="row ">
         {filteredProduct.map((item) => (
-          <div className="containerCatalogItem">
+          <div className="containerCatalogItem" key={item._id}>
             <ShopItem
               className={"catalogItem"}
               link={`/details/${item._id}`}

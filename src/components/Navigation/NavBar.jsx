@@ -85,15 +85,7 @@ function NavBar() {
               color="primary"
               badgeContent={data ? data.body.length : 0}
             >
-              <Link
-                // onClick={() => {
-                //   // setCount(count + 1);
-                //   getCartItems();
-                // }}
-                to="/cart"
-              >
-                Cart
-              </Link>
+              <Link to="/cart">Cart</Link>
             </Badge>
           </Grid>
           <Grid item={true} sm={2} md={2}>

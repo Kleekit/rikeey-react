@@ -7,7 +7,7 @@ import MoreCatalog from "../components/Details/MoreCatalog";
 import ProductDetails from "../components/Details/ProductDetails";
 import { useParams } from "react-router";
 import { useQuery } from "react-query";
-import { getProduct, getProductDetails } from "../methods/product.method";
+import { getProductDetails } from "../methods/product.method";
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +34,10 @@ export default function Details(props) {
     ["getProduct", { productId: productID.productId }],
     getProductDetails
   );
+
+  if (isError) {
+    return "bros error de.......";
+  }
 
   if (isLoading) {
     return "Loading.......";
