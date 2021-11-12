@@ -5,6 +5,7 @@ import { getCategory } from "../../methods/product.method";
 
 export default function FilterBottom() {
   const { data } = useQuery("getCategory", getCategory);
+  // const data = filterData;
 
   return (
     <span>

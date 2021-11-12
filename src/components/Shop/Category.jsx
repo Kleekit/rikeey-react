@@ -15,13 +15,11 @@ const useStyles = makeStyles({
       display: "flex",
     },
     "& .shop-col": {
-      flexGrow: 0,
-      maxWidth: "33.33333%",
-      flexBasis: "33.33333%",
+      flex: "0 0 auto",
+      width: "33.33333%",
       padding: "0 2%",
       "@media (max-width: 600px)": {
-        maxWidth: "50%",
-        flexBasis: "50%",
+        width: "50%",
       },
     },
     "& .shopItemImg": {
@@ -42,7 +40,7 @@ export default function Category({ items, displayCategory }) {
 
   // const categoryTitle = props.categoryTitle;
   // const { body } = props.items;
-  // console.log(body);
+  // console.log(items);
 
   return (
     <div className={classes.root}>
@@ -55,7 +53,7 @@ export default function Category({ items, displayCategory }) {
           <div className="shop-col" key={itemIdx + Number(item.price)}>
             <ShopItem
               className="shopItemImg"
-              link={{ state: item, pathname: "/shop/details" }}
+              link={`/details/${item._id}`}
               imgSrc={item.displayImage.url}
               name={item.name}
               price={item.price}

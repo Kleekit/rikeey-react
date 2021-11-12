@@ -5,7 +5,7 @@ import { Paper, Divider, Grid, Rating } from "@mui/material";
 // import { Link } from "react-router-dom";
 // import { HashLink } from "react-router-hash-link";
 import { useMutation } from "react-query";
-import CommentDialog from "./CommentDialog";
+// import CommentDialog from "./CommentDialog";
 import { addItemToCart } from "../../methods/cart.method";
 import { getOrStoreId } from "../../helpers/getOrStore.helper";
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
         },
         "& .subCoverImg": {
           height: "30vh",
-          border: "0.1rem solid #000",
+          // border: "0.1rem solid #000",
           "@media (max-width: 960px)": {
             height: "40vh",
           },
@@ -136,8 +136,9 @@ const useStyles = makeStyles({
   },
   "& .subCoverImg": {
     flexGrow: 0,
-    maxWidth: "30%",
-    flexBasis: "30%",
+    maxWidth: "33.333%",
+    flexBasis: "33.333%",
+    padding: "0 2%",
     "@media (max-width: 960px)": {
       maxWidth: "80%",
       flexBasis: "80%",
@@ -182,7 +183,13 @@ export default function ProductDetails(props) {
     }
   };
 
-  const [value] = React.useState(2.5);
+  // const [value] = React.useState(2.5);
+
+  const allImages = props.allImages;
+
+  // for (let i = 0; i < allImages.length; i++) {
+  //   const images = allImages[i];
+  // }
 
   // const selectColor = () => {
   //   document
@@ -207,14 +214,20 @@ export default function ProductDetails(props) {
             <img
               className="w-100 h-100"
               src={props.displayImage}
-              alt={props.name}
+              alt={props.displayAlt}
             />
           </div>
-          <Grid container justifyContent="space-between" className="subCover">
-            <Grid item={true} xs={3} md={3} className="subCoverImg"></Grid>
-            <Grid item={true} xs={3} md={3} className="subCoverImg"></Grid>
-            <Grid item={true} xs={3} md={3} className="subCoverImg"></Grid>
-          </Grid>
+          <div className="subCover row">
+            {allImages.map((items) => (
+              <div className="subCoverImg col-4">
+                <img
+                  className="w-100 h-100"
+                  src={items.url}
+                  alt={`${props.displayAlt} ${items.originalname}`}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </Grid>
       <Grid item={true} xs={12} sm={5} md={5} className="shopItemDetails">
@@ -222,66 +235,61 @@ export default function ProductDetails(props) {
         <h3 className="itemPrice fw-600 mb-4">
           # {props.price} / $ {props.price / 20}
         </h3>
-        <div className="itemStarReview mb-2 d-flex align-items-center">
+        {/* <div className="itemStarReview mb-2 d-flex align-items-center">
           <Rating
             name="customers-rating"
             value={value}
             precision={0.5}
             readOnly
           />
-          {/* <HashLink
+          <div className="ms-3">{value}</div>
+          // <HashLink
               to={{ state: item, pathname: "/shop/details#viewReviews" }}
               className="ms-4 viewReviewBtn"
             >
               View reviews
-            </HashLink> */}
+            </HashLink> 
         </div>
         <div className="itemStarReview d-flex align-items-center">
-          <span className="reviewCount">138 Reviews</span>
+          <span className="reviewCount">{props.reviews} Reviews</span>
           <CommentDialog />
-        </div>
+        </div> */}
         <Divider className="my-5" />
-        <div className="itemDescription  ">{props.description}</div>
+        <div className="itemDescription">{props.description}</div>
         <Divider className="my-5" />
-        {/* <h3 className="selectHeader">Colors</h3> */}
-        {/* <Paper elevation={3} className="paperColorPicker ">
-            {color.map((color) => (
-              <span
-                onClick={color.selectColor}
-                style={{ background: `${color.background}` }}
-                className="colorPicker cursor-pointer ms-4"
-                id="colorPicker"
-              >
-                <span
-                  id="colorPickerSelected"
-                  style={{ background: `${color.overlay}` }}
-                ></span>
-              </span>
-            ))}
-          </Paper> */}
-        {/* {item.sizes.length > 0 && <h3 className="selectHeader">Size</h3>}
-          {item.sizes.map((size) => ( */}
-        <Paper elevation={3} className="paperSizePicker ">
-          <span
-            // onClick={selectSize}
-            id="sizePicker"
-            className="cursor-pointer ms-4"
-          >
-            {props.size}
+        {/* <h3 className="selectHeader">Colors</h3>
+        <Paper elevation={3} className="paperColorPicker ">
+          <span className="colorPicker cursor-pointer ms-4" id="colorPicker">
+            <span
+              id="colorPickerSelected"
+              style={{ background: `${props.size}` }}
+            ></span>
           </span>
-        </Paper>
-        {/*
-          ))} */}
-        <div className="d-flex">
-          <span
-            type="button"
-            onClick={handleAddToCartClick}
-            className="addToCart fw-700 me-4"
-          >
-            Add to Cart
-          </span>
-
-          {!isLoading && (
+        </Paper> */}
+        {props.size.length > 0 ? (
+          <div>
+            <h3 className="selectHeader">Size</h3>
+            <Paper elevation={3} className="paperSizePicker ">
+              {props.size.map((item) => (
+                <span id="sizePicker" className="cursor-pointer ms-4">
+                  {item}
+                </span>
+              ))}
+            </Paper>
+          </div>
+        ) : null}
+        {isLoading ? (
+          <h4>abeg wait</h4>
+        ) : (
+          <div className="d-flex">
+            <span
+              type="button"
+              onClick={handleAddToCartClick}
+              className="addToCart fw-700 me-4"
+              id="addToCart"
+            >
+              Add to Cart
+            </span>
             <span
               type="button"
               onClick={handleAddItemToCart}
@@ -289,8 +297,8 @@ export default function ProductDetails(props) {
             >
               Buy Now
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </Grid>
     </Grid>
   );

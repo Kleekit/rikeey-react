@@ -3,8 +3,11 @@ import { makeStyles } from "@material-ui/styles";
 import { Divider } from "@mui/material";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import MoreCatalog from "../components/Details/MoreCatalog";
-import ViewDetails from "../components/Details/ViewDetails";
+// import ViewDetails from "../components/Details/ViewDetails";
 import ProductDetails from "../components/Details/ProductDetails";
+import { useParams } from "react-router";
+import { useQuery } from "react-query";
+import { getProduct, getProductDetails } from "../methods/product.method";
 
 const useStyles = makeStyles({
   root: {
@@ -19,35 +22,52 @@ const useStyles = makeStyles({
 });
 
 export default function Details(props) {
-  const item = props.location.state;
-  console.log(item);
   const classes = useStyles();
 
   const customConfig = {
     customStyle: `${classes.root}`,
   };
+  // query
+  const productID = useParams();
+
+  const { isLoading, isError, data } = useQuery(
+    ["getProduct", { productId: productID.productId }],
+    getProductDetails
+  );
+
+  if (isLoading) {
+    return "Loading.......";
+  }
+
+  let item;
+  if (data && data.status) {
+    item = data.body;
+  }
+
+  console.log(data);
 
   return (
     <CustomContainer {...customConfig}>
       <ProductDetails
-        displayImage={item.displayImage.url}
         item={item}
-        alt={item.name}
+        displayImage={item.displayImage.url}
+        displayAlt={item.name}
         name={item.name}
         price={item.price}
         description={item.description}
         size={item.sizes}
+        allImages={item.allImages}
       />
       <div className="more-catalog">
         <h2 className="header text-center">Something Light</h2>
         <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
-        <MoreCatalog />
+        <MoreCatalog productId={item._id} subCat={item.subCategory} />
       </div>
-      <div className="reviews" id="viewReviews">
+      {/* <div className="reviews" id="viewReviews">
         <h2 className="header text-center">Reviews</h2>
         <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
         <ViewDetails />
-      </div>
+      </div> */}
     </CustomContainer>
   );
 }

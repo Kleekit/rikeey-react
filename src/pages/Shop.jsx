@@ -8,7 +8,7 @@ import FilterTop from "../components/Shop/FilterTop";
 import FilterBottom from "../components/Shop/FilterBottom";
 import Category from "../components/Shop/Category";
 import { useQuery } from "react-query";
-import { getProduct } from "../methods/product.method";
+import { getCategory, getProduct } from "../methods/product.method";
 import { useParams } from "react-router";
 // import { getOrStoreId } from "../helpers/getOrStore.helper";
 // import { Link } from "react-router-dom";
@@ -104,9 +104,14 @@ function Shop() {
   const customConfig = {
     customStyle: `${classes.root} pt-4 d-flex`,
   };
+
+  const { filterData } = useQuery("getCategory", getCategory);
+
   const { isLoading, isError, data } = useQuery("getProduct", getProduct);
   // const items = data;
   //
+  // console.log(data.body[2].subCategory);
+
   if (isError) {
     <h1>Something Went Wrong</h1>;
   }
@@ -132,10 +137,13 @@ function Shop() {
       displayCategory = "All Products";
     }
   }
+  // console.log(allProducts);
 
   return (
     <CustomContainer {...customConfig}>
-      {isLoading ? (
+      {isError ? (
+        <></>
+      ) : isLoading ? (
         <h3>loading....</h3>
       ) : data && data.status ? (
         <Grid container justifyContent="space-between">
@@ -159,12 +167,7 @@ function Shop() {
             </Grid>
           </Hidden>
           <Grid item={true} xs={12} sm={12} md={9} className="shop-catalog ">
-            <Category
-              categoryTitle={"Tega's Shoes"}
-              items={allProducts}
-              displayCategory={displayCategory}
-            />
-
+            <Category items={allProducts} displayCategory={displayCategory} />
             <div className="d-l-none pagination d-flex justify-content-center">
               <Hidden mdUp>
                 <Pagination count={10} variant="outlined" color="primary" />
