@@ -1,18 +1,19 @@
 import React from "react";
-import { Grid } from "@mui/material";
+// import { Grid } from "@mui/material";
 import ShopItem from "../Shop/ShopItem";
 import { makeStyles } from "@material-ui/styles";
+import { getProduct } from "../../methods/product.method";
+import { useQuery } from "react-query";
 
 const useStyles = makeStyles({
   root: {
     marginBottom: "10rem",
     "& .containerCatalogItem": {
-      flexGrow: 0,
-      maxWidth: "22%",
-      flexBasis: "22%",
+      flex: "0 0 auto",
+      width: "25%",
+      padding: "0 2%",
       "@media (max-width: 860px)": {
-        maxWidth: "46%",
-        flexBasis: "46%",
+        width: "25%",
         marginBottom: "5rem",
       },
     },
@@ -35,48 +36,49 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MoreCatalog() {
+export default function MoreCatalog(productId, subCat) {
   const classes = useStyles();
+
+  const { isLoading, isError, data } = useQuery("getProduct", getProduct);
+
+  if (isError) {
+    return "bros error de";
+  }
+  if (isLoading) {
+    return "Loading.......";
+  }
+
+  let item;
+  if (data && data.status) {
+    item = data.body;
+  }
+
+  const filteredProduct = item.filter(
+    (data) => (data.subCategory = subCat && data._id !== productId)
+  );
+
   return (
     <div className={classes.root}>
-      <Grid container justifyContent="space-between">
-        <Grid item={true} xs={12} md={2} className="containerCatalogItem">
-          <ShopItem
-            className={"catalogItem"}
-            link={"/shop/details"}
-            // imgSrc={item.displayImage.url}
-            title={"title"}
-            price={"price"}
-          />
-        </Grid>
-        <Grid item={true} xs={12} md={2} className="containerCatalogItem">
-          <ShopItem
-            className={"catalogItem"}
-            link={"/shop/details"}
-            // imgSrc={item.displayImage.url}
-            title={"title"}
-            price={"price"}
-          />
-        </Grid>
-        <Grid item={true} xs={12} md={2} className="containerCatalogItem">
-          <ShopItem
-            className={"catalogItem"}
-            link={"/shop/details"}
-            // imgSrc={item.displayImage.url}
-            title={"title"}
-            price={"price"}
-          />
-        </Grid>
-        <Grid item={true} xs={12} md={2} className="containerCatalogItem">
-          <ShopItem
-            className={"catalogItem"}
-            link={"/shop/details"}
-            // imgSrc={item.displayImage.url}
-            title={"title"}
-            price={"price"}
-          />
-        </Grid>
-      </Grid>
+      <div className="row ">
+        {filteredProduct.map((item) => (
+          <div className="containerCatalogItem" key={item._id}>
+            <ShopItem
+              className={"catalogItem"}
+              link={`/details/${item._id}`}
+              imgSrc={item.displayImage.url}
+              name={item.name}
+              price={item.price}
+              colors={
+                item.colors.length > 0 ? (
+                  <p className="fs-sm mb-m8">
+                    Available in {item.colors} colors
+                  </p>
+                ) : null
+              }
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

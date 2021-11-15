@@ -6,8 +6,16 @@ import { apiCaller } from "../apiCaller/apicaller";
 
 //mutable
 
-export const getProduct = async (body) => {
+export const getProduct = async () => {
   let { data } = await apiCaller.get("/products");
+  // console.log(data);
+  return data;
+};
+
+export const getProductDetails = async ({ queryKey }) => {
+  const productId = queryKey[1].productId;
+  let { data } = await apiCaller.get(`/product/${productId}`);
+  // console.log(data);
   return data;
 };
 

@@ -1,14 +1,15 @@
 import React from "react";
 import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Hidden, Pagination } from "@mui/material";
+import { Grid, Hidden } from "@mui/material";
 import ShopSideBar from "../components/Shop/ShopSidebar";
 import OpenFIlter from "../components/Shop/OpenFIlter";
-import FilterTop from "../components/Shop/FilterTop";
+// import FilterTop from "../components/Shop/FilterTop";
 import FilterBottom from "../components/Shop/FilterBottom";
 import Category from "../components/Shop/Category";
 import { useQuery } from "react-query";
 import { getProduct } from "../methods/product.method";
+import { useParams } from "react-router";
 // import { getOrStoreId } from "../helpers/getOrStore.helper";
 // import { Link } from "react-router-dom";
 
@@ -97,45 +98,85 @@ const useStyles = makeStyles({
 
 function Shop() {
   const classes = useStyles();
+  const shopParams = useParams();
+
+  // console.log({ shopParams });
   const customConfig = {
     customStyle: `${classes.root} pt-4 d-flex`,
   };
+
+  // const { filterData } = useQuery("getCategory", getCategory);
+
   const { isLoading, isError, data } = useQuery("getProduct", getProduct);
   // const items = data;
   //
+  // console.log(data.body[2].subCategory);
+
   if (isError) {
     <h1>Something Went Wrong</h1>;
   }
+  let allProducts = [];
+  let displayCategory;
+  if (data && data.status) {
+    if (shopParams.subCategory) {
+      for (let singleProduct of data.body) {
+        if (singleProduct.subCategory === shopParams.subCategory) {
+          allProducts.push(singleProduct);
+          displayCategory = singleProduct.subCategory;
+        }
+      }
+    } else if (shopParams.category) {
+      for (let singleProduct of data.body) {
+        if (singleProduct.productCategory === shopParams.category) {
+          allProducts.push(singleProduct);
+          displayCategory = singleProduct.productCategory;
+        }
+      }
+    } else {
+      allProducts = data.body;
+      displayCategory = "All Products";
+    }
+  }
+  // console.log(allProducts);
 
   return (
     <CustomContainer {...customConfig}>
-      <Grid container justifyContent="space-between">
-        <ShopSideBar openFilter={<OpenFIlter />}>
-          <div className={classes.root}>
-            <FilterTop />
-          </div>
-        </ShopSideBar>
-        <Hidden mdDown>
-          <Grid item={true} xs={12} sm={12} md={3} className="filter-col pe-0">
-            <div className="filter-content fs-large pb-5 fw-500 ">
+      {isError ? (
+        <></>
+      ) : isLoading ? (
+        <h3>loading....</h3>
+      ) : data && data.status ? (
+        <Grid container justifyContent="space-between">
+          <ShopSideBar openFilter={<OpenFIlter />}>
+            <div className={classes.root}>
               {/* <FilterTop /> */}
               <FilterBottom />
             </div>
+          </ShopSideBar>
+          <Hidden mdDown>
+            <Grid
+              item={true}
+              xs={12}
+              sm={12}
+              md={3}
+              className="filter-col pe-0"
+            >
+              <div className="filter-content fs-large pb-5 fw-500 ">
+                {/* <FilterTop /> */}
+                <FilterBottom />
+              </div>
+            </Grid>
+          </Hidden>
+          <Grid item={true} xs={12} sm={12} md={9} className="shop-catalog ">
+            <Category items={allProducts} displayCategory={displayCategory} />
+            {/* <div className="d-l-none pagination d-flex justify-content-center">
+              <Hidden mdUp>
+                <Pagination count={10} variant="outlined" color="primary" />
+              </Hidden>
+            </div> */}
           </Grid>
-        </Hidden>
-        <Grid item={true} xs={12} sm={12} md={9} className="shop-catalog ">
-          {isLoading ? (
-            <h3>loading....</h3>
-          ) : (
-            <Category categoryTitle={"Tega's Shoes"} items={data} />
-          )}
-          <div className="d-l-none pagination d-flex justify-content-center">
-            <Hidden mdUp>
-              <Pagination count={10} variant="outlined" color="primary" />
-            </Hidden>
-          </div>
         </Grid>
-      </Grid>
+      ) : null}
     </CustomContainer>
   );
 }

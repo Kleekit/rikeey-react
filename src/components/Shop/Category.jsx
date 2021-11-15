@@ -15,13 +15,11 @@ const useStyles = makeStyles({
       display: "flex",
     },
     "& .shop-col": {
-      flexGrow: 0,
-      maxWidth: "33.33333%",
-      flexBasis: "33.33333%",
+      flex: "0 0 auto",
+      width: "33.33333%",
       padding: "0 2%",
       "@media (max-width: 600px)": {
-        maxWidth: "50%",
-        flexBasis: "50%",
+        width: "50%",
       },
     },
     "& .shopItemImg": {
@@ -37,25 +35,35 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Category(props) {
+export default function Category({ items, displayCategory }) {
   const classes = useStyles();
-  const categoryTitle = props.categoryTitle;
-  const { body } = props.items;
+
+  // const categoryTitle = props.categoryTitle;
+  // const { body } = props.items;
+  // console.log(items);
 
   return (
     <div className={classes.root}>
       <Hidden mdDown>
-        <h3 className="catalogCategory px-4 mb-4">{categoryTitle}</h3>
+        <h3 className="catalogCategory px-4 mb-4">{displayCategory}</h3>
       </Hidden>
+
       <div className={"shopRow row"}>
-        {body.map((item, itemIdx) => (
+        {items.map((item, itemIdx) => (
           <div className="shop-col" key={itemIdx + Number(item.price)}>
             <ShopItem
               className="shopItemImg"
-              link={{ state: item, pathname: "/shop/details" }}
+              link={`/details/${item._id}`}
               imgSrc={item.displayImage.url}
-              title={item.productName}
+              name={item.name}
               price={item.price}
+              colors={
+                item.colors.length > 0 ? (
+                  <p className="fs-sm mb-m8">
+                    Available in {item.colors} colors
+                  </p>
+                ) : null
+              }
             />
           </div>
         ))}

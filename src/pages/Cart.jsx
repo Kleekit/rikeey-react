@@ -64,41 +64,54 @@ export default function Cart() {
 
   return (
     <CustomContainer {...customConfig}>
-      <div className="cart mx-auto">
-        <div className="cart-head  ">
-          <div className="w-40 my-auto ps-4">Items</div>
-          <div className="w-20 my-auto mdDown text-center">Quantity</div>
-          <div className="w-20 my-auto mdDown text-center">Prices</div>
-          <div className="w-20 my-auto mdDown text-center">Subtotal</div>
-        </div>
-        <div className="cart-body ">
-          {isLoading && <h3>Loading...</h3>}
-          {data &&
-            data.status &&
-            data.body.map((item) => (
-              <CartItem
-                item={item}
-                refetch={refetch}
-                key={item.productName}
-                setTotal={setTotal}
-                total={total}
-                calTotal={calTotal}
-              />
-            ))}
-        </div>
-        <div className="total-sec  mt-5 ms-auto">
-          <div className="cart-total mb-5 d-flex ps-5 pe-2 pb-2 justify-content-between">
-            <div>Total</div>
-            <div>$ {overallAllTotal}</div>
+      {isLoading ? (
+        <h2>wait a sec.</h2>
+      ) : data.body.length > 0 ? (
+        <div className="cart mx-auto">
+          <div className="cart-head  ">
+            <div className="w-40 my-auto ps-4">Items</div>
+            <div className="w-20 my-auto mdDown text-center">Quantity</div>
+            <div className="w-20 my-auto mdDown text-center">Prices</div>
+            <div className="w-20 my-auto mdDown text-center">Subtotal</div>
           </div>
-          <Link to="/shop">
-            <div className="d-flex  justify-content-end pe-4 fs-lgr red">
-              Continue shopping
+          <div className="cart-body ">
+            {isLoading && <h3>Loading...</h3>}
+            {data &&
+              data.status &&
+              data.body.map((item) => (
+                <CartItem
+                  item={item}
+                  refetch={refetch}
+                  key={item.productName}
+                  setTotal={setTotal}
+                  total={total}
+                  calTotal={calTotal}
+                />
+              ))}
+          </div>
+          <div className="total-sec  mt-5 ms-auto">
+            <div className="cart-total mb-5 d-flex ps-5 pe-2 pb-2 justify-content-between">
+              <div>Total</div>
+              <div>$ {overallAllTotal}</div>
             </div>
-          </Link>
-          <CheckoutButton />
+            <Link to="/shop">
+              <div className="d-flex  justify-content-end pe-4 fs-lgr red">
+                Continue shopping
+              </div>
+            </Link>
+            <CheckoutButton />
+          </div>
         </div>
-      </div>
+      ) : (
+        <h2
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "50vh" }}
+        >
+          <div className="w-50 h-50 text-center">
+            You have no item on you cart. visit shop to add items
+          </div>
+        </h2>
+      )}
     </CustomContainer>
   );
 }
