@@ -48,6 +48,10 @@ function Shop() {
           </ProductCard>
         </div>
         <div className="border-b-[0.15rem] border-[#848688] mx-auto w-[50%] sm:w-[75%] mb-[10rem]"></div>
+        <div className="grid grid-cols-2 gap-[8rem] mb-[12rem]">
+          <AccessoriesCard />
+          <AccessoriesCard />
+        </div>
         <AccessoriesCard />
       </div>
     </Layout>

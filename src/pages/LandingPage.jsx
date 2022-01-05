@@ -26,19 +26,21 @@ function LandingPage() {
             Shop Now
           </a>
         </div>
-        <div className="grid grid-cols-2 gap-[8rem]">
-          <CardNFloatedText
+        <div className="grid grid-cols-2 gap-[8rem] mb-[12rem]">
+          <AccessoriesCard />
+          <AccessoriesCard />
+          {/* <CardNFloatedText
             imageUrl={
               "https://images.unsplash.com/3/www.madebyvadim.com.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWNjZXNzb3JpZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
             }
             text={"Men"}
-          />
-          <CardNFloatedText
+          /> */}
+          {/* <CardNFloatedText
             imageUrl={
               "https://images.unsplash.com/3/www.madebyvadim.com.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWNjZXNzb3JpZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
             }
             text={"Men"}
-          />
+          /> */}
         </div>
         <div className="new-release-container mb-[12rem]">
           <div className="text-[2rem] font-bold underline underline-offset-2 mb-[2.3rem]">

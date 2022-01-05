@@ -46,6 +46,10 @@ export default function Details() {
             </ProductCard>
           </div>
         </div>
+        <div className="grid grid-cols-2 gap-[8rem] mb-[12rem]">
+          <AccessoriesCard />
+          <AccessoriesCard />
+        </div>
         <AccessoriesCard />
       </div>
     </Layout>
