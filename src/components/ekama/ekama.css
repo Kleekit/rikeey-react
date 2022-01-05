@@ -1,0 +1,32 @@
+/* CardNFloatedText start */
+
+/* .cardNFloatedText {
+  border-radius: 3.5rem;
+} */
+.cardNFloatedText .action {
+  bottom: 20%;
+  left: 45%;
+  height: 10rem;
+  color: #fff;
+  /* content style */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+/* CardNFloatedText end */
+
+/* button-style start */
+.button-style {
+  background-color: antiquewhite;
+  color: black;
+  border: 0;
+  padding: 0.7rem 1.7rem;
+  border-radius: 25px;
+  box-shadow: 0 3px 10px black;
+  font-size: 3rem;
+}
+.button-style:hover {
+  box-shadow: 0 3px 3px black;
+}
+/* button-style end */

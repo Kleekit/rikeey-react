@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
+import Ekama from "./components/ekama/ekama";
 import Callback from "./pages/Callback";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
@@ -15,6 +16,7 @@ function App() {
   return (
     <Switch location={location}>
       <Route path="/" exact component={LandingPage} />
+      <Route path="/ekama" exact component={Ekama} />
       <Route path="/shop" exact component={Shop} />
       <Route path="/shop/:category" exact component={Shop} />
       <Route path="/details" exact component={Details} />

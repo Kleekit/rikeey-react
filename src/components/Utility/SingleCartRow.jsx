@@ -3,7 +3,7 @@ import React from "react";
 export default function SingleCartRow() {
   return (
     <div className="cartRowMain mb-[4rem]">
-      <div className="row grid grid-cols-2 gap-[8rem]">
+      <div className="row  grid grid-cols-2 gap-[8rem]">
         <div className="col-md-6 flex">
           <img
             className="img-fluid cartItemImg"
