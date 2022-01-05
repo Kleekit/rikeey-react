@@ -1,11 +1,9 @@
 import React from "react";
 
-function ProductDetailsCard() {
+export default function DetailsCard(props) {
   return (
     <div>
-      <h6 className="mb-[3rem] text-[1.8rem] font-[600]">
-        Women {">"} Full set
-      </h6>
+      {props.children}
       <div className=" grid grid-cols-2 gap-[8rem] mb-[10rem]">
         <div className="">
           <div className="productDetailsImg w-full">
@@ -24,7 +22,7 @@ function ProductDetailsCard() {
             <h6>15,000</h6>
           </div>
           <div className="detailsDescription">
-            <h6>Descripton</h6>
+            <h6>Description</h6>
             <p>
               The Kendal set is a collection as vibrant as you are; a collection
               that empowers you to let yourself glow. With performance and
@@ -47,4 +45,14 @@ function ProductDetailsCard() {
   );
 }
 
-export default ProductDetailsCard;
+DetailsCard.NavOutline = (props) => (
+  <h6 className="mb-[3rem] text-[1.8rem] font-[600]">Women {">"} Full set</h6>
+);
+
+DetailsCard.Name = (props) => (
+  <h6 className="mb-[3rem] text-[1.8rem] font-[600]">Women {">"} Full set</h6>
+);
+
+DetailsCard.NavOutline = (props) => (
+  <h6 className="mb-[3rem] text-[1.8rem] font-[600]">Women {">"} Full set</h6>
+);
