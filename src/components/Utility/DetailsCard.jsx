@@ -17,19 +17,19 @@ DetailsCard.Image = (props) => (
 );
 
 DetailsCard.Name = (props) => (
-  <div className="detailsHeader">
+  <div className="detailsHeader mb-[3rem]">
     <h2>{props.children}</h2>
   </div>
 );
 
 DetailsCard.Price = (props) => (
-  <div className="detailsPrice">
+  <div className="detailsPrice mb-[3rem]">
     <h6>{props.children}</h6>
   </div>
 );
 
 DetailsCard.Description = (props) => (
-  <div className="detailsDescription">
+  <div className="detailsDescription mb-[3rem]">
     <h6 className="text-[2rem] font-[700] mb-[1.5rem]">Description</h6>
     <p>{props.children}</p>
   </div>

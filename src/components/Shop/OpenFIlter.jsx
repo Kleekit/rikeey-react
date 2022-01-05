@@ -2,7 +2,7 @@ import React from "react";
 
 export default function OpenFIlter() {
   return (
-    <div className="open-filter">
+    <div className="ml-[2rem] mb-[4rem]">
       <svg
         width="68"
         height="25"

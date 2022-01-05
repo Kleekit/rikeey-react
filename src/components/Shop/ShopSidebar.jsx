@@ -6,20 +6,20 @@ import CloseIcon from "@mui/icons-material/CloseRounded";
 
 const useStyles = makeStyles({
   drawer: {
-    top: "8rem !important",
+    top: "6rem !important",
     "& > .MuiBackdrop-root": {
       top: "8rem !important",
       //   display: "none",
     },
     "& > .MuiDrawer-paper": {
       left: 0,
-      top: "8rem !important",
+      top: "6rem !important",
       boxShadow: "none !important",
       background: "rgba(255, 255, 255, 1)",
       color: "#000",
       padding: 0,
       width: "65vw",
-      height: "calc(90vh - 8rem)",
+      height: "calc(100vh - 6rem)",
       "@media (max-width: 960px)": {
         width: "50vw",
       },
@@ -95,7 +95,7 @@ export default function ShopSideBar(props) {
               paddingBottom: "3.5rem",
             }}
           >
-            <div className="navigationContainer d-flex justify-content-between align-items-center">
+            <div className="navigationContainer flex justify-between items-center">
               {/* <Notifications className="navIcon" /> */}
               <CloseIcon
                 className="navIcon cursor-pointer"
