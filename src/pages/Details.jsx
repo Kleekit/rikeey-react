@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
 import CategoryNav from "../components/Utility/CategoryNav";
 import Layout from "../components/Utility/Layout";
@@ -6,6 +6,25 @@ import ProductCard from "../components/Utility/ProductCard";
 import ProductDetailsCard from "../components/Utility/ProductDetailsCard";
 
 export default function Details() {
+  const [size, setSize] = useState([]);
+  const [color, setColor] = useState([]);
+
+  function handleSize(value) {
+    if (size.includes(value)) {
+      size.filter((cur) => cur !== value);
+    } else {
+      size.push(value);
+    }
+  }
+
+  function handleColor(value) {
+    if (size.includes(value)) {
+      size.filter((cur) => cur !== value);
+    } else {
+      size.push(value);
+    }
+  }
+
   return (
     <Layout>
       <CategoryNav>
