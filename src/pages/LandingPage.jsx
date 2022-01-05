@@ -5,7 +5,23 @@ import ProductCard from "../components/Utility/ProductCard";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
 import { useQuery } from "react-query";
 import { getProduct } from "../methods/product.method";
+import { SwiperSlide } from "swiper/react";
 // import CardNFloatedText from "../components/Utility/CardNFloatedText";
+
+const carouselImg = [
+  { src: "./images/slide1.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/slide3.png", alt: "" },
+  { src: "./images/men-button.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/women-set.png", alt: "" },
+  { src: "./images/slide1.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/slide3.png", alt: "" },
+  { src: "./images/men-button.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/women-set.png", alt: "" },
+];
 
 function LandingPage() {
   const customConfig = {
@@ -21,7 +37,20 @@ function LandingPage() {
 
   return (
     <Layout {...customConfig}>
-      <HeroCarousel styles="mb-[2rem]" />
+      <HeroCarousel styles="mb-[2rem]">
+        <HeroCarousel.Slides>
+          {carouselImg.map((item, itemIdx) => (
+            <SwiperSlide key={itemIdx}>
+              <img
+                alt={item.alt}
+                className={"carouselImg"}
+                width="100%"
+                src={item.src}
+              />
+            </SwiperSlide>
+          ))}
+        </HeroCarousel.Slides>
+      </HeroCarousel>
       <div className="p-[6rem]">
         <div className="text-center mb-[12rem]">
           <div className="text-[5rem] font-bold mb-[1rem]">Sweat in Style</div>
@@ -58,7 +87,7 @@ function LandingPage() {
           <div className="flex flex-wrap mx-[-1.4%] ">
             {data &&
               data.body.map((product) => (
-                <ProductCard key={product._id}>
+                <ProductCard link={`/details/${product._id}`} key={product._id}>
                   <ProductCard.Image>
                     {product.displayImage.url}
                   </ProductCard.Image>
