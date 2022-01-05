@@ -4,16 +4,22 @@ export default function CartFooter() {
   return (
     <div className="w-1/2 ml-auto mt-[4rem]">
       <div className="row grid grid-cols-2 gap-[8rem] cardFooterItemOne items-center justify-center">
-        <div className="col-md-6">
+        <div className="">
           <p>Subtotal</p>
+
           <h6>
             Shipping <small>(Nigeria)</small>
           </h6>
-          <a href="/">International</a>
+
+          <a href="/" className="linkCustom">
+            International
+          </a>
         </div>
-        <div className="col-md-6">
-          <p>40,000</p>
-          <p>2,300</p>
+
+        <div className="ml-36">
+          <p>₦40,000</p>
+
+          <p className="">₦2,300</p>
         </div>
       </div>
       <div className="row grid grid-cols-2 gap-[8rem]">
@@ -21,9 +27,9 @@ export default function CartFooter() {
           <h6>Total</h6>
         </div>
         <div className="col-md-6">
-          <h6>42,300</h6>
+          <h6 className="ml-36">₦42,300</h6>
           <div>
-            <button className="proceed">Proceed to Checkout</button>
+            <button className="proceed mr-8 mt-8">Proceed to Checkout</button>
           </div>
         </div>
       </div>

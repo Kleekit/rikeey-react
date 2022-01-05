@@ -55,25 +55,25 @@ export default function CartRowContainer() {
       <div className="cartContainerHeader mb-[2rem]">
         <div className="row grid grid-cols-2 gap-[8rem] pl-[8rem]">
           <div className="col-md-6">
-            <h5>Product</h5>
+            <h5 className="font-bold">Product</h5>
           </div>
           <div className="col-md-6">
             <div className="row grid grid-cols-3 gap-[8rem]">
               <div className="col-md-4">
-                <h5>Price</h5>
+                <h5 className="font-bold">Price</h5>
               </div>
               <div className="col-md-4">
-                <h5>Quantity</h5>
+                <h5 className="font-bold">Quantity</h5>
               </div>
               <div className="col-md-4">
-                <h5>Total</h5>
+                <h5 className="font-bold">Total</h5>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="border-y-[0.1rem] border-[#5E6368] py-[4rem] pl-[8rem]">
-        <SingleCartRow />
+        {/* <SingleCartRow item={item} refetch={refetch} /> */}
         <SingleCartRow />
         <SingleCartRow />
         <SingleCartRow />

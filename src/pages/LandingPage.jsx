@@ -3,16 +3,54 @@ import Layout from "../components/Utility/Layout";
 import HeroCarousel from "../components/Utility/HeroCarousel";
 import ProductCard from "../components/Utility/ProductCard";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
-import CardNFloatedText from "../components/Utility/CardNFloatedText";
+import { useQuery } from "react-query";
+import { getProduct } from "../methods/product.method";
+import { SwiperSlide } from "swiper/react";
+// import CardNFloatedText from "../components/Utility/CardNFloatedText";
+
+const carouselImg = [
+  { src: "./images/slide1.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/slide3.png", alt: "" },
+  { src: "./images/men-button.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/women-set.png", alt: "" },
+  { src: "./images/slide1.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/slide3.png", alt: "" },
+  { src: "./images/men-button.png", alt: "" },
+  { src: "./images/slide2.png", alt: "" },
+  { src: "./images/women-set.png", alt: "" },
+];
 
 function LandingPage() {
   const customConfig = {
     // customStyle: `${classes.root}`,
   };
 
+  const { isLoading, data, isError, refetch } = useQuery(
+    "getProduct",
+    getProduct
+  );
+
+  console.log(data);
+
   return (
     <Layout {...customConfig}>
-      <HeroCarousel styles="mb-[2rem]" />
+      <HeroCarousel styles="mb-[2rem]">
+        <HeroCarousel.Slides>
+          {carouselImg.map((item, itemIdx) => (
+            <SwiperSlide key={itemIdx}>
+              <img
+                alt={item.alt}
+                className={"carouselImg"}
+                width="100%"
+                src={item.src}
+              />
+            </SwiperSlide>
+          ))}
+        </HeroCarousel.Slides>
+      </HeroCarousel>
       <div className="p-[6rem]">
         <div className="text-center mb-[12rem]">
           <div className="text-[5rem] font-bold mb-[1rem]">Sweat in Style</div>
@@ -47,30 +85,16 @@ function LandingPage() {
             New Release
           </div>
           <div className="flex flex-wrap mx-[-1.4%] ">
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
+            {data &&
+              data.body.map((product) => (
+                <ProductCard link={`/details/${product._id}`} key={product._id}>
+                  <ProductCard.Image>
+                    {product.displayImage.url}
+                  </ProductCard.Image>
+                  <ProductCard.Name>{product.name}</ProductCard.Name>
+                  <ProductCard.Price>N {product.price}</ProductCard.Price>
+                </ProductCard>
+              ))}
           </div>
         </div>
         <AccessoriesCard />
