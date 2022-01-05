@@ -1,77 +1,53 @@
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Divider } from "@mui/material";
-import CustomContainer from "../components/Navigation/CustomContainer";
-import MoreCatalog from "../components/Details/MoreCatalog";
-// import ViewDetails from "../components/Details/ViewDetails";
-import ProductDetails from "../components/Details/ProductDetails";
-import { useParams } from "react-router";
-import { useQuery } from "react-query";
-import { getProductDetails } from "../methods/product.method";
+import AccessoriesCard from "../components/Utility/AccessoriesCard";
+import CategoryNav from "../components/Utility/CategoryNav";
+import Layout from "../components/Utility/Layout";
+import ProductCard from "../components/Utility/ProductCard";
+import ProductDetailsCard from "../components/Utility/ProductDetailsCard";
 
-const useStyles = makeStyles({
-  root: {
-    padding: "5rem 4rem",
-    "& .dividerHeader": {
-      width: "25%",
-      "@media (max-width: 960px)": {
-        width: "60%",
-      },
-    },
-  },
-});
-
-export default function Details(props) {
-  const classes = useStyles();
-
-  const customConfig = {
-    customStyle: `${classes.root}`,
-  };
-  // query
-  const productID = useParams();
-
-  const { isLoading, isError, data } = useQuery(
-    ["getProduct", { productId: productID.productId }],
-    getProductDetails
-  );
-
-  if (isError) {
-    return "bros error de.......";
-  }
-
-  if (isLoading) {
-    return "Loading.......";
-  }
-
-  let item;
-  if (data && data.status) {
-    item = data.body;
-  }
-
-  // console.log(data);
-
+export default function Details() {
   return (
-    <CustomContainer {...customConfig}>
-      <ProductDetails
-        item={item}
-        displayImage={item.displayImage.url}
-        displayAlt={item.name}
-        name={item.name}
-        price={item.price}
-        description={item.description}
-        size={item.sizes}
-        allImages={item.allImages}
-      />
-      <div className="more-catalog">
-        <h2 className="header text-center">Something Light</h2>
-        <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
-        <MoreCatalog productId={item._id} subCat={item.subCategory} />
+    <Layout>
+      <CategoryNav>
+        <div>Tops</div>
+        <div>Bottoms</div>
+        <div>Tees</div>
+      </CategoryNav>
+      <div className="px-[6rem] py-[4rem] ">
+        <ProductDetailsCard />
+        <div className="similar-container mb-[12rem]">
+          <div className="text-[2rem] font-bold underline underline-offset-2 mb-[2.3rem]">
+            You may like
+          </div>
+          <div className="flex flex-wrap mx-[-1.4%] ">
+            <ProductCard>
+              <ProductCard.Name>
+                Motion Seamless Crop - Musk Pink
+              </ProductCard.Name>
+              <ProductCard.Price>N 30,000</ProductCard.Price>
+            </ProductCard>
+            <ProductCard>
+              <ProductCard.Name>
+                Motion Seamless Crop - Musk Pink
+              </ProductCard.Name>
+              <ProductCard.Price>N 30,000</ProductCard.Price>
+            </ProductCard>
+            <ProductCard>
+              <ProductCard.Name>
+                Motion Seamless Crop - Musk Pink
+              </ProductCard.Name>
+              <ProductCard.Price>N 30,000</ProductCard.Price>
+            </ProductCard>
+            <ProductCard>
+              <ProductCard.Name>
+                Motion Seamless Crop - Musk Pink
+              </ProductCard.Name>
+              <ProductCard.Price>N 30,000</ProductCard.Price>
+            </ProductCard>
+          </div>
+        </div>
+        <AccessoriesCard />
       </div>
-      {/* <div className="reviews" id="viewReviews">
-        <h2 className="header text-center">Reviews</h2>
-        <Divider variant="inset" className="my-5 mx-auto dividerHeader" />
-        <ViewDetails />
-      </div> */}
-    </CustomContainer>
+    </Layout>
   );
 }
