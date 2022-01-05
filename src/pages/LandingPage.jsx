@@ -3,12 +3,21 @@ import Layout from "../components/Utility/Layout";
 import HeroCarousel from "../components/Utility/HeroCarousel";
 import ProductCard from "../components/Utility/ProductCard";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
-import CardNFloatedText from "../components/Utility/CardNFloatedText";
+import { useQuery } from "react-query";
+import { getProduct } from "../methods/product.method";
+// import CardNFloatedText from "../components/Utility/CardNFloatedText";
 
 function LandingPage() {
   const customConfig = {
     // customStyle: `${classes.root}`,
   };
+
+  const { isLoading, data, isError, refetch } = useQuery(
+    "getProduct",
+    getProduct
+  );
+
+  console.log(data);
 
   return (
     <Layout {...customConfig}>
@@ -47,30 +56,16 @@ function LandingPage() {
             New Release
           </div>
           <div className="flex flex-wrap mx-[-1.4%] ">
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
+            {data &&
+              data.body.map((product) => (
+                <ProductCard link={} key={product._id}>
+                  <ProductCard.Image>
+                    {product.displayImage.url}
+                  </ProductCard.Image>
+                  <ProductCard.Name>{product.name}</ProductCard.Name>
+                  <ProductCard.Price>N {product.price}</ProductCard.Price>
+                </ProductCard>
+              ))}
           </div>
         </div>
         <AccessoriesCard />
