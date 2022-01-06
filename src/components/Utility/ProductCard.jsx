@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard(props) {
   return (
-    <div className="productContainer flex flex-col justify-center px-[1.4%] w-1/2 sm:w-1/4">
+    <div className="productContainer flex flex-col justify-center py-6 px-[1.4%] w-1/2 sm:w-1/4">
       <Link to={props.link} className="productNameContainer">
         {props.children}
       </Link>

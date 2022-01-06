@@ -23,30 +23,45 @@ function Shop() {
         </ShopHero>
         <div className="flex flex-wrap mx-[-1.4%] mb-[10rem] ">
           <ProductCard>
+            <ProductCard.Image>
+              https://randomuser.me/api/portraits/women/90.jpg
+            </ProductCard.Image>
             <ProductCard.Name>
               Motion Seamless Crop - Musk Pink
             </ProductCard.Name>
             <ProductCard.Price>N 30,000</ProductCard.Price>
           </ProductCard>
           <ProductCard>
+            <ProductCard.Image>
+              https://randomuser.me/api/portraits/women/90.jpg
+            </ProductCard.Image>
             <ProductCard.Name>
               Motion Seamless Crop - Musk Pink
             </ProductCard.Name>
             <ProductCard.Price>N 30,000</ProductCard.Price>
           </ProductCard>
           <ProductCard>
+            <ProductCard.Image>
+              https://randomuser.me/api/portraits/women/90.jpg
+            </ProductCard.Image>
             <ProductCard.Name>
               Motion Seamless Crop - Musk Pink
             </ProductCard.Name>
             <ProductCard.Price>N 30,000</ProductCard.Price>
           </ProductCard>
           <ProductCard>
+            <ProductCard.Image>
+              https://randomuser.me/api/portraits/women/90.jpg
+            </ProductCard.Image>
             <ProductCard.Name>
               Motion Seamless Crop - Musk Pink
             </ProductCard.Name>
             <ProductCard.Price>N 30,000</ProductCard.Price>
           </ProductCard>
           <ProductCard>
+            <ProductCard.Image>
+              https://randomuser.me/api/portraits/women/90.jpg
+            </ProductCard.Image>
             <ProductCard.Name>
               Motion Seamless Crop - Musk Pink
             </ProductCard.Name>
