@@ -72,7 +72,7 @@ function Footer() {
                 <Grid item={true} xs={5} sm={5} md={5} className="flex">
                   <div className="">
                     <div className="email-text-align">
-                      <p className="font-[600] signup-align mr-2 mb-3 xs:text-[1.6rem]">
+                      <p className="font-[600] signup-align mr-2 mb-3 xs:text-[1.6rem] xs:mt-5">
                         Sign up to our newsletter
                       </p>
                       <div className="flex email-footer">

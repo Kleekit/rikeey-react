@@ -80,7 +80,7 @@ function LandingPage() {
             accessName={"Men"}
           />
         </div>
-        <div className="new-release-container mb-[12rem]">
+        {/* <div className="new-release-container mb-[12rem]">
           <div className="text-[2rem] font-bold underline underline-offset-2 mb-[2.3rem]">
             New Release
           </div>
@@ -119,7 +119,7 @@ function LandingPage() {
                 ))}
             </Carousel.Slides>
           </Carousel>
-        </div>
+        </div> */}
         <AccessoriesCard
           src={
             "https://images.unsplash.com/3/www.madebyvadim.com.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWNjZXNzb3JpZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
