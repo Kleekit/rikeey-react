@@ -17,7 +17,7 @@ export default function Women() {
   );
   return (
     <Layout>
-      <CategoryNav styles="hidden md:flex">
+      <CategoryNav styles="hidden md:flex border-b-[0.15rem] border-[#5E6368]">
         <div>Full Set</div>
         <div>Bra</div>
         <div>Bottoms</div>

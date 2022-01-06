@@ -30,17 +30,19 @@ export default function Cart() {
 
   return (
     <Layout>
-      <CategoryNav styles="flex border-none">
+      <CategoryNav styles="flex text-center sm:border-b-[0.15rem] border-[#5E6368]">
         <div>Cart</div>
       </CategoryNav>
-      <div className="px-[3rem] sm:px-[6rem] pt-[4rem] sm:pt-[8rem] ">
-        <CartRowContainer
-          items={data.body}
-          refetch={refetch}
-          setTotal={setTotal}
-        />
-        <CartFooter total={overallAllTotal} />
-      </div>
+      {data && data.status && (
+        <div className="px-[3rem] sm:px-[6rem] pt-[4rem] sm:pt-[8rem] ">
+          <CartRowContainer
+            items={data.body}
+            refetch={refetch}
+            setTotal={setTotal}
+          />
+          <CartFooter total={overallAllTotal} />
+        </div>
+      )}
     </Layout>
   );
 }

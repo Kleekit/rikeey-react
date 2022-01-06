@@ -17,7 +17,7 @@ export default function Men() {
   );
   return (
     <Layout>
-      <CategoryNav styles="hidden md:flex">
+      <CategoryNav styles="hidden md:flex border-b-[0.15rem] border-[#5E6368]">
         <div>Tops</div>
         <div>Bottoms</div>
         <div>Tees</div>

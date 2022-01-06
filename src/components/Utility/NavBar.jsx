@@ -89,7 +89,7 @@ function NavBar() {
               badgeContent={data ? data.body.length : 0}
             >
               <Link to="/cart">
-                <ShoppingCart className="text-[2rem]" />
+                <ShoppingCart style={{ fontSize: "2rem" }} />
               </Link>
             </Badge>
           </div>
