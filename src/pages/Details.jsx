@@ -18,12 +18,30 @@ export default function Details() {
   }
 
   function handleColor(value) {
-    if (size.includes(value)) {
-      size.filter((cur) => cur !== value);
+    if (color.includes(value)) {
+      color.filter((cur) => cur !== value);
     } else {
-      size.push(value);
+      color.push(value);
     }
   }
+
+  // function makeCornflake({ cornFlake, water, milk, milo, plate, spoon }) {
+  //   plate.push(cornFlake);
+  //   plate.push(milk);
+  //   plate.push(milo);
+  //   plate.push(water);
+  //   plate.push(spoon);
+  //   console.log("please enjoy your meal!");
+  //   console.log(plate);
+  // }
+
+  // let plate = [];
+  // let milk = "peak milk";
+  // let milo = "milo";
+  // let water = "nestle water";
+  // let cornFlake = "Nasco";
+  // let spoon = "metallic spoon";
+  // makeCornflake({ plate, milk, milo, water, cornFlake, spoon });
 
   return (
     <Layout>

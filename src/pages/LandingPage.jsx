@@ -58,7 +58,7 @@ function LandingPage() {
           <div className="flex flex-wrap mx-[-1.4%] ">
             {data &&
               data.body.map((product) => (
-                <ProductCard link={} key={product._id}>
+                <ProductCard key={product._id}>
                   <ProductCard.Image>
                     {product.displayImage.url}
                   </ProductCard.Image>
