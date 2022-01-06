@@ -23,33 +23,19 @@ const useStyles = makeStyles({
   },
 });
 
-// const carouselImg = [
-//   { src: "./images/slide1.png", alt: "" },
-//   { src: "./images/slide2.png", alt: "" },
-//   { src: "./images/slide3.png", alt: "" },
-//   { src: "./images/men-button.png", alt: "" },
-//   { src: "./images/slide2.png", alt: "" },
-//   { src: "./images/women-set.png", alt: "" },
-//   { src: "./images/slide1.png", alt: "" },
-//   { src: "./images/slide2.png", alt: "" },
-//   { src: "./images/slide3.png", alt: "" },
-//   { src: "./images/men-button.png", alt: "" },
-//   { src: "./images/slide2.png", alt: "" },
-//   { src: "./images/women-set.png", alt: "" },
-// ];
-
-export default function HeroCarousel(props) {
+export default function Carousel(props) {
   const classes = useStyles();
 
   return (
     <Swiper
       className={clsx(classes.root, props.styles)}
       slidesPerView={1}
+      // slidesPerView={"auto"}
       autoplay={{
         delay: 4500,
         disableOnInteraction: false,
       }}
-      pagination
+      pagination={{ dynamicBullets: true }}
       loop
       grabCursor
       keyboard={{ enabled: true }}
@@ -70,4 +56,4 @@ export default function HeroCarousel(props) {
   );
 }
 
-HeroCarousel.Slides = (props) => props.children;
+Carousel.Slides = (props) => props.children;

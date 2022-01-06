@@ -102,12 +102,12 @@ function NavBar() {
           </Grid> */}
         </Grid>
       </Hidden>
-      {/* <div className="navigation sideBarNav d-flex justify-content-between align-items-center">
-        <Link className="logo-container d-block" to="/">
+      <div className="navigation sideBarNav flex justify-between items-center">
+        <Link className="logo-container sm:hidden w-[3rem] block" to="/">
           <RikeeyLogo />
         </Link>
         <SideBar />
-      </div> */}
+      </div>
     </div>
   );
 }

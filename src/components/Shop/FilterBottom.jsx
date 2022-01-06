@@ -11,20 +11,20 @@ export default function FilterBottom() {
     <span>
       {data && data.status ? (
         <span>
-          <div className="filterBarLinks mx-auto mt-4 w-60">
+          <div className="filterBarLinks mx-auto mt-[2rem] w-[85%] ">
             <Link to={`/shop`}>
-              <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">
+              <div className="filter-mn fs-nm font-[700] mb-[3rem] pb-[1rem] px-[1rem]">
                 All Products
               </div>
             </Link>
           </div>
           {data.body.map((body) => (
             <div
-              className="filterBarLinks mx-auto w-60"
+              className="filterBarLinks mx-auto w-[85%]"
               key={body.category.categoryName}
             >
               <Link to={`/shop/${body.category.categoryName}`}>
-                <div className="filter-mn fs-nm fw-700 mb-3 w-70 px-2">
+                <div className="filter-mn fs-nm font-[700] mb-[3rem] pb-[1rem] px-[1rem]">
                   {body.category.categoryName}
                 </div>
               </Link>
@@ -35,7 +35,9 @@ export default function FilterBottom() {
                       to={`/shop/${body.category.categoryName}/${subCat.subCategoryName}`}
                       key={subCat.subCategoryName}
                     >
-                      <h4 className="mb-3 ms-2">{subCat.subCategoryName}</h4>
+                      <h4 className="mb-[3rem] ml-2">
+                        {subCat.subCategoryName}
+                      </h4>
                     </Link>
                   ))}
               </div>

@@ -197,7 +197,7 @@ export default function SideBar() {
               paddingBottom: "2rem",
             }}
           >
-            <div className="navigationContainer d-flex justify-content-between align-items-center">
+            <div className="navigationContainer flex justify-between items-center">
               <Badge
                 overlap="circular"
                 color="primary"
