@@ -46,10 +46,10 @@ const useStyles = makeStyles({
         height: "100%",
         position: "relative",
         "& .navIcon": {
-          fontSize: "3.5rem",
+          fontSize: "3rem",
           color: "#000",
           "@media (max-width: 420px)": {
-            fontSize: "3rem",
+            fontSize: "2.5rem",
           },
         },
         "& .menuIcon": {
@@ -74,13 +74,13 @@ const useStyles = makeStyles({
           fontSize: "initial",
           borderRadius: "unset",
           boxShadow: "none",
-          marginBottom: "5rem",
+          marginBottom: "3.5rem",
           "@media (max-width: 420px)": {
-            marginBottom: "3.8rem",
+            marginBottom: "2rem",
           },
         },
         "& .menuItemHeader": {
-          fontSize: "2.5rem",
+          fontSize: "2rem",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -88,7 +88,7 @@ const useStyles = makeStyles({
           padding: "1rem",
           paddingRight: "3rem",
           "@media (max-width: 420px)": {
-            fontSize: "2rem",
+            fontSize: "1.5rem",
           },
         },
         "& .menuItemContent": {
@@ -228,73 +228,25 @@ export default function SideBar() {
                 </Link>
               </div>
               <div className="menuItem">
-                <Link className="menuItemHeader link" to="/shop">
-                  Shop
+                <Link className="menuItemHeader link" to="/new-releases">
+                  New Releases
                 </Link>
-              </div>
-              {/* <div className="menuItem">
-                <div
-                  className="menuItemHeader link"
-                  tabIndex="1"
-                  type="button"
-                  onClick={handleWomenClick}
-                >
-                  <span>Women Active Wear</span>
-                  {openWomen ? (
-                    <ExpandIcon className="menuIcon" />
-                  ) : (
-                    <CollapseIcon className="menuIcon" />
-                  )}
-                </div>
-                <Collapse in={!openWomen} timeout="auto" unmountOnExit>
-                  <div className="menuItemContent ">
-                    <Link className="contentList link" to="/shop">
-                      Fullset
-                    </Link>
-                    <Link className="contentList link" to="/shop">
-                      Tops & Bra tops
-                    </Link>
-                    <Link className="contentList mb-0 link" to="/shop">
-                      Buttoms
-                    </Link>
-                  </div>
-                </Collapse>
-              </div>
-              <div className="menuItem ">
-                <div
-                  className="menuItemHeader link"
-                  tabIndex="1"
-                  type="button"
-                  onClick={handleMenClick}
-                >
-                  <span>Men Active Wear</span>
-                  {openMen ? (
-                    <ExpandIcon className="menuIcon" />
-                  ) : (
-                    <CollapseIcon className="menuIcon" />
-                  )}
-                </div>
-                <Collapse in={!openMen} timeout="auto" unmountOnExit>
-                  <div className="menuItemContent ">
-                    <Link className="contentList link" to="/shop">
-                      Tops
-                    </Link>
-                    <Link className="contentList mb-0 link" to="/shop">
-                      Buttoms
-                    </Link>
-                  </div>
-                </Collapse>
               </div>
               <div className="menuItem">
-                <Link className="menuItemHeader link" to="/shop">
-                  Waist Trainer
+                <Link className="menuItemHeader link" to="/men">
+                  Men
                 </Link>
               </div>
-              <div className="menuItem mb-0">
-                <Link className="menuItemHeader link" to="/shop">
-                  Fitness Equipment
+              <div className="menuItem">
+                <Link className="menuItemHeader link" to="/women">
+                  Women
                 </Link>
-              </div> */}
+              </div>
+              <div className="menuItem">
+                <Link className="menuItemHeader link" to="/accessories">
+                  Accessories
+                </Link>
+              </div>
             </div>
           </ListItem>
         </List>

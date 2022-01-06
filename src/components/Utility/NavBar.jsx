@@ -4,6 +4,7 @@ import RikeeyLogo from "../Reuseable/RikeeyLogo";
 import { Badge, Grid, Hidden } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 import SearchIcon from "@mui/icons-material/SearchOutlined";
+import ShoppingCart from "@mui/icons-material/ShoppingCartOutlined";
 import SideBar from "../Sidebar/SideBar";
 import clsx from "clsx";
 // import { apiCaller } from "../../apiCaller/apicaller";
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
       background: "#F6F6F6",
     },
     "& .logo-container": {
-      width: "4rem",
+      width: "3rem",
     },
     "& .logo-img": {
       height: "100%",
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
       },
     },
     "& .menuContainer": {
-      fontSize: "1.8rem",
+      fontSize: "1.5rem",
       fontWeight: 700,
       display: "flex",
       alignItems: "center",
@@ -87,7 +88,9 @@ function NavBar() {
               color="primary"
               badgeContent={data ? data.body.length : 0}
             >
-              <Link to="/cart">Cart</Link>
+              <Link to="/cart">
+                <ShoppingCart className="text-[2rem]" />
+              </Link>
             </Badge>
           </div>
           {/* <Grid item={true} sm={2} md={2}>
@@ -105,7 +108,7 @@ function NavBar() {
         </div>
       </Hidden>
       <div className="navigation sideBarNav flex justify-between items-center">
-        <Link className="logo-container sm:hidden w-[3rem] block" to="/">
+        <Link className="logo-container md:hidden w-[3rem] block" to="/">
           <RikeeyLogo />
         </Link>
         <SideBar />

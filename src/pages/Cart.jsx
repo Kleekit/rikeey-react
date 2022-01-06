@@ -30,7 +30,7 @@ export default function Cart() {
 
   return (
     <Layout>
-      <CategoryNav styles="flex">
+      <CategoryNav styles="flex border-none">
         <div>Cart</div>
       </CategoryNav>
       <div className="px-[3rem] sm:px-[6rem] pt-[4rem] sm:pt-[8rem] ">

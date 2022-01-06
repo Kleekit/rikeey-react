@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CartFooter({ total }) {
   return (
-    <div className="w-1/2 ml-auto mt-[4rem]">
+    <div className="sm:w-1/2 ml-auto mt-[4rem]">
       <div className="row grid grid-cols-2 gap-[8rem] cardFooterItemOne items-center justify-center">
         <div className="">
           <p>Subtotal</p>
@@ -28,9 +28,9 @@ export default function CartFooter({ total }) {
         </div>
         <div className="col-md-6">
           <h6 className="ml-36">₦{total}</h6>
-          <div>
+          <a href="/checkout">
             <button className="proceed mr-8 mt-8">Proceed to Checkout</button>
-          </div>
+          </a>
         </div>
       </div>
     </div>
