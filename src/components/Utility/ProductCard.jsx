@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard(props) {
   return (
-    <div className="productContainer flex flex-col justify-center px-[1.4%] w-1/2 sm:w-1/4">
+    <div
+      className={`${props.styles} productContainer flex flex-col justify-center `}
+    >
       <Link to={props.link} className="productNameContainer">
         {props.children}
       </Link>
@@ -14,7 +16,7 @@ export default function ProductCard(props) {
 ProductCard.Image = (props) => (
   <div className="productImg mb-[1rem]">
     <img
-      className="w-full rounded-[2rem] h-[55vh] "
+      className="w-full rounded-[2rem] h-[55vh] xs:h-[35vh]"
       src={props.children}
       alt="product figure"
     />
@@ -22,9 +24,13 @@ ProductCard.Image = (props) => (
 );
 
 ProductCard.Name = (props) => (
-  <p className="text-[2.3rem] font-[400] mb-[0.5rem] px-2">{props.children}</p>
+  <p className=" xs:text-[1.8rem] text-[2.3rem] font-[400] mb-[0.5rem] px-2">
+    {props.children}
+  </p>
 );
 
 ProductCard.Price = (props) => (
-  <p className="text-[1.8rem] font-[600] px-2">{props.children}</p>
+  <p className="xs:text-[1.6rem] text-[1.8rem] font-[600] px-2">
+    {props.children}
+  </p>
 );

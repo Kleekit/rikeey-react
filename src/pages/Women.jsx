@@ -10,21 +10,21 @@ import OpenFIlter from "../components/Shop/OpenFIlter";
 import FilterBottom from "../components/Shop/FilterBottom";
 import { getProduct } from "../methods/product.method";
 
-export default function Shop() {
+export default function Women() {
   const { isLoading, data, isError, refetch } = useQuery(
     "getProduct",
     getProduct
   );
   return (
     <Layout>
-      <CategoryNav styles="hidden md:flex">
-        <div>Tops</div>
+      <CategoryNav styles="hidden md:flex border-b-[0.15rem] border-[#5E6368]">
+        <div>Full Set</div>
+        <div>Bra</div>
         <div>Bottoms</div>
-        <div>Tees</div>
       </CategoryNav>
       <div className="p-[3rem] sm:p-[6rem]">
         <ShopHero>
-          <ShopHero.Name>Men</ShopHero.Name>
+          <ShopHero.Name>Women</ShopHero.Name>
           <ShopHero.Description>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint.
@@ -44,7 +44,8 @@ export default function Shop() {
                 key={product._id}
               >
                 <ProductCard.Image>
-                  {product.displayImage.url}
+                  {/* {product.displayImage.url} */}
+                  https://images.unsplash.com/photo-1540254597053-3901b858d40f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c3BvcnRzd2VhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60
                 </ProductCard.Image>
                 <ProductCard.Name>{product.name}</ProductCard.Name>
                 <ProductCard.Price>N {product.price}</ProductCard.Price>
@@ -58,12 +59,14 @@ export default function Shop() {
               "https://images.unsplash.com/photo-1486714941986-f2113c751c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWVuJTIwc3BvcnRzJTIwZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             }
             accessName={"Women"}
+            link="/women"
           />
           <AccessoriesCard
             src={
               "https://images.unsplash.com/photo-1512353087810-25dfcd100962?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
             }
             accessName={"Men"}
+            link="/men"
           />
         </div>
         <AccessoriesCard
@@ -71,6 +74,7 @@ export default function Shop() {
             "https://images.unsplash.com/3/www.madebyvadim.com.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWNjZXNzb3JpZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
           }
           accessName={"Accessories"}
+          link="/accessories"
         />
       </div>
     </Layout>

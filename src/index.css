@@ -325,3 +325,16 @@ a:focus {
   color: #730f11 !important;
   text-decoration: underline !important;
 }
+
+.filterContainer {
+  background: rgba(239, 239, 239, 0.31);
+  padding: 3.5rem;
+  border-radius: 4rem;
+}
+
+.filterContainerButton {
+  background-color: #ffdcdd;
+  font-weight: 600;
+  padding: 1.5rem 2.5rem;
+  border-radius: 2rem;
+}

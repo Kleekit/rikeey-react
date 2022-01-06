@@ -1,6 +1,5 @@
 import React from "react";
 // import { useHistory } from "react-router-dom";
-import CustomContainer from "../components/Navigation/CustomContainer";
 import { makeStyles } from "@material-ui/styles";
 import ArrowLeft from "@mui/icons-material/KeyboardArrowLeftRounded";
 import { Link } from "react-router-dom";
@@ -11,6 +10,7 @@ import { useMutation } from "react-query";
 import { register } from "../methods/cart.method";
 import { getOrStoreId } from "../helpers/getOrStore.helper";
 import CustomInput from "../components/Reuseable/CustomInput";
+import Layout from "../components/Utility/Layout";
 
 const useStyles = makeStyles({
   root: {
@@ -100,12 +100,12 @@ export default function Checkout() {
   });
 
   return (
-    <CustomContainer {...customConfig}>
+    <Layout {...customConfig}>
       {!isLoading ? (
         <form onSubmit={formik.handleSubmit}>
-          <div className="col-md-6 mt-6 mb-15 mx-auto ">
-            <div className="contact-info mBottom br-3 px-4 py-5">
-              <h3 className="fw-600 px-2 ">Contact Information</h3>
+          <div className=" w-6/7 sm:w-1/2 mt-6 mb-15 mx-auto ">
+            <div className="contact-info mBottom rounded-[1.5rem] px-[1.5rem] py-5">
+              <h3 className="font-[600] px-2 ">Contact Information</h3>
               <div className="form px-4">
                 <CustomInput
                   formik={formik}
@@ -123,8 +123,8 @@ export default function Checkout() {
                 />
               </div>
             </div>
-            <div className="contact-info mBottom br-3 px-4 py-5">
-              <h3 className="fw-600 px-2 ">Waybill Information</h3>
+            <div className="contact-info mBottom rounded-[1.5rem] px-[1.5rem] py-5">
+              <h3 className="font-[600] px-2 ">Waybill Information</h3>
               <div className="form px-4">
                 <CustomInput
                   formik={formik}
@@ -152,27 +152,29 @@ export default function Checkout() {
                   placeholder="Jakpa road"
                 />
 
-                <div className="country-state-form w-80 d-flex justify-content-between">
-                  {/* <div className="form-group  w-40 fs-sm"> */}
-                  <CustomInput
-                    formik={formik}
-                    formikTag="country"
-                    type="text"
-                    label="Country"
-                    labelText="Country"
-                    placeholder="Nigeria"
-                  />
-                  {/* </div> */}
-                  {/* <div className="form-group  w-40 fs-sm"> */}
-                  <CustomInput
-                    formik={formik}
-                    formikTag="state"
-                    type="text"
-                    label="State"
-                    labelText="State"
-                    placeholder="Delta"
-                  />
-                  {/* </div> */}
+                <div className="country-state-form grid grid-cols-4 gap-[3rem]">
+                  <div className="col-span-2">
+                    <CustomInput
+                      labelWidth="w-[60%]"
+                      formik={formik}
+                      formikTag="country"
+                      type="text"
+                      label="Country"
+                      labelText="Country"
+                      placeholder="Nigeria"
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <CustomInput
+                      labelWidth="w-[35%]"
+                      formik={formik}
+                      formikTag="state"
+                      type="text"
+                      label="State"
+                      labelText="State"
+                      placeholder="Delta"
+                    />
+                  </div>
                 </div>
                 <CustomInput
                   formik={formik}
@@ -203,9 +205,9 @@ export default function Checkout() {
               </div> */}
               </div>
             </div>
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="flex justify-between items-center">
               <Link to="/cart">
-                <div className="ms-3 returnBtn d-flex">
+                <div className="ml-3 returnBtn flex">
                   <ArrowLeft
                     sx={{
                       fontSize: "2.4rem",
@@ -214,18 +216,18 @@ export default function Checkout() {
                   <span>Return to cart </span>
                 </div>
               </Link>
-              <Button
+              <button
                 type="submit"
-                className="submitBtn me-3 br-2 py-3 px-5 fw-600 justify-content-end white"
+                className="submitBtn text-[1.5rem] sm:text-[1.3rem] mr-3 rounded-[0.5rem] py-3 px-5 font-[600] justify-end "
               >
-                <div>Continue</div>
-              </Button>
+                <div className="text-white font-bold">Continue</div>
+              </button>
             </div>
           </div>
         </form>
       ) : (
         <h1>Loading...</h1>
       )}
-    </CustomContainer>
+    </Layout>
   );
 }

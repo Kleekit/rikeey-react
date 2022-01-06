@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
 import CategoryNav from "../components/Utility/CategoryNav";
 import Layout from "../components/Utility/Layout";
@@ -7,12 +7,15 @@ import ProductCard from "../components/Utility/ProductCard";
 import DetailsCard from "../components/Utility/DetailsCard";
 import { getProduct, getProductDetails } from "../methods/product.method";
 import { useParams } from "react-router-dom";
-import HeroCarousel from "../components/Utility/HeroCarousel";
+import Carousel from "../components/Utility/Carousel";
 import { SwiperSlide } from "swiper/react";
+import { addItemToCart } from "../methods/cart.method";
+import { getOrStoreId } from "../helpers/getOrStore.helper";
 
 export default function Details() {
   const [sizes, setSize] = useState(Array);
   const [colors, setColor] = useState(Array);
+  const cartItem = useMutation((item) => addItemToCart(item));
 
   const sizesFromDb = ["sm", "md", "lg", "xl"];
   const colorsFromDb = ["red", "blue", "green"];
@@ -53,8 +56,21 @@ export default function Details() {
     if (arr.includes(params)) return "text-[red]";
   }
 
+  const handleAddToCart = async () => {
+    const payload = {
+      productId: item._id,
+      productName: item.name,
+      price: item.price,
+      sharedPreference: getOrStoreId(),
+    };
+    console.log(payload);
+    await cartItem.mutateAsync(payload);
+    // if (res.status) {
+    //   window.location.reload();
+    // }
+  };
+
   const productID = useParams();
-  // console.log(productID);
 
   const productQuery = useQuery("getProduct", getProduct);
 
@@ -62,8 +78,6 @@ export default function Details() {
   if (productQuery.data && productQuery.data.status) {
     product = productQuery.data.body;
   }
-
-  // console.log(productQuery.data);
 
   const { isLoading, isError, data } = useQuery(
     ["getProduct", { productId: productID.productId }],
@@ -87,18 +101,18 @@ export default function Details() {
 
   return (
     <Layout>
-      <CategoryNav>
+      <CategoryNav styles="hidden md:flex">
         <div>Tops</div>
         <div>Bottoms</div>
         <div>Tees</div>
       </CategoryNav>
-      <div className="px-[6rem] py-[4rem] ">
+      <div className="px-[3rem] sm:px-[6rem] py-[2rem] sm:py-[4rem] ">
         <DetailsCard>
           <DetailsCard.NavOutline>Women {">"} Full set</DetailsCard.NavOutline>
-          <div className=" grid grid-cols-2 gap-[8rem] mb-[10rem]">
+          <div className=" grid grid-cols-1 sm:grid-cols-2 sm:gap-[8rem] mb-[10rem]">
             <DetailsCard.Image>
-              <HeroCarousel styles="mb-[2rem]">
-                <HeroCarousel.Slides>
+              <Carousel styles="mb-[2rem]">
+                <Carousel.Slides>
                   {item.allImages.map((image) => (
                     <SwiperSlide>
                       <img
@@ -109,8 +123,8 @@ export default function Details() {
                       />
                     </SwiperSlide>
                   ))}
-                </HeroCarousel.Slides>
-              </HeroCarousel>
+                </Carousel.Slides>
+              </Carousel>
             </DetailsCard.Image>
             <div>
               <DetailsCard.Name>{item.name}</DetailsCard.Name>
@@ -123,7 +137,7 @@ export default function Details() {
                   {sizesFromDb.map((cur) => (
                     <div
                       onClick={() => handleSize(cur)}
-                      className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline ${selected(
+                      className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
                         sizes,
                         cur
                       )}`}
@@ -131,15 +145,6 @@ export default function Details() {
                       {cur}
                     </div>
                   ))}
-                  {/* <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline active:text-[red]">
-                    sm
-                  </div>
-                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
-                    lg
-                  </div>
-                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
-                    xl
-                  </div> */}
                 </div>
               </DetailsCard.Size>
               <DetailsCard.Color>
@@ -147,7 +152,7 @@ export default function Details() {
                   {colorsFromDb.map((cur) => (
                     <div
                       onClick={() => handleColor(cur)}
-                      className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline active:text-[red] ${selected(
+                      className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
                         colors,
                         cur
                       )}`}
@@ -155,20 +160,11 @@ export default function Details() {
                       {cur}
                     </div>
                   ))}
-                  {/* <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline text-[red]">
-                    red
-                  </div>
-                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
-                    blue
-                  </div>
-                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
-                    yellow
-                  </div> */}
                 </div>
               </DetailsCard.Color>
               <DetailsCard.Set>
                 <div className="flex">
-                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline active:text-[red]">
+                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red]">
                     full set
                   </div>
                   <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
@@ -179,6 +175,9 @@ export default function Details() {
                   </div>
                 </div>
               </DetailsCard.Set>
+              <div>
+                <button onClick={handleAddToCart}>Add to cart</button>
+              </div>
             </div>
           </div>
         </DetailsCard>
@@ -186,7 +185,7 @@ export default function Details() {
           <div className="text-[2rem] font-bold underline underline-offset-2 mb-[2.3rem]">
             You may like
           </div>
-          <div className="flex flex-wrap mx-[-1.4%] ">
+          <div className="hidden sm:flex flex-wrap sm:mx-[-3%] md:mx-[-1.4%] ">
             {productQuery.data &&
               product.map((product) => (
                 <ProductCard key={product._id}>
@@ -198,12 +197,47 @@ export default function Details() {
                 </ProductCard>
               ))}
           </div>
+          <Carousel styles="mb-[2rem] block sm:hidden">
+            <Carousel.Slides>
+              {productQuery.data &&
+                product.map((product) => (
+                  <SwiperSlide key={product._id}>
+                    <ProductCard
+                      styles="pb-[4rem]"
+                      link={`/details/${product._id}`}
+                    >
+                      <ProductCard.Image>
+                        {product.displayImage.url}
+                      </ProductCard.Image>
+                      <ProductCard.Name>{product.name}</ProductCard.Name>
+                      <ProductCard.Price>N {product.price}</ProductCard.Price>
+                    </ProductCard>
+                  </SwiperSlide>
+                ))}
+            </Carousel.Slides>
+          </Carousel>
         </div>
-        <div className="grid grid-cols-2 gap-[8rem] mb-[12rem]">
-          <AccessoriesCard />
-          <AccessoriesCard />
+        <div className="border-b-[0.15rem] border-[#848688] mx-auto w-full sm:w-[75%] mb-[10rem]"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[8rem] mb-[12rem]">
+          <AccessoriesCard
+            src={
+              "https://images.unsplash.com/photo-1486714941986-f2113c751c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWVuJTIwc3BvcnRzJTIwZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            }
+            accessName={"Women"}
+          />
+          <AccessoriesCard
+            src={
+              "https://images.unsplash.com/photo-1512353087810-25dfcd100962?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            }
+            accessName={"Men"}
+          />
         </div>
-        <AccessoriesCard />
+        <AccessoriesCard
+          src={
+            "https://images.unsplash.com/3/www.madebyvadim.com.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWNjZXNzb3JpZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+          }
+          accessName={"Accessories"}
+        />
       </div>
     </Layout>
   );

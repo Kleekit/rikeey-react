@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import { makeStyles } from "@material-ui/styles";
+import { getOrStoreId } from "../../helpers/getOrStore.helper";
 import clsx from "clsx";
 import "../LandingPage/landing.css";
 import "../LandingPage/queries.css";
+import { generateRandomString } from "../../helpers/generateRandomString";
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +33,18 @@ const useStyles = makeStyles({
 export default function Layout(props) {
   const classes = useStyles();
   const { customStyle } = props;
+
+  const LookForId = () => {
+    const id = getOrStoreId();
+    if (!id) {
+      const t = new Date().getTime().toString();
+      getOrStoreId(generateRandomString({ name: t, length: 12 }));
+    }
+  };
+
+  useEffect(() => {
+    LookForId();
+  }, []);
 
   return (
     <div className={classes.root}>
