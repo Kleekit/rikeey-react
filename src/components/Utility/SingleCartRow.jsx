@@ -24,13 +24,13 @@ export default function SingleCartRow({ item, refetch }) {
         <div className="col-md-6 flex">
           <img
             className="img-fluid cartItemImg rounded-lg"
-            src="https://randomuser.me/api/portraits/women/82.jpg"
+            src={item.productId.displayImage.url}
             alt="cart item"
           />
           <div>
-            <h6 className="mx-3 font-bold">Motion Seamless Crop - Musk Pink</h6>
+            <h6 className="mx-3 font-bold">{item.productName}</h6>
 
-            <p className="mx-3 customItemText text-gray-500">Grey Crop Top</p>
+            {/* <p className="mx-3 customItemText text-gray-500">Grey Crop Top</p> */}
           </div>
         </div>
         <div className="col-md-6">
@@ -44,14 +44,14 @@ export default function SingleCartRow({ item, refetch }) {
               </h6>
             </div> */}
           <div className="col-md-4 flex justify-between">
-            <h6 className="font-bold">₦15,000</h6>
+            <h6 className="font-bold">{item.price}</h6>
             <button className="removeBtn">
               <AiOutlineClose />
               <ChangeQuantity item={item} refetch={refetch} />
             </button>
           </div>
           <div className="col-md-4 flex justify-between">
-            <h6>15,000</h6>
+            <h6>{item.price * item.quantity} total</h6>
             <button onClick={handleRemoveItem} className="removeBtn">
               X
             </button>
@@ -74,6 +74,8 @@ const ChangeQuantity = ({ item, refetch }) => {
       refetch();
     }
   };
+
+  console.log(item);
 
   return (
     <>

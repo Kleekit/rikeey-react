@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
+import { getCartItem } from "../../methods/cart.method";
 import SingleCartRow from "./SingleCartRow";
 
 // .cartItemsContainer {
@@ -49,7 +51,7 @@ import SingleCartRow from "./SingleCartRow";
 //     border-radius: 0.5rem;
 //   }
 
-export default function CartRowContainer() {
+export default function CartRowContainer({ items, refetch }) {
   return (
     <div className="cartItemsContainer ">
       <div className="cartContainerHeader mb-[2rem]">
@@ -74,9 +76,10 @@ export default function CartRowContainer() {
       </div>
       <div className="border-y-[0.1rem] border-[#5E6368] py-[4rem] pl-[8rem]">
         {/* <SingleCartRow item={item} refetch={refetch} /> */}
-        <SingleCartRow />
-        <SingleCartRow />
-        <SingleCartRow />
+        {items.map((item) => (
+          // <SingleCartRow />
+          <SingleCartRow item={item} refetch={refetch} key={item.productName} />
+        ))}
       </div>
     </div>
   );
