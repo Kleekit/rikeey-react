@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import { getCartItem } from "../../methods/cart.method";
+import React from "react";
+// import { useQuery } from "react-query";
+// import { getCartItem } from "../../methods/cart.method";
 import SingleCartRow from "./SingleCartRow";
 
 // .cartItemsContainer {

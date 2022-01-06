@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlinePlus, AiOutlineMinus, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import { useMutation } from "react-query";
 import { changeQuantity, removeItemFormCart } from "../../methods/cart.method";
 

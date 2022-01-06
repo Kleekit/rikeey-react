@@ -53,13 +53,15 @@ function LandingPage() {
       </Carousel>
       <div className="p-[3rem] sm:p-[6rem]">
         <div className="text-center mb-[12rem]">
-          <div className="text-[5rem] font-bold mb-[1rem]">Sweat in Style</div>
-          <div className="text-[2rem] font-[500] mb-[3.5rem]">
+          <div className="text-[5rem] font-bold mb-[1rem] xs:text-[3rem]">
+            Sweat in Style
+          </div>
+          <div className="text-[2rem] font-[500] mb-[3.5rem] xs:text-[1.8rem]">
             Made for your comfort
           </div>
           <a
             href="/shop"
-            className="inline text-[2rem] p-[1.5rem] rounded-[3rem] cursor-pointer font-bold bg-[#FEB9BA]"
+            className="inline xs:text-[1.5rem] text-[2rem] p-[1.5rem] rounded-[3rem] cursor-pointer font-bold bg-[#FEB9BA]"
           >
             Shop Now
           </a>
