@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
 import CategoryNav from "../components/Utility/CategoryNav";
@@ -15,6 +15,8 @@ export default function NewReleases() {
     "getProduct",
     getProduct
   );
+
+  const [toggleFilter, setToggleFilter] = useState(0);
   return (
     <Layout>
       {/* <CategoryNav styles="hidden md:flex">
@@ -29,7 +31,34 @@ export default function NewReleases() {
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint.
           </ShopHero.Description>
-          <ShopHero.Toggle>toggle</ShopHero.Toggle>
+          <ShopHero.Toggle>
+            <div className="filterContainer flex items-center justify-around xs:hidden">
+              <button
+                onClick={() => setToggleFilter(1)}
+                className={
+                  toggleFilter === 1 ? "filterContainerButton" : "font-bold"
+                }
+              >
+                Women
+              </button>
+              <button
+                onClick={() => setToggleFilter(2)}
+                className={
+                  toggleFilter === 2 ? "filterContainerButton" : "font-bold"
+                }
+              >
+                New Releases
+              </button>
+              <button
+                onClick={() => setToggleFilter(3)}
+                className={
+                  toggleFilter === 3 ? "filterContainerButton" : "font-bold"
+                }
+              >
+                Men
+              </button>
+            </div>
+          </ShopHero.Toggle>
         </ShopHero>
         <ShopSideBar openFilter={<OpenFIlter />}>
           <div className="text-[2rem]">
@@ -45,7 +74,8 @@ export default function NewReleases() {
                 key={product._id}
               >
                 <ProductCard.Image>
-                  {product.displayImage.url}
+                  {/* {product.displayImage.url} */}
+                  https://images.unsplash.com/photo-1540254597053-3901b858d40f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c3BvcnRzd2VhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60
                 </ProductCard.Image>
                 <ProductCard.Name>{product.name}</ProductCard.Name>
                 <ProductCard.Price>N {product.price}</ProductCard.Price>

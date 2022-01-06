@@ -9,6 +9,7 @@ import clsx from "clsx";
 // import { apiCaller } from "../../apiCaller/apicaller";
 import { useQuery } from "react-query";
 import { getCartItem } from "../../methods/cart.method";
+import CartIcon from "../Reuseable/CartIcon";
 
 const useStyles = makeStyles({
   root: {
@@ -85,7 +86,9 @@ function NavBar() {
               color="primary"
               badgeContent={data ? data.body.length : 0}
             >
-              <Link to="/cart">Cart</Link>
+              <Link to="/cart">
+                <CartIcon />
+              </Link>
             </Badge>
           </Grid>
           <Grid item={true} sm={2} md={2}>

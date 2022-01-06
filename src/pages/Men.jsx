@@ -44,7 +44,8 @@ export default function Men() {
                 key={product._id}
               >
                 <ProductCard.Image>
-                  {product.displayImage.url}
+                  {/* {product.displayImage.url} */}
+                  https://images.unsplash.com/photo-1540254597053-3901b858d40f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c3BvcnRzd2VhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60
                 </ProductCard.Image>
                 <ProductCard.Name>{product.name}</ProductCard.Name>
                 <ProductCard.Price>N {product.price}</ProductCard.Price>

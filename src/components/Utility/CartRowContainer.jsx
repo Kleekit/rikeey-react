@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus, AiOutlineClose } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { getCartItem } from "../../methods/cart.method";
+=======
+import React from "react";
+// import { useQuery } from "react-query";
+// import { getCartItem } from "../../methods/cart.method";
+>>>>>>> 649df4eee8358100cc764bcd267a61e9ea5eeedf
 import SingleCartRow from "./SingleCartRow";
 
 // .cartItemsContainer {
