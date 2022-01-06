@@ -3,7 +3,7 @@ import React from "react";
 export default function ShopHero(props) {
   return (
     <div
-      className={`${props.styles} text-center w-3/4 sm:w-2/5 mx-auto mb-[10rem]`}
+      className={`${props.styles} text-center w-3/4 sm:w-2/5 mx-auto mb-[6rem]`}
     >
       {props.children}
     </div>
