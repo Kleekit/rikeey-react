@@ -17,11 +17,11 @@ export default function NewReleases() {
   );
   return (
     <Layout>
-      <CategoryNav styles="hidden md:flex">
+      {/* <CategoryNav styles="hidden md:flex">
         <div>Tops</div>
         <div>Bottoms</div>
         <div>Tees</div>
-      </CategoryNav>
+      </CategoryNav> */}
       <div className="p-[3rem] sm:p-[6rem]">
         <ShopHero>
           <ShopHero.Name>New Releases</ShopHero.Name>

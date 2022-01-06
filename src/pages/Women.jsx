@@ -18,9 +18,9 @@ export default function Women() {
   return (
     <Layout>
       <CategoryNav styles="hidden md:flex">
-        <div>Tops</div>
+        <div>Full Set</div>
+        <div>Bra</div>
         <div>Bottoms</div>
-        <div>Tees</div>
       </CategoryNav>
       <div className="p-[3rem] sm:p-[6rem]">
         <ShopHero>
