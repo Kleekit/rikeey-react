@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
-import { AiOutlinePlus, AiOutlineMinus, AiOutlineClose } from "react-icons/ai";
-import { useQuery } from "react-query";
-import { getCartItem } from "../../methods/cart.method";
-=======
-import React from "react";
+// import { AiOutlinePlus, AiOutlineMinus, AiOutlineClose } from "react-icons/ai";
 // import { useQuery } from "react-query";
 // import { getCartItem } from "../../methods/cart.method";
->>>>>>> 649df4eee8358100cc764bcd267a61e9ea5eeedf
 import SingleCartRow from "./SingleCartRow";
 
 // .cartItemsContainer {
@@ -82,10 +76,10 @@ export default function CartRowContainer({ items, refetch }) {
         </div>
       </div>
       <div className="md:border-y-[0.1rem] border-[#5E6368] py-[5rem] px-[2rem] md:pl-[8rem]">
-        <SingleCartRow />
-        {/* {items.map((item) => (
+        {/* <SingleCartRow /> */}
+        {items.map((item) => (
           <SingleCartRow item={item} refetch={refetch} key={item.productName} />
-        ))} */}
+        ))}
       </div>
     </div>
   );
