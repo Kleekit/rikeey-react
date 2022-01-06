@@ -1,47 +1,103 @@
 import React, { useState } from "react";
+import { useMutation, useQuery } from "react-query";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
 import CategoryNav from "../components/Utility/CategoryNav";
 import Layout from "../components/Utility/Layout";
 import ProductCard from "../components/Utility/ProductCard";
-import ProductDetailsCard from "../components/Utility/ProductDetailsCard";
+import DetailsCard from "../components/Utility/DetailsCard";
+import { getProduct, getProductDetails } from "../methods/product.method";
+import { useParams } from "react-router-dom";
+import HeroCarousel from "../components/Utility/HeroCarousel";
+import { SwiperSlide } from "swiper/react";
+import { addItemToCart } from "../methods/cart.method";
+import { getOrStoreId } from "../helpers/getOrStore.helper";
 
 export default function Details() {
-  const [size, setSize] = useState([]);
-  const [color, setColor] = useState([]);
+  const [sizes, setSize] = useState(Array);
+  const [colors, setColor] = useState(Array);
+  const cartItem = useMutation((item) => addItemToCart(item));
+
+  const sizesFromDb = ["sm", "md", "lg", "xl"];
+  const colorsFromDb = ["red", "blue", "green"];
 
   function handleSize(value) {
-    if (size.includes(value)) {
-      size.filter((cur) => cur !== value);
+    if (sizes.includes(value)) {
+      for (let i = 0; i < sizes.length; i++) {
+        if (value === sizes[i]) {
+          sizes.splice(i, 1);
+          break;
+        }
+      }
+      setSize([...sizes]);
     } else {
-      size.push(value);
+      sizes.push(value);
+      setSize([...sizes]);
     }
+    console.log(sizes);
   }
 
   function handleColor(value) {
-    if (color.includes(value)) {
-      color.filter((cur) => cur !== value);
+    if (colors.includes(value)) {
+      for (let i = 0; i < colors.length; i++) {
+        if (value === colors[i]) {
+          colors.splice(i, 1);
+          break;
+        }
+      }
+      setColor([...colors]);
     } else {
-      color.push(value);
+      colors.push(value);
+      setColor([...colors]);
     }
+    console.log(colors);
   }
 
-  // function makeCornflake({ cornFlake, water, milk, milo, plate, spoon }) {
-  //   plate.push(cornFlake);
-  //   plate.push(milk);
-  //   plate.push(milo);
-  //   plate.push(water);
-  //   plate.push(spoon);
-  //   console.log("please enjoy your meal!");
-  //   console.log(plate);
-  // }
+  function selected(arr, params) {
+    if (arr.includes(params)) return "text-[red]";
+  }
 
-  // let plate = [];
-  // let milk = "peak milk";
-  // let milo = "milo";
-  // let water = "nestle water";
-  // let cornFlake = "Nasco";
-  // let spoon = "metallic spoon";
-  // makeCornflake({ plate, milk, milo, water, cornFlake, spoon });
+  const handleAddToCart = async () => {
+    const payload = {
+      productId: item._id,
+      productName: item.name,
+      price: item.price,
+      sharedPreference: getOrStoreId(),
+    };
+    console.log(payload);
+    await cartItem.mutateAsync(payload);
+    // if (res.status) {
+    //   window.location.reload();
+    // }
+  };
+
+  const productID = useParams();
+
+  const productQuery = useQuery("getProduct", getProduct);
+
+  let product;
+  if (productQuery.data && productQuery.data.status) {
+    product = productQuery.data.body;
+  }
+
+  const { isLoading, isError, data } = useQuery(
+    ["getProduct", { productId: productID.productId }],
+    getProductDetails
+  );
+
+  if (isError) {
+    return "bros error de.......";
+  }
+
+  if (isLoading) {
+    return "Loading.......";
+  }
+
+  let item;
+  if (data && data.status) {
+    item = data.body;
+  }
+
+  // console.log({ item });
 
   return (
     <Layout>
@@ -51,36 +107,95 @@ export default function Details() {
         <div>Tees</div>
       </CategoryNav>
       <div className="px-[6rem] py-[4rem] ">
-        <ProductDetailsCard />
+        <DetailsCard>
+          <DetailsCard.NavOutline>Women {">"} Full set</DetailsCard.NavOutline>
+          <div className=" grid grid-cols-2 gap-[8rem] mb-[10rem]">
+            <DetailsCard.Image>
+              <HeroCarousel styles="mb-[2rem]">
+                <HeroCarousel.Slides>
+                  {item.allImages.map((image) => (
+                    <SwiperSlide>
+                      <img
+                        alt={image.originalname}
+                        className={"carouselImg rounded-[5rem]"}
+                        width="100%"
+                        src={image.url}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </HeroCarousel.Slides>
+              </HeroCarousel>
+            </DetailsCard.Image>
+            <div>
+              <DetailsCard.Name>{item.name}</DetailsCard.Name>
+              <DetailsCard.Price>N {item.price}</DetailsCard.Price>
+              <DetailsCard.Description>
+                {item.description}
+              </DetailsCard.Description>
+              <DetailsCard.Size>
+                <div className="flex">
+                  {sizesFromDb.map((cur) => (
+                    <div
+                      onClick={() => handleSize(cur)}
+                      className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline ${selected(
+                        sizes,
+                        cur
+                      )}`}
+                    >
+                      {cur}
+                    </div>
+                  ))}
+                </div>
+              </DetailsCard.Size>
+              <DetailsCard.Color>
+                <div className="flex">
+                  {colorsFromDb.map((cur) => (
+                    <div
+                      onClick={() => handleColor(cur)}
+                      className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline active:text-[red] ${selected(
+                        colors,
+                        cur
+                      )}`}
+                    >
+                      {cur}
+                    </div>
+                  ))}
+                </div>
+              </DetailsCard.Color>
+              <DetailsCard.Set>
+                <div className="flex">
+                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline active:text-[red]">
+                    full set
+                  </div>
+                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
+                    crop top
+                  </div>
+                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
+                    leggings
+                  </div>
+                </div>
+              </DetailsCard.Set>
+              <div>
+                <button onClick={handleAddToCart}>Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </DetailsCard>
         <div className="similar-container mb-[12rem]">
           <div className="text-[2rem] font-bold underline underline-offset-2 mb-[2.3rem]">
             You may like
           </div>
           <div className="flex flex-wrap mx-[-1.4%] ">
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
-            <ProductCard>
-              <ProductCard.Name>
-                Motion Seamless Crop - Musk Pink
-              </ProductCard.Name>
-              <ProductCard.Price>N 30,000</ProductCard.Price>
-            </ProductCard>
+            {productQuery.data &&
+              product.map((product) => (
+                <ProductCard key={product._id}>
+                  <ProductCard.Image>
+                    {product.displayImage.url}
+                  </ProductCard.Image>
+                  <ProductCard.Name>{product.name}</ProductCard.Name>
+                  <ProductCard.Price>N {product.price}</ProductCard.Price>
+                </ProductCard>
+              ))}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-[8rem] mb-[12rem]">

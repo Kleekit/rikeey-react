@@ -19,8 +19,8 @@ function App() {
       <Route path="/ekama" exact component={Ekama} />
       <Route path="/shop" exact component={Shop} />
       <Route path="/shop/:category" exact component={Shop} />
-      <Route path="/details" exact component={Details} />
-      {/* <Route path="/details/:productId" exact component={Details} /> */}
+      {/* <Route path="/details" exact component={Details} /> */}
+      <Route path="/details/:productId" exact component={Details} />
       <Route path="/shop/:category/:subCategory" exact component={Shop} />
       {/* <Route path="/shop/:details" exact component={Details} /> */}
       <Route path="/cart" exact component={Cart} />

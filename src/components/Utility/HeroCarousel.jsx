@@ -23,20 +23,20 @@ const useStyles = makeStyles({
   },
 });
 
-const carouselImg = [
-  { src: "./images/slide1.png", alt: "" },
-  { src: "./images/slide2.png", alt: "" },
-  { src: "./images/slide3.png", alt: "" },
-  { src: "./images/men-button.png", alt: "" },
-  { src: "./images/slide2.png", alt: "" },
-  { src: "./images/women-set.png", alt: "" },
-  { src: "./images/slide1.png", alt: "" },
-  { src: "./images/slide2.png", alt: "" },
-  { src: "./images/slide3.png", alt: "" },
-  { src: "./images/men-button.png", alt: "" },
-  { src: "./images/slide2.png", alt: "" },
-  { src: "./images/women-set.png", alt: "" },
-];
+// const carouselImg = [
+//   { src: "./images/slide1.png", alt: "" },
+//   { src: "./images/slide2.png", alt: "" },
+//   { src: "./images/slide3.png", alt: "" },
+//   { src: "./images/men-button.png", alt: "" },
+//   { src: "./images/slide2.png", alt: "" },
+//   { src: "./images/women-set.png", alt: "" },
+//   { src: "./images/slide1.png", alt: "" },
+//   { src: "./images/slide2.png", alt: "" },
+//   { src: "./images/slide3.png", alt: "" },
+//   { src: "./images/men-button.png", alt: "" },
+//   { src: "./images/slide2.png", alt: "" },
+//   { src: "./images/women-set.png", alt: "" },
+// ];
 
 export default function HeroCarousel(props) {
   const classes = useStyles();
@@ -54,16 +54,20 @@ export default function HeroCarousel(props) {
       grabCursor
       keyboard={{ enabled: true }}
     >
-      {carouselImg.map((item, itemIdx) => (
+      {props.children}
+      {/* {carouselImg.map((item, itemIdx) => (
         <SwiperSlide key={itemIdx}>
-          <img
+           <img
             alt={item.alt}
             className={"carouselImg"}
             width="100%"
             src={item.src}
-          />
+          /> 
+          {props.children}
         </SwiperSlide>
-      ))}
+      ))} */}
     </Swiper>
   );
 }
+
+HeroCarousel.Slides = (props) => props.children;

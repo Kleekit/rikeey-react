@@ -304,3 +304,24 @@ a:focus {
 }
 
 /* >>>>>>>>>>>> */
+
+/* Custom styles */
+
+.cardFooterItemOne {
+  margin-bottom: 2rem;
+  border-bottom: 0.6px solid #5e6368;
+  padding-bottom: 2rem;
+}
+
+.proceed {
+  border: none;
+  background-color: #feb9ba;
+  padding: 8px 20px;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+}
+
+.linkCustom {
+  color: #730f11 !important;
+  text-decoration: underline !important;
+}
