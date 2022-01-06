@@ -74,9 +74,9 @@ export default function CartRowContainer() {
       </div>
       <div className="border-y-[0.1rem] border-[#5E6368] py-[4rem] pl-[8rem]">
         {/* <SingleCartRow item={item} refetch={refetch} /> */}
+        {/* <SingleCartRow />
         <SingleCartRow />
-        <SingleCartRow />
-        <SingleCartRow />
+        <SingleCartRow /> */}
       </div>
     </div>
   );

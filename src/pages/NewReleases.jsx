@@ -10,7 +10,7 @@ import OpenFIlter from "../components/Shop/OpenFIlter";
 import FilterBottom from "../components/Shop/FilterBottom";
 import { getProduct } from "../methods/product.method";
 
-export default function Shop() {
+export default function NewReleases() {
   const { isLoading, data, isError, refetch } = useQuery(
     "getProduct",
     getProduct
@@ -24,11 +24,12 @@ export default function Shop() {
       </CategoryNav>
       <div className="p-[3rem] sm:p-[6rem]">
         <ShopHero>
-          <ShopHero.Name>Men</ShopHero.Name>
+          <ShopHero.Name>New Releases</ShopHero.Name>
           <ShopHero.Description>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint.
           </ShopHero.Description>
+          <ShopHero.Toggle>toggle</ShopHero.Toggle>
         </ShopHero>
         <ShopSideBar openFilter={<OpenFIlter />}>
           <div className="text-[2rem]">
@@ -58,12 +59,14 @@ export default function Shop() {
               "https://images.unsplash.com/photo-1486714941986-f2113c751c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWVuJTIwc3BvcnRzJTIwZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
             }
             accessName={"Women"}
+            link="/women"
           />
           <AccessoriesCard
             src={
               "https://images.unsplash.com/photo-1512353087810-25dfcd100962?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
             }
             accessName={"Men"}
+            link="/men"
           />
         </div>
         <AccessoriesCard
@@ -71,6 +74,7 @@ export default function Shop() {
             "https://images.unsplash.com/3/www.madebyvadim.com.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWNjZXNzb3JpZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
           }
           accessName={"Accessories"}
+          link="/accessories"
         />
       </div>
     </Layout>

@@ -11,7 +11,7 @@ export default function Cart() {
         <div>Cart</div>
       </CategoryNav>
       <div className="px-[3rem] sm:px-[6rem] pt-[4rem] sm:pt-[8rem] ">
-        <CartRowContainer />
+        {/* <CartRowContainer /> */}
         <CartFooter />
       </div>
     </Layout>
