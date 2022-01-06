@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { getUser, register } from "../methods/cart.method";
 import { getOrStoreId } from "../helpers/getOrStore.helper";
+import Layout from "../components/Utility/Layout";
 
 const useStyles = makeStyles({
   root: {
@@ -47,37 +48,37 @@ function Payment() {
   const { isLoading, data } = useQuery("getUser", getUser);
 
   return (
-    <CustomContainer {...customConfig}>
+    <Layout {...customConfig}>
       {!isLoading ? (
-        <div className="col-md-6 mt-6 mb-15 mx-auto">
-          <div className="contact-info mBottom  br-3 px-4 py-5">
-            <h3 className="fw-600 px-2 ">Contact Information</h3>
+        <div className="w-6/7 sm:w-1/2 mt-6 mb-15 mx-auto ">
+          <div className="contact-info mBottom rounded-[1.5rem] px-[1.5rem] py-5">
+            <h3 className="font-[600] px-2 ">Contact Information</h3>
             <div className="form px-4">
-              <div className="form-group  fs-sm">
-                <label className="mb-2">Email address</label>
-                <div className="d-flex ">
+              <div className="form-group grid grid-cols-3 gap-[0rem] md:gap-[2rem] items-center fs-sm">
+                <label className="mb-2 col-span-1">Email address</label>
+                <div className="flex col-span-2">
                   <input
                     type="email"
-                    className="form-control customInput no-border"
+                    className="rounded-[0.5rem] p-3 customInput border-none"
                     id=""
                     aria-describedby=""
                     placeholder={data.body.email}
                   />
-                  <div className="w-20 fs-smr red my-auto text-center fw-700">
+                  <div className="w-[20%] fs-smr text-red my-auto text-center font-[700]">
                     Change
                   </div>
                 </div>
               </div>
-              <div className="form-group mb-4 fs-sm ">
-                <label className="mb-2">Phone Number</label>
-                <div className="d-flex ">
+              <div className="form-group grid grid-cols-3 gap-[0rem] md:gap-[2rem] items-center mb-4 fs-sm ">
+                <label className="mb-2 col-span-1">Phone Number</label>
+                <div className="flex col-span-2">
                   <input
                     type="text"
-                    className="form-control customInput no-border"
+                    className="rounded-[0.5rem] p-3 customInput border-none"
                     id=""
                     placeholder={data.body.phone}
                   />
-                  <div className="w-20 fs-smr red my-auto text-center fw-700">
+                  <div className="w-[20%] fs-smr text-red my-auto text-center font-[700]">
                     Change
                   </div>
                 </div>
@@ -85,15 +86,15 @@ function Payment() {
             </div>
           </div>
 
-          <div className="waybill-info mBottom br-3 px-4 py-5 ">
-            <h3 className="fw-600 px-2 ">Waybill Information</h3>
+          <div className="waybill-info mBottom rounded-[1.5rem] px-[1.5rem] py-5 ">
+            <h3 className="font-[600] px-2 ">Waybill Information</h3>
             <div className="form px-4">
-              <div className="form-group mb-4 fs-sm">
-                <label className="mb-2">Address</label>
-                <div className="d-flex ">
+              <div className="form-group grid grid-cols-3 gap-[0rem] md:gap-[2rem] items-center mb-4 fs-sm">
+                <label className="mb-2 col-span-1">Address</label>
+                <div className="flex col-span-2">
                   <input
                     type="text"
-                    className="form-control customInput no-border"
+                    className="rounded-[0.5rem] p-3 customInput border-none"
                     id=""
                     placeholder={data.body.address}
                   />
@@ -150,9 +151,9 @@ function Payment() {
           </div>
         </div> */}
 
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="flex justify-between items-center">
             <Link to="/checkout">
-              <div className="ms-3 returnBtn d-flex">
+              <div className="ms-3 returnBtn flex">
                 <ArrowLeft
                   sx={{
                     fontSize: "2.4rem",
@@ -167,7 +168,7 @@ function Payment() {
       ) : (
         <h1>Loading....</h1>
       )}
-    </CustomContainer>
+    </Layout>
   );
 }
 

@@ -33,7 +33,7 @@ export default function Cart() {
       <CategoryNav styles="flex text-center sm:border-b-[0.15rem] border-[#5E6368]">
         <div>Cart</div>
       </CategoryNav>
-      {data && data.status && (
+      {data && data.status ? (
         <div className="px-[3rem] sm:px-[6rem] pt-[4rem] sm:pt-[8rem] ">
           <CartRowContainer
             items={data.body}
@@ -41,6 +41,10 @@ export default function Cart() {
             setTotal={setTotal}
           />
           <CartFooter total={overallAllTotal} />
+        </div>
+      ) : (
+        <div className="w-1/2 mx-auto">
+          <div className="text-[2rem]">Nothing de your cart</div>
         </div>
       )}
     </Layout>
