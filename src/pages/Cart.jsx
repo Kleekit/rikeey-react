@@ -7,7 +7,7 @@ import Layout from "../components/Utility/Layout";
 import { getCartItem } from "../methods/cart.method";
 
 export default function Cart() {
-  const [total, setTotal] = useState(0);
+  const [setTotal] = useState(0);
 
   const { isLoading, data, isError, refetch } = useQuery(
     "getCartItem",

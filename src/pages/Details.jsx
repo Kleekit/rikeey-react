@@ -17,8 +17,8 @@ export default function Details() {
   const [colors, setColor] = useState(Array);
   const cartItem = useMutation((item) => addItemToCart(item));
 
-  const sizesFromDb = ["sm", "md", "lg", "xl"];
-  const colorsFromDb = ["red", "blue", "green"];
+  // const sizesFromDb = ["sm", "md", "lg", "xl"];
+  // const colorsFromDb = ["red", "blue", "green"];
 
   function handleSize(value) {
     if (sizes.includes(value)) {
@@ -134,39 +134,39 @@ export default function Details() {
               </DetailsCard.Description>
               {item.sizes.length > 0 && (
                 <DetailsCard.Size>
-                <div className="flex">
-                  {item.sizes.map((cur) => (
-                    <div
-                      onClick={() => handleSize(cur)}
-                      className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
-                        sizes,
-                        cur
-                      )}`}
-                    >
-                      {cur}
-                    </div>
-                  ))}
-                </div>
-              </DetailsCard.Size>
+                  <div className="flex">
+                    {item.sizes.map((cur) => (
+                      <div
+                        onClick={() => handleSize(cur)}
+                        className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
+                          sizes,
+                          cur
+                        )}`}
+                      >
+                        {cur}
+                      </div>
+                    ))}
+                  </div>
+                </DetailsCard.Size>
               )}
               {item.colors.length > 0 && (
-                 <DetailsCard.Color>
-                 <div className="flex">
-                   {item.colors.map((cur) => (
-                     <div
-                       onClick={() => handleColor(cur)}
-                       className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
-                         colors,
-                         cur
-                       )}`}
-                     >
-                       {cur}
-                     </div>
-                   ))}
-                 </div>
-               </DetailsCard.Color>
+                <DetailsCard.Color>
+                  <div className="flex">
+                    {item.colors.map((cur) => (
+                      <div
+                        onClick={() => handleColor(cur)}
+                        className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
+                          colors,
+                          cur
+                        )}`}
+                      >
+                        {cur}
+                      </div>
+                    ))}
+                  </div>
+                </DetailsCard.Color>
               )}
-             
+
               <DetailsCard.Set>
                 <div className="flex">
                   <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red]">
@@ -175,11 +175,11 @@ export default function Details() {
                   {item.subsets.map((subset) => {
                     return (
                       <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
-                      {subset.name}
-                    </div>
-                    )
+                        {subset.name}
+                      </div>
+                    );
                   })}
-                 
+
                   {/* <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
                     leggings
                   </div> */}

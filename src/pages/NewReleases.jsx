@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
-import CategoryNav from "../components/Utility/CategoryNav";
+// import CategoryNav from "../components/Utility/CategoryNav";
 import Layout from "../components/Utility/Layout";
 import ProductCard from "../components/Utility/ProductCard";
 import ShopHero from "../components/Utility/ShopHero";
@@ -11,10 +11,7 @@ import FilterBottom from "../components/Shop/FilterBottom";
 import { getProduct } from "../methods/product.method";
 
 export default function NewReleases() {
-  const { isLoading, data, isError, refetch } = useQuery(
-    "getProduct",
-    getProduct
-  );
+  const { data } = useQuery("getProduct", getProduct);
 
   const [toggleFilter, setToggleFilter] = useState(1);
   return (

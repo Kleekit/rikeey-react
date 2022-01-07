@@ -1,4 +1,4 @@
-import { Button, Card, CardMedia } from "@mui/material";
+import { Card, CardMedia } from "@mui/material";
 import React from "react";
 import CustomButton from "./customButton";
 import "./ekama.css"; // check css file for additional css rules
@@ -11,7 +11,7 @@ const CardNFloatedText = ({ imageUrl, text, actionFN }) => {
           //   height="100vh"
           component="img"
           image={imageUrl}
-          //   alt="Paella dish"
+          alt=""
         />
       </Card>
       <div className="position-absolute action ">

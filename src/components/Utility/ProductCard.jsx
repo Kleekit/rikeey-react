@@ -24,7 +24,7 @@ ProductCard.Image = (props) => (
 );
 
 ProductCard.Name = (props) => (
-  <p className=" xs:text-[1.8rem] text-[2.3rem] font-[400] mb-[0.5rem] px-2">
+  <p className=" xs:text-[1.7rem] text-[2.3rem] font-[400] mb-[0.5rem] px-2">
     {props.children}
   </p>
 );

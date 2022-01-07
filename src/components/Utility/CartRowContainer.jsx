@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import { AiOutlinePlus, AiOutlineMinus, AiOutlineClose } from "react-icons/ai";
 // import { useQuery } from "react-query";
 // import { getCartItem } from "../../methods/cart.method";
