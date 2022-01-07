@@ -11,10 +11,7 @@ import FilterBottom from "../components/Shop/FilterBottom";
 import { getProduct } from "../methods/product.method";
 
 export default function Shop() {
-  const { isLoading, data, isError, refetch } = useQuery(
-    "getProduct",
-    getProduct
-  );
+  const { data } = useQuery("getProduct", getProduct);
   return (
     <Layout>
       <CategoryNav styles="hidden md:flex">

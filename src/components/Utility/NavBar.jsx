@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import RikeeyLogo from "../Reuseable/RikeeyLogo";
-import { Badge, Grid, Hidden } from "@mui/material";
+import { Badge, Hidden } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
-import SearchIcon from "@mui/icons-material/SearchOutlined";
+// import SearchIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingCart from "@mui/icons-material/ShoppingCartOutlined";
 import SideBar from "../Sidebar/SideBar";
-import clsx from "clsx";
+// import clsx from "clsx";
 // import { apiCaller } from "../../apiCaller/apicaller";
 import { useQuery } from "react-query";
 import { getCartItem } from "../../methods/cart.method";
@@ -118,46 +118,3 @@ function NavBar() {
 }
 
 export default NavBar;
-
-{
-  /* <Grid
-          container
-          justifyContent="space-between"
-          alignItems="center"
-          className="h-[7rem] px-[7vw] fixed top-0 border-b-[0.15rem] border-[#5E6368]"
-        >
-          <Grid item={true} sm={2} md={2}>
-            <Link className="w-[3rem] block" to="/">
-              <RikeeyLogo />
-            </Link>
-          </Grid>
-          <Grid className="menuContainer menuLink" item={true} sm={4} md={5}>
-            
-            <Link to="/new-releases">New Releases</Link>
-            <Link to="/women">Women</Link>
-            <Link to="/men">Men</Link>
-            <Link to="/accessories">Accessories</Link>
-          </Grid>
-          <Grid item={true} sm={2} md={2}>
-            <Badge
-              overlap="circular"
-              color="primary"
-              badgeContent={data ? data.body.length : 0}
-            >
-              <Link to="/cart">Cart</Link>
-            </Badge>
-          </Grid>
-          <Grid item={true} sm={2} md={2}>
-            <div className="input-group search-nav">
-              <label className="search-nav-label my-auto mr-2">
-                <SearchIcon fontSize="large" />
-              </label>
-              <input
-                type="text"
-                className="form-control btn-sm small no-box-shadow bg-transparent border-none"
-                placeholder="Search"
-              />
-            </div>
-          </Grid>
-        </Grid> */
-}

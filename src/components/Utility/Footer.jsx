@@ -77,7 +77,6 @@ function Footer() {
                       </p>
                       <div className="flex email-footer">
                         <input
-                          className=""
                           type="text"
                           className="outline-none p-4 email-input-footer"
                           placeholder="Email"

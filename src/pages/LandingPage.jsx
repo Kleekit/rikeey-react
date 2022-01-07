@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/Utility/Layout";
 import Carousel from "../components/Utility/Carousel";
-import ProductCard from "../components/Utility/ProductCard";
+// import ProductCard from "../components/Utility/ProductCard";
 import AccessoriesCard from "../components/Utility/AccessoriesCard";
 import { useQuery } from "react-query";
 import { getProduct } from "../methods/product.method";
@@ -36,16 +36,13 @@ function LandingPage() {
     // customStyle: `${classes.root}`,
   };
 
-  const { isLoading, data, isError, refetch } = useQuery(
-    "getProduct",
-    getProduct
-  );
+  const { data } = useQuery("getProduct", getProduct);
 
   console.log(data);
 
   return (
     <Layout {...customConfig}>
-      <Carousel delay={4500} styles="mb-[2rem]">
+      <Carousel delay={3000} styles="mb-[2rem]">
         <Carousel.Slides>
           {carouselImg.map((item, itemIdx) => (
             <SwiperSlide key={itemIdx}>

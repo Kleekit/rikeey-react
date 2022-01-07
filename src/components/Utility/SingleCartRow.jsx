@@ -3,9 +3,7 @@ import { useMutation } from "react-query";
 import { changeQuantity, removeItemFormCart } from "../../methods/cart.method";
 
 export default function SingleCartRow({ item, refetch }) {
-  const { mutateAsync, isLoading } = useMutation((item) =>
-    removeItemFormCart(item)
-  );
+  const { mutateAsync } = useMutation((item) => removeItemFormCart(item));
 
   const handleRemoveItem = async () => {
     const payload = {
