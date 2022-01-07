@@ -97,7 +97,7 @@ export default function Details() {
     item = data.body;
   }
 
-  // console.log({ item });
+  console.log({ item });
 
   return (
     <Layout>
@@ -132,9 +132,10 @@ export default function Details() {
               <DetailsCard.Description>
                 {item.description}
               </DetailsCard.Description>
-              <DetailsCard.Size>
+              {item.sizes.length > 0 && (
+                <DetailsCard.Size>
                 <div className="flex">
-                  {sizesFromDb.map((cur) => (
+                  {item.sizes.map((cur) => (
                     <div
                       onClick={() => handleSize(cur)}
                       className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
@@ -147,32 +148,41 @@ export default function Details() {
                   ))}
                 </div>
               </DetailsCard.Size>
-              <DetailsCard.Color>
-                <div className="flex">
-                  {colorsFromDb.map((cur) => (
-                    <div
-                      onClick={() => handleColor(cur)}
-                      className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
-                        colors,
-                        cur
-                      )}`}
-                    >
-                      {cur}
-                    </div>
-                  ))}
-                </div>
-              </DetailsCard.Color>
+              )}
+              {item.colors.length > 0 && (
+                 <DetailsCard.Color>
+                 <div className="flex">
+                   {item.colors.map((cur) => (
+                     <div
+                       onClick={() => handleColor(cur)}
+                       className={`p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red] ${selected(
+                         colors,
+                         cur
+                       )}`}
+                     >
+                       {cur}
+                     </div>
+                   ))}
+                 </div>
+               </DetailsCard.Color>
+              )}
+             
               <DetailsCard.Set>
                 <div className="flex">
                   <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline cursor-pointer active:text-[red]">
-                    full set
+                    Full Set
                   </div>
-                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
-                    crop top
-                  </div>
-                  <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
+                  {item.subsets.map((subset) => {
+                    return (
+                      <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
+                      {subset.name}
+                    </div>
+                    )
+                  })}
+                 
+                  {/* <div className="p-[1.5rem] rounded-[1rem] border-[0.2rem] inline">
                     leggings
-                  </div>
+                  </div> */}
                 </div>
               </DetailsCard.Set>
               <div>
