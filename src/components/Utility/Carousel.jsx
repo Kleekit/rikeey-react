@@ -32,7 +32,7 @@ export default function Carousel(props) {
       slidesPerView={1}
       // slidesPerView={"auto"}
       autoplay={{
-        delay: 4500,
+        delay: props.delay,
         disableOnInteraction: false,
       }}
       pagination={{ dynamicBullets: true }}

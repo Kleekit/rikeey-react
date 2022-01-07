@@ -74,9 +74,9 @@ export default function Details() {
 
   const productQuery = useQuery("getProduct", getProduct);
 
-  let product;
+  let products;
   if (productQuery.data && productQuery.data.status) {
-    product = productQuery.data.body;
+    products = productQuery.data.body;
   }
 
   const { isLoading, isError, data } = useQuery(
@@ -111,7 +111,7 @@ export default function Details() {
           <DetailsCard.NavOutline>Women {">"} Full set</DetailsCard.NavOutline>
           <div className=" grid grid-cols-1 sm:grid-cols-2 sm:gap-[8rem] mb-[10rem]">
             <DetailsCard.Image>
-              <Carousel styles="mb-[2rem]">
+              <Carousel delay={4500} styles="mb-[2rem]">
                 <Carousel.Slides>
                   {item.allImages.map((image) => (
                     <SwiperSlide>
@@ -187,8 +187,12 @@ export default function Details() {
           </div>
           <div className="hidden sm:flex flex-wrap sm:mx-[-3%] md:mx-[-1.4%] ">
             {productQuery.data &&
-              product.map((product) => (
-                <ProductCard key={product._id}>
+              products.map((product) => (
+                <ProductCard
+                  styles="sm:px-[3%] md:px-[1.4%] sm:w-1/3 md:w-1/4 mb-[5rem] sm:mb-[8rem]"
+                  link={`/details/${product._id}`}
+                  key={product._id}
+                >
                   <ProductCard.Image>
                     {product.displayImage.url}
                   </ProductCard.Image>
@@ -197,10 +201,10 @@ export default function Details() {
                 </ProductCard>
               ))}
           </div>
-          <Carousel styles="mb-[2rem] block sm:hidden">
+          <Carousel delay={4500} styles="mb-[2rem] block sm:hidden">
             <Carousel.Slides>
               {productQuery.data &&
-                product.map((product) => (
+                products.map((product) => (
                   <SwiperSlide key={product._id}>
                     <ProductCard
                       styles="pb-[4rem]"

@@ -9,18 +9,26 @@ import { SwiperSlide } from "swiper/react";
 // import CardNFloatedText from "../components/Utility/CardNFloatedText";
 
 const carouselImg = [
-  { src: "./images/slide1.png", alt: "" },
-  { src: "./images/slide2.png", alt: "" },
-  { src: "./images/slide3.png", alt: "" },
-  { src: "./images/men-button.png", alt: "" },
-  { src: "./images/slide2.png", alt: "" },
-  { src: "./images/women-set.png", alt: "" },
-  { src: "./images/slide1.png", alt: "" },
-  { src: "./images/slide2.png", alt: "" },
-  { src: "./images/slide3.png", alt: "" },
-  { src: "./images/men-button.png", alt: "" },
-  { src: "./images/slide2.png", alt: "" },
-  { src: "./images/women-set.png", alt: "" },
+  {
+    src: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    alt: "",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    alt: "",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1581009137042-c552e485697a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    alt: "",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1546483875-ad9014c88eba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1082&q=80",
+    alt: "",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    alt: "",
+  },
 ];
 
 function LandingPage() {
@@ -37,16 +45,13 @@ function LandingPage() {
 
   return (
     <Layout {...customConfig}>
-      <Carousel styles="mb-[2rem]">
+      <Carousel delay={4500} styles="mb-[2rem]">
         <Carousel.Slides>
           {carouselImg.map((item, itemIdx) => (
             <SwiperSlide key={itemIdx}>
-              <img
-                alt={item.alt}
-                className={"carouselImg"}
-                width="100%"
-                src={item.src}
-              />
+              <div className="h-[40vh] sm:h-[60vh] md:h-[80vh] lg:h-[100vh] w-[100vw]">
+                <img alt={item.alt} width="100%" src={item.src} />
+              </div>
             </SwiperSlide>
           ))}
         </Carousel.Slides>
@@ -100,7 +105,7 @@ function LandingPage() {
                 </ProductCard>
               ))}
           </div>
-          <Carousel styles="mb-[2rem] block sm:hidden">
+          <Carousel delay={4500} styles="mb-[2rem] block sm:hidden">
             <Carousel.Slides>
               {data &&
                 data.body.map((product) => (
