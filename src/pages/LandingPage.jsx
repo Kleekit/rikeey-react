@@ -10,23 +10,23 @@ import { SwiperSlide } from "swiper/react";
 
 const carouselImg = [
   {
-    src: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    src: "./images/rikeeyimg6.jpg",
     alt: "",
   },
   {
-    src: "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    src: "./images/rikeeyimg2.jpg",
     alt: "",
   },
   {
-    src: "https://images.unsplash.com/photo-1581009137042-c552e485697a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    src: "./images/rikeeyimg3.jpg",
     alt: "",
   },
   {
-    src: "https://images.unsplash.com/photo-1546483875-ad9014c88eba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1082&q=80",
+    src: "./images/rikeeyimg7.jpg",
     alt: "",
   },
   {
-    src: "https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    src: "./images/rikeeyimg8.jpg",
     alt: "",
   },
 ];
@@ -68,19 +68,12 @@ function LandingPage() {
             Shop Now
           </a>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[8rem] mb-[12rem]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[5rem] mb-[12rem] ">
           <AccessoriesCard
-            src={
-              "https://images.unsplash.com/photo-1486714941986-f2113c751c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWVuJTIwc3BvcnRzJTIwZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            }
+            src={"./images/rikeeyimg1.jpg"}
             accessName={"Women"}
           />
-          <AccessoriesCard
-            src={
-              "https://images.unsplash.com/photo-1512353087810-25dfcd100962?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-            }
-            accessName={"Men"}
-          />
+          <AccessoriesCard src={"./images/rikeeyimg3.jpg"} accessName={"Men"} />
         </div>
         {/* <div className="new-release-container mb-[12rem]">
           <div className="text-[2rem] font-bold underline underline-offset-2 mb-[2.3rem]">
@@ -123,9 +116,7 @@ function LandingPage() {
           </Carousel>
         </div> */}
         <AccessoriesCard
-          src={
-            "https://images.unsplash.com/3/www.madebyvadim.com.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YWNjZXNzb3JpZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-          }
+          src={"./images/accessories.jpg"}
           accessName={"Accessories"}
         />
       </div>

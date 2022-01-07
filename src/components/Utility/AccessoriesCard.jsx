@@ -3,9 +3,9 @@ import React from "react";
 export default function AccessoriesCard({ src, accessName, style, link }) {
   return (
     <div className=" flex flex-col justify-center align-center relative my-[1.2rem] ">
-      <div className=" w-full">
+      <div className="overflow-hidden h-[60vh] md:h-[80vh] lg:h-[100vh] rounded-[7rem] w-full">
         <img
-          className="img-fluid w-full rounded-[7rem] "
+          className="img-fluid object-cover"
           src={src}
           style={style}
           alt="accessories"
