@@ -16,7 +16,7 @@ export default function NewReleases() {
     getProduct
   );
 
-  const [toggleFilter, setToggleFilter] = useState(0);
+  const [toggleFilter, setToggleFilter] = useState(1);
   return (
     <Layout>
       {/* <CategoryNav styles="hidden md:flex">
@@ -47,7 +47,7 @@ export default function NewReleases() {
                   toggleFilter === 2 ? "filterContainerButton" : "font-bold"
                 }
               >
-                New Releases
+                Accessories
               </button>
               <button
                 onClick={() => setToggleFilter(3)}
