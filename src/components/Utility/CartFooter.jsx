@@ -1,6 +1,8 @@
 import React from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function CartFooter({ total }) {
+  const { user, isUser } = useAuth();
   return (
     <div className="sm:w-1/2 ml-auto mt-[4rem]">
       <div className="row grid grid-cols-2 gap-[8rem] cardFooterItemOne items-center justify-center">
@@ -28,9 +30,17 @@ export default function CartFooter({ total }) {
         </div>
         <div className="col-md-6">
           <h6 className="ml-36">₦{total}</h6>
-          <a href="/checkout">
-            <button className="proceed mr-8 mt-8">Proceed to Checkout</button>
-          </a>
+          {!isUser ? (
+            <a href="/checkout">
+              <button className="proceed mr-8 mt-8">
+                Provide your details
+              </button>
+            </a>
+          ) : (
+            <a href="/checkout/payment">
+              <button className="proceed mr-8 mt-8">Proceed to Checkout</button>
+            </a>
+          )}
         </div>
       </div>
     </div>

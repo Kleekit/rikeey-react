@@ -4,6 +4,7 @@ import CartFooter from "../components/Utility/CartFooter";
 import CartRowContainer from "../components/Utility/CartRowContainer";
 import CategoryNav from "../components/Utility/CategoryNav";
 import Layout from "../components/Utility/Layout";
+import { useAuth } from "../hooks/useAuth";
 import { getCartItem } from "../methods/cart.method";
 
 export default function Cart() {

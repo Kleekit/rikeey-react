@@ -63,10 +63,12 @@ function Payment() {
                     id=""
                     aria-describedby=""
                     placeholder={data.body.email}
+                    value={data.body.email}
+                    readOnly
                   />
-                  <div className="w-[20%] fs-smr text-red my-auto text-center font-[700]">
+                  {/* <div className="w-[20%] fs-smr text-red my-auto text-center font-[700]">
                     Change
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="form-group grid grid-cols-3 gap-[0rem] md:gap-[2rem] items-center mb-4 fs-sm ">
@@ -77,10 +79,12 @@ function Payment() {
                     className="rounded-[0.5rem] p-3 customInput border-none"
                     id=""
                     placeholder={data.body.phone}
+                    value={data.body.phone}
+                    readOnly
                   />
-                  <div className="w-[20%] fs-smr text-red my-auto text-center font-[700]">
+                  {/* <div className="w-[20%] fs-smr text-red my-auto text-center font-[700]">
                     Change
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -97,10 +101,14 @@ function Payment() {
                     className="rounded-[0.5rem] p-3 customInput border-none"
                     id=""
                     placeholder={data.body.address}
+                    value={data.body.address}
+                    readOnly
                   />
-                  <div className="w-20 fs-smr red my-auto text-center fw-700">
-                    Change
-                  </div>
+                  <Link to="/checkout">
+                    <div className="w-20 fs-smr red my-auto text-center fw-700">
+                      Change
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>

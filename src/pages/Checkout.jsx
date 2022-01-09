@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 // import { Button } from "@mui/material";
-import { useMutation } from "react-query";
-import { register } from "../methods/cart.method";
+import { useMutation, useQuery } from "react-query";
+import { getUser, register } from "../methods/cart.method";
 import { getOrStoreId } from "../helpers/getOrStore.helper";
 import CustomInput from "../components/Reuseable/CustomInput";
 import Layout from "../components/Utility/Layout";
@@ -42,7 +42,7 @@ export default function Checkout() {
   const customConfig = {
     customStyle: `${classes.root} pt-4 px-5 row `,
   };
-  // routing
+  const user = useQuery("user", getUser);
 
   //mutate call
   const { isLoading, mutateAsync } = useMutation((payload) =>
@@ -101,7 +101,7 @@ export default function Checkout() {
 
   return (
     <Layout {...customConfig}>
-      {!isLoading ? (
+      {!isLoading || user.isLoading ? (
         <form onSubmit={formik.handleSubmit}>
           <div className=" w-6/7 sm:w-1/2 mt-6 mb-15 mx-auto ">
             <div className="contact-info mBottom rounded-[1.5rem] px-[1.5rem] py-5">

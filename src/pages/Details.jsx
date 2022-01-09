@@ -9,7 +9,7 @@ import { getProduct, getProductDetails } from "../methods/product.method";
 import { useParams } from "react-router-dom";
 import Carousel from "../components/Utility/Carousel";
 import { SwiperSlide } from "swiper/react";
-import { addItemToCart } from "../methods/cart.method";
+import { addItemToCart, getCartItem } from "../methods/cart.method";
 import { getOrStoreId } from "../helpers/getOrStore.helper";
 
 export default function Details() {
@@ -17,8 +17,7 @@ export default function Details() {
   const [colors, setColor] = useState(Array);
   const cartItem = useMutation((item) => addItemToCart(item));
 
-  // const sizesFromDb = ["sm", "md", "lg", "xl"];
-  // const colorsFromDb = ["red", "blue", "green"];
+  const cartTIems = useQuery("getCartItem", getCartItem);
 
   function handleSize(value) {
     if (sizes.includes(value)) {
@@ -64,10 +63,11 @@ export default function Details() {
       sharedPreference: getOrStoreId(),
     };
     console.log(payload);
-    await cartItem.mutateAsync(payload);
-    // if (res.status) {
-    //   window.location.reload();
-    // }
+    const res = await cartItem.mutateAsync(payload);
+    if (res.status) {
+      cartTIems.refetch();
+      // window.location.reload();
+    }
   };
 
   const productID = useParams();
