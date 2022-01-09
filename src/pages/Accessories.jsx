@@ -8,17 +8,37 @@ import ShopHero from "../components/Utility/ShopHero";
 import ShopSideBar from "../components/Shop/ShopSidebar";
 import OpenFIlter from "../components/Shop/OpenFIlter";
 import FilterBottom from "../components/Shop/FilterBottom";
-import { getProduct } from "../methods/product.method";
+import { getCategory, getProduct } from "../methods/product.method";
+import CategoryNav from "../components/Utility/CategoryNav";
 
 export default function Accessories() {
   const { data } = useQuery("getProduct", getProduct);
+  const categoryQuery = useQuery("getCategories", getCategory);
+  let allAccessoriesProducts =[];
+  let subCategories;
+  if(data && data.status){
+    for(let accessories of data.body){
+      if(accessories.productCategory.toLowerCase() === 'accessories'){
+        allAccessoriesProducts.push(accessories);
+      }
+      
+    }
+  }
+
+  if(categoryQuery.data && categoryQuery.data.status){
+    for(let category of categoryQuery.data.body){
+      if(category.category.categoryName.toLowerCase() === 'accessories'){
+        subCategories = category.subCategories
+      }
+    }
+  }
   return (
     <Layout>
-      {/* <CategoryNav styles="hidden md:flex">
-        <div>Tops</div>
-        <div>Bottoms</div>
-        <div>Tees</div>
-      </CategoryNav> */}
+     <CategoryNav styles="hidden md:flex border-b-[0.15rem] border-[#5E6368]">
+      {subCategories && subCategories.map((subCategory) =>{
+          return (<div>{subCategory.subCategoryName}</div>)
+        })}
+      </CategoryNav>
       <div className="p-[3rem] sm:p-[6rem]">
         <ShopHero>
           <ShopHero.Name>Accessories</ShopHero.Name>
@@ -33,16 +53,15 @@ export default function Accessories() {
           </div>
         </ShopSideBar>
         <div className="flex flex-wrap mx-[-4%] sm:mx-[-3%] md:mx-[-1.4%] mb-[10rem] ">
-          {data &&
-            data.body.map((product) => (
+          {allAccessoriesProducts.map((product) => (
               <ProductCard
                 styles="px-[4%] sm:px-[3%] md:px-[1.4%] w-1/2 sm:w-1/3 md:w-1/4 mb-[5rem] sm:mb-[8rem]"
                 link={`/details/${product._id}`}
                 key={product._id}
               >
                 <ProductCard.Image>
-                  {/* {product.displayImage.url} */}
-                  https://images.unsplash.com/photo-1540254597053-3901b858d40f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c3BvcnRzd2VhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60
+                  {product.displayImage.url}
+                  {/* https://images.unsplash.com/photo-1540254597053-3901b858d40f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c3BvcnRzd2VhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60 */}
                 </ProductCard.Image>
                 <ProductCard.Name>{product.name}</ProductCard.Name>
                 <ProductCard.Price>N {product.price}</ProductCard.Price>
